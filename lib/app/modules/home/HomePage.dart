@@ -1,8 +1,8 @@
 
 import 'package:Clinicarx/app/components/menu.dart';
-import 'package:Clinicarx/app/modules/home/inicio/attendancePage.dart';
-import 'package:Clinicarx/app/modules/home/inicio/medicamentPage.dart';
-import 'package:Clinicarx/app/modules/home/inicio/perfilPage.dart';
+import 'package:Clinicarx/app/modules/home/tabs/AttendancesPage.dart';
+import 'package:Clinicarx/app/modules/home/tabs/MedicamentsPage.dart';
+import 'package:Clinicarx/app/modules/home/tabs/PerfilPage.dart';
 import 'package:Clinicarx/env.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +20,8 @@ class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    AttendancePage(),
-    MedicamentPage(),
+    AttendancesPage(),
+    MedicamentsPage(),
     PerfilPage()
   ];
 

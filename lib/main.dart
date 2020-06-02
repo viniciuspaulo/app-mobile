@@ -1,4 +1,4 @@
-import 'package:Clinicarx/app/app_module.dart';
+import 'package:Clinicarx/app/AppModule.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

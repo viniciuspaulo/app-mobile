@@ -1,7 +1,7 @@
 
-import 'package:Clinicarx/app/app_widget.dart';
+import 'package:Clinicarx/app/AppWidget.dart';
 import 'package:Clinicarx/app/modules/auth/auth_module.dart';
-import 'package:Clinicarx/app/modules/home/home_module.dart';
+import 'package:Clinicarx/app/modules/home/homeModule.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
 

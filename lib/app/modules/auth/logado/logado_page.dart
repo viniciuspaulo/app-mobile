@@ -29,12 +29,15 @@ class _LogadoPageState extends State<LogadoPage> {
 
   @override
   Widget build(BuildContext context) {
-    checkIfAuthenticated().then((success) async {
-      // if (success == 1) {
-        Navigator.pushReplacementNamed(context, '/home');
-      // } else {
-      //   Navigator.pushReplacementNamed(context, LoginPage.tag);
-      // }
+
+    Future.delayed(Duration(milliseconds: 1000),(){
+      checkIfAuthenticated().then((success) async {
+        // if (success == 1) {
+          Navigator.pushReplacementNamed(context, '/home');
+        // } else {
+        //   Navigator.pushReplacementNamed(context, LoginPage.tag);
+        // }
+      });
     });
 
     final Size screenSize = MediaQuery.of(context).size;

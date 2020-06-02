@@ -7,7 +7,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: Modular.navigatorKey,
-      title: 'Ultrawave',
+      title: 'Clinicarx',
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),

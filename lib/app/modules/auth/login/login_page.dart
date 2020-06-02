@@ -1,5 +1,5 @@
 
-import 'package:Clinicarx/app/modules/home/home_page.dart';
+import 'package:Clinicarx/app/modules/home/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:toast/toast.dart';
