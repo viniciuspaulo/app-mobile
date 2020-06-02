@@ -1,15 +1,16 @@
 
 import 'package:Clinicarx/app/components/menu.dart';
-import 'package:Clinicarx/app/modules/home/inicio/inicio_page.dart';
+import 'package:Clinicarx/app/modules/home/inicio/attendancePage.dart';
+import 'package:Clinicarx/app/modules/home/inicio/medicamentPage.dart';
+import 'package:Clinicarx/app/modules/home/inicio/perfilPage.dart';
 import 'package:Clinicarx/env.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
+
   static String tag = '/home-tab';
   static String tagRota = '/home/home-tab';
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const HomePage({Key key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -19,7 +20,9 @@ class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    InicioPage(),
+    AttendancePage(),
+    MedicamentPage(),
+    PerfilPage()
   ];
 
   void onTabTapped(int index) {
@@ -32,33 +35,35 @@ class _HomePageState extends State<HomePage> {
       drawer: Menu(),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-       onTap: onTabTapped,
-       currentIndex: _currentIndex,
-       items: [
+        elevation: 0,
+        backgroundColor: environment['cor1'],
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        items: [
          BottomNavigationBarItem(
-           icon: Icon(FontAwesomeIcons.home,
-            color: _currentIndex == 0 ? environment['cor1'] : Colors.black54,
-           ),
-           title: Text('Início',style: TextStyle(color: environment['cor1'])),
+            icon: Image(
+              width: 35,
+              height: 35,
+              image: AssetImage("assets/images/icon_atend.png",),
+            ),
+            title: Text('Atendimentos',style: TextStyle(color: Colors.white)),
          ),
          BottomNavigationBarItem(
-           icon: Icon(FontAwesomeIcons.dollarSign,
-            color: _currentIndex == 1 ? environment['cor1'] : Colors.black54,
-           ),
-           title: Text('Faturas',style: TextStyle(color: environment['cor1'])),
+            icon: Image(
+              width: 35,
+              height: 35,
+              image: AssetImage("assets/images/ICON_CAPSULE.png",),
+            ),
+            title: Text('Medicamentos',style: TextStyle(color: Colors.white)),
          ),
          BottomNavigationBarItem(
-           icon: Icon(FontAwesomeIcons.robot,
-            color: _currentIndex == 2 ? environment['cor1'] : Colors.black54,
-           ),
-           title: Text('Atendimentos',style: TextStyle(color: environment['cor1'])),
+            icon: Image(
+            width: 35,
+              height: 35,
+              image: AssetImage("assets/images/ICON_USER.png",),
+            ),
+           title: Text('Perfil',style: TextStyle(color: Colors.white)),
          ),
-         BottomNavigationBarItem(
-           icon: Icon(FontAwesomeIcons.user,
-            color: _currentIndex == 3 ? environment['cor1'] : Colors.black54,
-           ),
-           title: Text('Perfil',style: TextStyle(color: environment['cor1'])),
-         )
        ],
       )
     );

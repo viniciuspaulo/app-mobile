@@ -26,6 +26,51 @@ class _MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    return Text("Menu");
+
+    final Size screenSize = MediaQuery.of(context).size;
+
+    return Container(
+      width: screenSize.width - 100,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/fundo.png"),
+          fit: BoxFit.cover,
+        )
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Sobre Clinicarx",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25
+            ),
+          ),
+          Divider(height: 25),
+          Text("Termos de uso",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25
+            ),
+          ),
+         Divider(height: 25),
+          Text("Reportar um problema",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25
+            ),
+          ),
+         Divider(height: 25),
+          Text("Sair",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

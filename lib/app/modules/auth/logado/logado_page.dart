@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LogadoPage extends StatefulWidget {
-  final String title;
   static String tag = '/';
-  const LogadoPage({Key key, this.title = "Logado"}) : super(key: key);
+  const LogadoPage({Key key}) : super(key: key);
 
   @override
   _LogadoPageState createState() => _LogadoPageState();
 }
 
 class _LogadoPageState extends State<LogadoPage> {
-
 
   checkIfAuthenticated() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -29,16 +27,14 @@ class _LogadoPageState extends State<LogadoPage> {
     return 0;
   }
 
-
- 
   @override
   Widget build(BuildContext context) {
     checkIfAuthenticated().then((success) async {
-      if (success == 1) {
+      // if (success == 1) {
         Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        Navigator.pushReplacementNamed(context, LoginPage.tag);
-      }
+      // } else {
+      //   Navigator.pushReplacementNamed(context, LoginPage.tag);
+      // }
     });
 
     final Size screenSize = MediaQuery.of(context).size;
