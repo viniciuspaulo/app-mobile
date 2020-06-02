@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>722487420586-7kjof2iki673kvs29lsgcofapeukh04j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.722487420586-7kjof2iki673kvs29lsgcofapeukh04j</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>722487420586-frlranpu528ea8qn8ctjji2ndia4p9o1.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyArbD-4M4ZpFz9cSIp8KEut12YSrC3sIsU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>722487420586</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.clinicarx.clinicarxapp</string>
+	<key>PROJECT_ID</key>
+	<string>clinicarx-mobile</string>
+	<key>STORAGE_BUCKET</key>
+	<string>clinicarx-mobile.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:722487420586:ios:60fddbbec9e4f066d152d3</string>
+	<key>DATABASE_URL</key>
+	<string>https://clinicarx-mobile.firebaseio.com</string>
+</dict>
+</plist>

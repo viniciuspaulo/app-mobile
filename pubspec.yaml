@@ -1,0 +1,63 @@
+name: Clinicarx
+description: clinicar app.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+  dio: ^3.0.9
+  flutter_mobx: ^1.0.1
+  mobx: ^1.0.2
+  flutter_modular: ^0.5.2
+  flutter_svg: ^0.14.1
+  font_awesome_flutter: ^8.5.0
+  shared_preferences: ^0.5.6+2
+  geolocator: ^5.1.5
+  connectivity: ^0.4.6+1
+  cached_network_image: ^2.0.0-rc
+  flutter_launcher_icons: ^0.7.4
+  url_launcher: ^5.0.0
+  device_info: ^0.4.1+5
+  flutter_masked_text: ^0.8.0
+  toast: ^0.1.5
+  badges: ^1.1.1
+  package_info: ^0.4.0+14
+  jiffy: ^3.0.1
+  firebase_messaging: ^6.0.13
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/laucher/icon.ios.png"
+  image_path_android: "assets/laucher/icon.png"
+  adaptive_icon_background: "assets/laucher/icon.png"
+  adaptive_icon_foreground: "assets/laucher/icon.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+  fonts:
+    - family: Open Sans
+      fonts:
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/OpenSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/OpenSans-Regular.ttf
+          weight: 400
+scripts:
+  mobx: flutter pub run build_runner watch --delete-conflicting-outputs
+  google: keytool -genkey -v -keystore naboa-chave.keystore -alias naboa -keyalg RSA -keysize 2048 -validity 100000000010000
+  chave: keytool -genkey -v -keystore naboa-chave.keystore -alias naboa -keyalg RSA -keysize 2048 -validity 10000
+  sha1: keytool -J-Duser.language=en -exportcert -alias androiddebugkey -keystore $HOME/.android/debug.keystore -list -v -storepass android
