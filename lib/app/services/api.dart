@@ -63,7 +63,7 @@ class ApiService {
       print(urlRequest);
       return await this._dio.post(urlRequest,data: data);
     } on DioError catch(e) {
-      print(e.response.data['data']);
+      print(e.response.data);
       throw(e.response.data['data']['message']);
     }
   }

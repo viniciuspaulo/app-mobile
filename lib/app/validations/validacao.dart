@@ -5,7 +5,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-validacaoStringNotNull({String valor, String mensagem, int limit = 0}) {
+validacaoStringNotNull({String valor, String mensagem}) {
+  if (valor == null || valor.length == 0) {
+    return mensagem;
+  }
+  return null;
+}
+
+validacaoStringNotNullLimit({String valor, String mensagem, int limit = 0}) {
   if (valor == null || valor.length == 0) {
     return mensagem;
   }
@@ -39,6 +46,11 @@ validacaoStringNotNull({String valor, String mensagem, int limit = 0}) {
     }else {
       return null;
     }
+  }
+
+
+  String somenteNumeros(String valor) {
+    return valor.replaceAll('-', '').replaceAll('.', '');
   }
 
   Color hexToColor(String code) {

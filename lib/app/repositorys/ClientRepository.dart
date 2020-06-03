@@ -1,16 +1,24 @@
 
 
 
+import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/services/api.dart';
-import 'package:flutter/material.dart';
+import 'package:Clinicarx/app/validations/validacao.dart';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ClientRepository {
   final _private = new ApiService();
 
-  Future postLogin({String document, @required String password}) async {
-    return await _private.postRequest('/login', {
-      "document": "",
-      "password": "",
+  Future postLogin(UserModel usuario) async {
+    Response response = await _private.postRequest('auth/login',{
+      'document': somenteNumeros(usuario.document),
+      'password': usuario.password 
     });
+
+    final storage = await SharedPreferences.getInstance();
+    await storage.setString("token", response.data['data']['access_token']);
+
+    return true;
   }
 }
