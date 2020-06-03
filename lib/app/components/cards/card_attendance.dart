@@ -15,7 +15,8 @@ class CardAttendance extends StatelessWidget {
         Navigator.pushNamed(context, AttendanceScreen.tagRota);
       },
       child: Card(
-        margin: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.all(15.0),
+        elevation: 5,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
