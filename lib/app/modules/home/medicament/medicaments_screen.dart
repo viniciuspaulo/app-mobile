@@ -1,22 +1,22 @@
 
 
-import 'package:Clinicarx/app/components/cards/cardMedicament.dart';
+import 'package:Clinicarx/app/components/cards/card_medicament.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MedicamentsPage extends StatefulWidget {
-  static String tagRota = '/home/medicament';
-  static String tag = '/medicament';
+class MedicamentsScreen extends StatefulWidget {
+  static String tagRota = '/home/medicaments';
+  static String tag = '/medicaments';
   final Key menuKey;
 
-  const MedicamentsPage({Key key,this.menuKey}) : super(key: key);
+  const MedicamentsScreen({Key key,this.menuKey}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MedicamentPageState();
 }
 
-class _MedicamentPageState extends State<MedicamentsPage> {
+class _MedicamentPageState extends State<MedicamentsScreen> {
   
     
   @override

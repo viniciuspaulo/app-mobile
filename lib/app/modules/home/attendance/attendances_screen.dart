@@ -1,22 +1,22 @@
 
 
-import 'package:Clinicarx/app/components/cards/CardAttendance.dart';
+import 'package:Clinicarx/app/components/cards/card_attendance.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AttendancesPage extends StatefulWidget {
-  static String tagRota = '/home/inicio';
-  static String tag = '/inicio';
+class AttendancesScreen extends StatefulWidget {
+  static String tagRota = '/home/attendances';
+  static String tag = '/attendances';
   final Key menuKey;
 
-  const AttendancesPage({Key key,this.menuKey}) : super(key: key);
+  const AttendancesScreen({Key key,this.menuKey}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _AttendancesPageState();
+  State<StatefulWidget> createState() => _AttendancesScreenState();
 }
 
-class _AttendancesPageState extends State<AttendancesPage> {
+class _AttendancesScreenState extends State<AttendancesScreen> {
   
     
   @override

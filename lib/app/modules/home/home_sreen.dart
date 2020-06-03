@@ -1,37 +1,60 @@
 
+import 'dart:async';
+
+import 'package:Clinicarx/app/components/connect.dart';
 import 'package:Clinicarx/app/components/menu.dart';
-import 'package:Clinicarx/app/modules/home/tabs/AttendancesPage.dart';
-import 'package:Clinicarx/app/modules/home/tabs/MedicamentsPage.dart';
-import 'package:Clinicarx/app/modules/home/tabs/PerfilPage.dart';
+import 'package:Clinicarx/app/modules/home/attendance/attendances_screen.dart';
+import 'package:Clinicarx/app/modules/home/medicament/medicaments_screen.dart';
+import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
 import 'package:Clinicarx/env.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
 
   static String tag = '/home-tab';
   static String tagRota = '/home/home-tab';
-  const HomePage({Key key}) : super(key: key);
+  const HomeScreen({Key key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    AttendancesPage(),
-    MedicamentsPage(),
-    PerfilPage()
+    AttendancesScreen(),
+    MedicamentsScreen(),
+    PerfilScreen()
   ];
+
+  StreamSubscription<ConnectivityResult> subscription;
+  ConnectivityResult statusConnect;
 
   void onTabTapped(int index) {
     setState(() => _currentIndex = index);
   }
 
   @override
+  initState() {
+    super.initState();
+
+    //Verifica conexao com internet
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => statusConnect = result);
+    });
+
+    (Connectivity().checkConnectivity()).then((connectivityResult) {
+      setState(() => statusConnect = connectivityResult);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return statusConnect != ConnectivityResult.wifi && statusConnect != ConnectivityResult.mobile ? 
+    Connect() : 
+    Scaffold(
       drawer: Menu(),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

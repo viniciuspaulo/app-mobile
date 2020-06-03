@@ -1,20 +1,19 @@
 
 
-import 'package:Clinicarx/app/components/menu.dart';
 import 'package:flutter/material.dart';
 
-class PerfilPage extends StatefulWidget {
-  static String tagRota = '/home/perfil';
-  static String tag = '/perfil';
+class MedicamentScreen extends StatefulWidget {
+  static String tagRota = '/home/medicament';
+  static String tag = '/medicament';
   final Key menuKey;
 
-  const PerfilPage({Key key,this.menuKey}) : super(key: key);
+  const MedicamentScreen({Key key,this.menuKey}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _PerfilPageState();
+  State<StatefulWidget> createState() => _MedicamentScreenState();
 }
 
-class _PerfilPageState extends State<PerfilPage> {
+class _MedicamentScreenState extends State<MedicamentScreen> {
   
     
   @override
@@ -34,7 +33,6 @@ class _PerfilPageState extends State<PerfilPage> {
           color: Colors.black54
         ),
       ),
-      drawer: Menu(),
       body: Column(
         children: [
           Text("Perfil")

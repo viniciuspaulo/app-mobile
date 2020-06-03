@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 
-class CardMedicament extends StatelessWidget {
+class CardProcedure extends StatelessWidget {
 
-  CardMedicament();
+  CardProcedure();
   
   @override
   Widget build(BuildContext context) {
@@ -25,32 +25,27 @@ class CardMedicament extends StatelessWidget {
             ),
           ),
           Divider(),
+
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image(
-                  width: 30,
-                  image: AssetImage('assets/images/ICON_MEDICINE.png'),
+                Column(
+                  children: [
+                    Text("INÍCIO: NÃO INFORMADO"),
+                    Text("FIM: NÃO INFORMADO"),
+                  ],
                 ),
-                Text("Puran T4 (Levotiroxina)"),
+                Column(
+                  children: [
+                    Text("INÍCIO: NÃO INFORMADO"),
+                    Text("FIM: NÃO INFORMADO"),
+                  ],
+                )
               ],
             ),
           ),
-
-          Container(
-            padding: const EdgeInsets.all(8.0),
-            color: Colors.teal,
-            child: Center(
-              child: Text("Conforme instruções adicionais",
-                style: TextStyle(
-                  color: Colors.white
-                ),
-              ),
-            ),
-          )
-
         ],
       ),
     );

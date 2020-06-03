@@ -1,4 +1,5 @@
 
+import 'package:Clinicarx/app/modules/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -63,10 +64,15 @@ class _MenuState extends State<Menu> {
             ),
           ),
          Divider(height: 25),
-          Text("Sair",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25
+          InkWell(
+            onTap: () {
+              Navigator.pushReplacementNamed(context, LoginPage.tag);
+            },
+            child: Text("Sair",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25
+              ),
             ),
           ),
         ],

@@ -1,5 +1,5 @@
-import 'package:Clinicarx/app/modules/auth/login/login_page.dart';
-import 'package:Clinicarx/env.dart';
+import 'dart:async';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +12,51 @@ class LogadoPage extends StatefulWidget {
   _LogadoPageState createState() => _LogadoPageState();
 }
 
-class _LogadoPageState extends State<LogadoPage> {
+class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateMixin{
+
+  Animation<double> animation;
+  Animation<double> animation2;
+
+  AnimationController animationController;
+  AnimationController animationController2;
+
+  StreamSubscription<ConnectivityResult> subscription;
+  ConnectivityResult statusConnect;
+  
+ @override
+  void initState() {
+    super.initState();
+
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    
+    animation = Tween<double>(begin: -300, end: 0).animate(animationController)
+    ..addListener(() {
+      setState(() {});
+    });
+
+    animation2 = Tween<double>(begin: -300, end: 0).animate(animationController)
+    ..addListener(() {
+      setState(() {});
+    });
+
+    animationController.forward();
+
+    Future.delayed(Duration(milliseconds: 1000),(){
+      checkIfAuthenticated().then((success) async {
+        // if (success == 1) {
+          Navigator.pushReplacementNamed(context, '/home');
+        // } else {
+        //   Navigator.pushReplacementNamed(context, LoginPage.tag);
+        // }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    animationController.dispose();
+  }
 
   checkIfAuthenticated() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -30,16 +74,6 @@ class _LogadoPageState extends State<LogadoPage> {
   @override
   Widget build(BuildContext context) {
 
-    Future.delayed(Duration(milliseconds: 1000),(){
-      checkIfAuthenticated().then((success) async {
-        // if (success == 1) {
-          Navigator.pushReplacementNamed(context, '/home');
-        // } else {
-        //   Navigator.pushReplacementNamed(context, LoginPage.tag);
-        // }
-      });
-    });
-
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -54,26 +88,32 @@ class _LogadoPageState extends State<LogadoPage> {
         ),
         child: Stack(children: [
           Positioned(
-            child: Container(
-              width: screenSize.width,
-              height: double.infinity,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(500.0),
-                  bottomRight: Radius.circular(500.0),
-                ),
-                child: Container(
-                  color: Colors.white,
-                ),
-              )
+            child: Transform.translate(
+              offset: Offset(animation.value, 0),
+              child: Container(
+                width: screenSize.width,
+                height: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(500.0),
+                    bottomRight: Radius.circular(500.0),
+                  ),
+                  child: Container(
+                    color: Colors.white,
+                  ),
+                )
+              ),
             ),
           ),
           Positioned(
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              child: Image(
-                image: AssetImage("assets/images/logo.png"),
+            child: Transform.translate(
+              offset: Offset(animation2.value, 0),
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                child: Image(
+                  image: AssetImage("assets/images/logo.png"),
+                ),
               ),
             ),
           ),

@@ -1,5 +1,4 @@
 
-import 'package:Clinicarx/app/modules/home/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:toast/toast.dart';
@@ -29,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
       try {
-        Navigator.pushReplacementNamed(context, HomePage.tagRota);
+        // Navigator.pushReplacementNamed(context, HomePage.tagRota);
       }catch(message) {
         setState(() => load = false);
         Toast.show(message, context,duration: Toast.LENGTH_LONG);
