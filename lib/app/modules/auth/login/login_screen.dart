@@ -1,41 +1,55 @@
 
+import 'dart:async';
+import 'dart:io';
+
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
 import 'package:Clinicarx/app/components/buttons/social_button.dart';
+import 'package:Clinicarx/app/components/connect.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
+import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
+import 'package:Clinicarx/app/modules/auth/remember/remember_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositorys/ClientRepository.dart';
+import 'package:Clinicarx/app/services/social_auth.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
 
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
 
   static String tag = '/login';
-  const LoginPage({Key key}) : super(key: key);
+  const LoginScreen({Key key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
 
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   bool load = false;
+  String loadSocial = "";
   bool showPassword = false;
 
   var maskCpf = new MaskedTextController(text: '',mask: '000.000.000-00');
   UserModel _user = new UserModel();
   ClientRepository _repositorio = new ClientRepository();
 
+  StreamSubscription<ConnectivityResult> subscription;
+  ConnectivityResult statusConnect;
+
+
   submit() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      
       setState(() => load = true);
+      
       try {
         await _repositorio.postLogin(_user);
         setState(() => load = false);
@@ -44,13 +58,70 @@ class _LoginPageState extends State<LoginPage> {
         Toast.show(mensagem, context);
         setState(() => load = false);
       }
+    }
+  }
 
+  submitSocial(String provider) async {
+    setState(() => loadSocial = provider);
+    try {
+      if (provider == "google") {
+        _user = await signInGoogle();
+      }
+
+      if (provider == "facebook") {
+        _user = await signInFacebook();
+      }
+
+      if (provider == "apple") {
+        _user = await signInApple();
+      }
+
+      var result = await _repositorio.postLogin(_user);
+      setState(() => loadSocial = "");
+      
+      if (result['first_access'] != null ) {
+        Navigator.pushNamed(context, RegisterScreen.tag);
+        return;
+      }
+      Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
+    } catch(mensagem) {
+      print(mensagem);
+      Toast.show("Não possivel logar.", context);
+      setState(() => loadSocial = "");
     }
   }
 
   @override
+  initState() {
+    super.initState();
+
+    //Verifica conexao com internet
+    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      setState(() => statusConnect = result);
+    });
+
+    (Connectivity().checkConnectivity()).then((connectivityResult) {
+      setState(() => statusConnect = connectivityResult);
+    });
+  }
+
+  Future<bool> verifyDeviceApple() async {
+    if (Platform.isIOS) {
+      var iosInfo = await DeviceInfoPlugin().iosInfo;
+      var version = iosInfo.systemVersion;
+      if (version.contains('13') == true) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return statusConnect != ConnectivityResult.wifi && statusConnect != ConnectivityResult.mobile ? 
+    Connect() : 
+    Scaffold(
       body: Form(
         key: _formKey,
         child: Container(
@@ -105,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: TextFormField(
                   obscureText: !showPassword,
-                  validator: (String _value) => validacaoStringNotNullLimit(
+                  validator: (String _value) => validacaoStringNotNull(
                     valor: _value,
                     mensagem: "Senha é obrigatória",
                   ),
@@ -148,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
 
               InkWell(
                 onTap: () {
-                  print("Esqueceu");
+                  Navigator.pushNamed(context, RememberScreen.tag);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),
@@ -182,16 +253,34 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     SocialButton(
                       icon: Icon( FontAwesomeIcons.google, size: 18, color: Colors.red,),
-                      onPressed: () {},
+                      load: loadSocial == "google" ? true : false,
+                      onPressed: () {
+                        submitSocial("google");
+                      },
                     ),
                     SocialButton(
                       icon: Icon( FontAwesomeIcons.facebook, size: 18,color: Colors.blue,),
-                      onPressed: () {},
+                      load: loadSocial == "facebook" ? true : false,
+                      onPressed: () {
+                        submitSocial("facebook");
+                      },
                     ),
-                    SocialButton(
-                      icon: Icon( FontAwesomeIcons.apple, size: 18,),
-                      onPressed: () {},
-                    )
+
+                    FutureBuilder(
+                    future: verifyDeviceApple(),
+                    builder: (_,snapshot) {
+                      return Visibility(
+                        child: SocialButton(
+                          icon: Icon( FontAwesomeIcons.apple, size: 18,),
+                          load: loadSocial == "apple" ? true : false,
+                          onPressed: () {
+                            submitSocial("apple");
+                          },
+                        ),
+                        visible: snapshot.hasData && snapshot.data,
+                      );
+                    },
+                  )
                   ],
                 ),
               ),
@@ -201,7 +290,9 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.only(top: 28),
                 child: SecundaryButton(
                   text: "NOVO POR AQUI? CADASTRE-SE",
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, RegisterScreen.tag);
+                  },
                 )
               ),
 

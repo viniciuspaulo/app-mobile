@@ -7,10 +7,12 @@ class SocialButton extends StatefulWidget {
  
   final Icon icon;
   final GestureTapCallback onPressed;
+  final bool load;
 
   SocialButton({
     @required this.icon,
     @required this.onPressed,
+    this.load
   });
 
   @override
@@ -22,8 +24,10 @@ class _SocialButton extends State<SocialButton>{
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      child: Container(
+      onTap: widget.onPressed,
+      child: widget.load ? CircularProgressIndicator(
+        strokeWidth: 1,
+      ) : Container(
         width: 44,
         height: 44,
         decoration: BoxDecoration(

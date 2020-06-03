@@ -1,5 +1,5 @@
 
-import 'package:Clinicarx/app/modules/auth/login/login_page.dart';
+import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,8 +65,11 @@ class _MenuState extends State<Menu> {
           ),
          Divider(height: 25),
           InkWell(
-            onTap: () {
-              Navigator.pushReplacementNamed(context, LoginPage.tag);
+            onTap: () async {
+              final storage = await SharedPreferences.getInstance();
+              await storage.remove("token");
+
+              Navigator.pushReplacementNamed(context, LoginScreen.tag);
             },
             child: Text("Sair",
               style: TextStyle(
