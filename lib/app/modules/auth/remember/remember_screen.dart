@@ -1,6 +1,5 @@
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
-import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
 import 'package:Clinicarx/app/modules/auth/remember/reset_screen.dart';
 import 'package:Clinicarx/app/repositorys/ClientRepository.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
@@ -21,20 +20,20 @@ class _RememberScreenState extends State<RememberScreen> {
  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   UserModel _user = new UserModel();
   ClientRepository _repositorio = new ClientRepository();
-  bool load = false;
+  bool loading = false;
 
   submit() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      setState(() => load = true);
+      setState(() => loading = true);
       
       try {
         var result = await _repositorio.postForgotPassword(_user);
-        setState(() => load = false);
+        setState(() => loading = false);
         Navigator.pushNamed(context, ResetScreen.tag, arguments: result['token']);
       } catch(mensagem) {
         Toast.show(mensagem, context);
-        setState(() => load = false);
+        setState(() => loading = false);
       }
     }
   }
@@ -102,7 +101,7 @@ class _RememberScreenState extends State<RememberScreen> {
                 child: PrimaryButton(
                   text: "Enviar",
                   onPressed: submit,
-                  load: load
+                  loading: loading
                 )
               ),
 

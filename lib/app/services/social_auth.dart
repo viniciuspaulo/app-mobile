@@ -99,7 +99,6 @@ Future<UserModel> signInApple() async {
     ]);
     switch (result.status) {
       case AuthorizationStatus.authorized:
-
         UserModel _user = new UserModel();
         _user.email = result.credential.email;
         _user.name = "${result.credential.fullName.givenName} ${result.credential.fullName.familyName}";
@@ -110,12 +109,12 @@ Future<UserModel> signInApple() async {
 
         return _user;
       break;
-    case AuthorizationStatus.error:
-      throw Exception("Não foi possivel logar");
-      break;
-    case AuthorizationStatus.cancelled:
-      throw Exception("Não foi possivel logar");
-      break;
+      case AuthorizationStatus.error:
+        throw Exception("Não foi possivel logar");
+        break;
+      case AuthorizationStatus.cancelled:
+        throw Exception("Não foi possivel logar");
+        break;
     }
   } catch(e) {
     throw Exception("Não foi possivel logar");

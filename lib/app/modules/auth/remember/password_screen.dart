@@ -20,7 +20,7 @@ class PasswordScreen extends StatefulWidget {
 class _PasswordScreenState extends State<PasswordScreen> {
  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   ClientRepository _repositorio = new ClientRepository();
-  bool load = false;
+  bool loading = false;
   String token = "";
   String password = "";
   String confirmPassword = "";
@@ -36,7 +36,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      setState(() => load = true);
+      setState(() => loading = true);
       
       try {
         final prefs = await SharedPreferences.getInstance();
@@ -44,14 +44,14 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
         await _repositorio.postUpdatePassword(password);
 
-        setState(() => load = false);
+        setState(() => loading = false);
         prefs.remove("token");
 
         Toast.show("A senhas alterada com sucesso.", context);
         Navigator.pushReplacementNamed(context, LoginScreen.tag);
       } catch(mensagem) {
         Toast.show(mensagem, context);
-        setState(() => load = false);
+        setState(() => loading = false);
       }
     }
   }
@@ -174,7 +174,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 child: PrimaryButton(
                   text: "ENVIAR",
                   onPressed: submit,
-                  load: load
+                  loading: loading
                 )
               ),
             ],

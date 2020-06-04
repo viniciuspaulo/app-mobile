@@ -1,5 +1,6 @@
 
 import 'package:Clinicarx/app/modules/auth/logado/logado_page.dart';
+import 'package:Clinicarx/app/modules/auth/terms/terms.dart';
 import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
 import 'package:Clinicarx/app/modules/auth/remember/password_screen.dart';
@@ -13,6 +14,7 @@ class AuthModule extends ChildModule {
   @override
   List<Router> get routers => [
     Router(LogadoPage.tag, child: (_, args) => LogadoPage()),
+    Router(TermsScreen.tag, child: (_, args) => TermsScreen()),
     Router(LoginScreen.tag, child: (_, args) => LoginScreen()),
     Router(RegisterScreen.tag, child: (_, args) => RegisterScreen()),
     Router(RememberScreen.tag, child: (_, args) => RememberScreen()),

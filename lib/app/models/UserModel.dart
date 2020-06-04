@@ -42,7 +42,7 @@ class UserModel {
     facebookToken = json['facebook_token'];
     appleToken = json['apple_token'];
 
-    provider = json['provider'];;
+    provider = json['provider'];
     providerToken = json['provider_token'];
   }
 

@@ -52,10 +52,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
     
   @override
-  Widget build(BuildContext context) {
-
-    final Size screenSize = MediaQuery.of(context).size;
-    
+  Widget build(BuildContext context) {    
     return Scaffold(
       appBar: AppBar(
         title: Image(

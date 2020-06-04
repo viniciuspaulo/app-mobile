@@ -19,14 +19,14 @@ class ResetScreen extends StatefulWidget {
 class _ResetScreenState extends State<ResetScreen> {
  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   ClientRepository _repositorio = new ClientRepository();
-  bool load = false;
+  bool loading = false;
   String token = "";
   String code = "";
 
   submit() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      setState(() => load = true);
+      setState(() => loading = true);
       
       try {
         print(code);
@@ -36,13 +36,13 @@ class _ResetScreenState extends State<ResetScreen> {
 
         var result = await _repositorio.postValidateResetPassword(code);
         
-        setState(() => load = false);
+        setState(() => loading = false);
         prefs.remove("token");
 
         Navigator.pushNamed(context, PasswordScreen.tag, arguments: result['token']);
       } catch(mensagem) {
         Toast.show(mensagem, context);
-        setState(() => load = false);
+        setState(() => loading = false);
       }
     }
   }
@@ -117,7 +117,7 @@ class _ResetScreenState extends State<ResetScreen> {
                 child: PrimaryButton(
                   text: "VALIDAR CÓDIGO",
                   onPressed: submit,
-                  load: load
+                  loading: loading
                 )
               ),
 
