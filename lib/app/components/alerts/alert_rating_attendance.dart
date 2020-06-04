@@ -1,11 +1,15 @@
 
 
 
+import 'package:Clinicarx/app/models/AttendancesModel.dart';
+import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 modalAlertRatingAttendance({
-  @required context
+  @required context,
+  @required AttendancesModel attendance,
+  @required dynamic onPress,
 }) {
   showModalBottomSheet(
     context:  context,
@@ -21,7 +25,7 @@ modalAlertRatingAttendance({
 
         return Container(
           width: screenSize.width,
-          height: screenSize.height / 2,
+          height: screenSize.height / 2.5,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -41,27 +45,58 @@ modalAlertRatingAttendance({
                   padding: const EdgeInsets.all(8.0),
                   child: Text("Como foi seu atendimento de saúde na Farmácia(a)"),
                 ),
-                Image(
-                  width: 120,
-                  image: AssetImage("assets/images/paguemenos.png",),
+                
+                imageFromBase64String(
+                  base64String: attendance.logo,
+                  width: 100,
+                  height: 100
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text("Farmacêutico(a)"),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Mayara Lages"),
+                  child: Text(attendance.farmaceutico),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Icon(FontAwesomeIcons.star),
-                    Icon(FontAwesomeIcons.star),
-                    Icon(FontAwesomeIcons.star),
-                    Icon(FontAwesomeIcons.star),
-                    Icon(FontAwesomeIcons.star),
-                ])
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      InkWell(child: Icon(FontAwesomeIcons.star),
+                        onTap: () {
+                          onPress(1);
+                          Navigator.pop(context);
+                        },
+                      ),
+                      InkWell(child: Icon(FontAwesomeIcons.star),
+                        onTap: () {
+                          onPress(2);
+                          Navigator.pop(context);
+                        },
+                      ),
+                      InkWell(child: Icon(FontAwesomeIcons.star),
+                        onTap: () {
+                          onPress(3);
+                          Navigator.pop(context);
+                        },
+                      ),
+                      InkWell(child: Icon(FontAwesomeIcons.star),
+                        onTap: () {
+                          onPress(4);
+                          Navigator.pop(context);
+                        },
+                      ),
+                      InkWell(child: Icon(FontAwesomeIcons.star),
+                        onTap: () {
+                          onPress(5);
+                          Navigator.pop(context);
+                        },
+                      ),
+                  ]),
+                )
               ],
             ),
           ),

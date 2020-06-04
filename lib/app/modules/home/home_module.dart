@@ -8,12 +8,17 @@ import 'package:Clinicarx/app/modules/home/medicament/medicament_screen.dart';
 import 'package:Clinicarx/app/modules/home/medicament/medicaments_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
+import 'package:Clinicarx/app/repositorys/AttendanceRepository.dart';
+import 'package:Clinicarx/app/repositorys/ClientRepository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomeModule extends ChildModule {
   
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+    Bind<AttendanceRepository>((i) => AttendanceRepository()),
+    Bind<ClientRepository>((i) => ClientRepository())
+  ];
 
   @override
   List<Router> get routers => [

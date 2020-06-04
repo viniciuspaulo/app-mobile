@@ -6,11 +6,20 @@ import 'package:share/share.dart';
 import 'package:toast/toast.dart';
 
 
-class AttendanceDocScreen extends StatelessWidget{
+class AttendanceDocScreen extends StatefulWidget{
 
-  String pathPDF = "";
-  String urlPDF = "";
-  AttendanceDocScreen(this.pathPDF, this.urlPDF);
+  final String pathPDF;
+  AttendanceDocScreen(this.pathPDF);
+
+  @override
+  _AttendanceDocScreenState createState() => _AttendanceDocScreenState();
+}
+
+class _AttendanceDocScreenState extends State<AttendanceDocScreen> {
+
+  salvarArquivo() { 
+    Toast.show("Pdf salvo.", context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,23 +40,13 @@ class AttendanceDocScreen extends StatelessWidget{
             child: InkWell(
               child: Icon(FontAwesomeIcons.shareAlt),
               onTap: () {
-                Share.share(this.urlPDF);
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              child: Icon(FontAwesomeIcons.fileDownload),
-              onTap: () { 
-                Toast.show("Pdf salvo.", context);
+                Share.share(widget.pathPDF);
               },
             ),
           )
         ],
       ),
-      path: pathPDF);
+      path: widget.pathPDF);
   }
-
 }
 

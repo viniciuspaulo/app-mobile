@@ -23,9 +23,17 @@ class _PasswordScreenState extends State<PasswordScreen> {
   bool load = false;
   String token = "";
   String password = "";
+  String confirmPassword = "";
+  
   bool showPassword = false;
 
   submit() async {
+
+    if (password != confirmPassword) {
+      Toast.show("A senhas não sao iguais.", context);
+      return;
+    }
+
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       setState(() => load = true);
@@ -39,6 +47,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
         setState(() => load = false);
         prefs.remove("token");
 
+        Toast.show("A senhas alterada com sucesso.", context);
         Navigator.pushReplacementNamed(context, LoginScreen.tag);
       } catch(mensagem) {
         Toast.show(mensagem, context);
@@ -48,7 +57,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
   }
 
 
-   @override
+  @override
   initState() {
     Future.delayed(Duration.zero,(){
       token = ModalRoute.of(context).settings.arguments;
@@ -120,6 +129,41 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   },
                   onChanged: (String value) {
                     password = value;
+                  },
+                ),
+              ),
+
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: TextFormField(
+                  obscureText: !showPassword,
+                  validator: (String _value) => validacaoStringNotNull(
+                    valor: _value,
+                    mensagem: "Senha é obrigatória",
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "Confirmar senha",
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: showPassword ? 
+                        Icon(FontAwesomeIcons.eyeSlash, color: Colors.black54) : 
+                        Icon(FontAwesomeIcons.eye, color: Colors.black54,
+                      ),
+                      onPressed: () {
+                        setState(() => showPassword =! showPassword);
+                      },
+                    ),
+                  ),
+                  onSaved: (String value) {
+                    confirmPassword = value;
+                  },
+                  onChanged: (String value) {
+                    confirmPassword = value;
                   },
                 ),
               ),

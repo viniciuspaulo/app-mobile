@@ -2,7 +2,9 @@
 
 import 'package:Clinicarx/app/components/cards/card_attendance.dart';
 import 'package:Clinicarx/app/components/menu.dart';
+import 'package:Clinicarx/app/repositorys/AttendanceRepository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttendancesScreen extends StatefulWidget {
@@ -18,7 +20,48 @@ class AttendancesScreen extends StatefulWidget {
 
 class _AttendancesScreenState extends State<AttendancesScreen> {
   
-    
+  AttendcePaginate attendancesPaginate = new AttendcePaginate();
+  final repositorio = Modular.get<AttendanceRepository>();
+
+  //Infity Scroll
+  ScrollController _scrollController = new ScrollController();
+  int page = 0;
+  bool load = false;
+  bool loadScroll = false;
+
+  @override
+  initState() {
+    super.initState();
+    onInit();
+
+     _scrollController.addListener(() {
+      var triggerFetchMoreSize =
+        0.9 * _scrollController.position.maxScrollExtent;
+      if (_scrollController.position.pixels > triggerFetchMoreSize) {
+        scrollLoad();
+      }
+    });
+  }
+
+  onInit() async {
+    setState(() => load = true);
+    attendancesPaginate = await repositorio.getAttendences(page: page);
+    setState(() => load = false);
+  }
+
+  scrollLoad() async {
+    if(this.page >= attendancesPaginate.total) {
+      setState(() => loadScroll = false);
+      return;
+    }
+    if (!loadScroll) {
+      setState(() => loadScroll = true);
+      AttendcePaginate result = await repositorio.getAttendences(page: this.page++);
+      attendancesPaginate.data = [...attendancesPaginate.data, ...result.data];
+      setState(() => loadScroll = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -108,13 +151,30 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
 
           Expanded(
             child: Container(
-              child: ListView.builder(
-                itemCount: 21,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {  
-                return CardAttendance();
-                },
-              ),
+              child: this.load ? 
+              Center(child: CircularProgressIndicator(
+                backgroundColor: Colors.white,
+                strokeWidth: 1,
+              )) : 
+                attendancesPaginate.data.length > 0 ? 
+                  ListView.builder(
+                    controller: _scrollController,
+                    itemCount: attendancesPaginate.data.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {  
+
+                      // if (loadScroll && index == attendancesPaginate.data.length) {
+                      //   return Center(child: CircularProgressIndicator(
+                      //     backgroundColor: Colors.white,
+                      //     strokeWidth: 1,
+                      //   ));
+                      // }
+                      return CardAttendance(attendancesPaginate.data[index]);
+                    },
+                  ) : 
+                  Center(
+                    child: Text("Não existe atendimentos"),
+                  ),
             ),
           )
         ],

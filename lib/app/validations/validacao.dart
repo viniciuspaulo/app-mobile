@@ -1,7 +1,9 @@
 
 
 
+import 'dart:convert';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -61,3 +63,20 @@ validacaoStringNotNullLimit({String valor, String mensagem, int limit = 0}) {
     Random random = new Random();
     return random.nextInt(999999999);
   }
+
+
+
+Image imageFromBase64String({String base64String, double width, double height}) {
+  return Image.memory(base64Decode(base64String),
+    width: width,
+    height: height,
+  );
+}
+
+Uint8List dataFromBase64String(String base64String) {
+  return base64Decode(base64String);
+}
+
+String base64String(Uint8List data) {
+  return base64Encode(data);
+}

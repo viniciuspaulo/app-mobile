@@ -1,10 +1,11 @@
 
 
+import 'package:Clinicarx/app/models/AttendancesModel.dart';
 import 'package:flutter/material.dart';
 
 class CardProcedure extends StatelessWidget {
 
-  CardProcedure();
+  CardProcedure(Procedures procedure);
   
   @override
   Widget build(BuildContext context) {

@@ -42,9 +42,17 @@ class ApiService {
     await _meutoken();
     try {
       String urlRequest = '$_baseUrl/$url';
-      if (latitude != null && longitude !=null) {
-        urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+
+      if (url.split('?').length > 1) {
+        if (latitude != null && longitude !=null) {
+          urlRequest = urlRequest+"\&position_lat=$latitude&position_lng=$longitude";
+        }
+      } else {
+        if (latitude != null && longitude !=null) {
+          urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+        }
       }
+
       print(urlRequest);
       return await this._dio.get(urlRequest);
     } on DioError catch(e) {
