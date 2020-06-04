@@ -22,6 +22,42 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb253819219318141</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.722487420586-7kjof2iki673kvs29lsgcofapeukh04j</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>253819219318141</string>
+	<key>FacebookDisplayName</key>
+	<string>Clinicarx</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>comgooglemaps</string>
+		<string>waze</string>
+	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Acesso para buscas as farmacias mais próximo de você</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Acesso para buscas as farmacias mais próximo de você</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Acesso para buscas as farmacias mais próximo de você</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

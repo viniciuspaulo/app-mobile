@@ -24,7 +24,7 @@ class Connect extends StatelessWidget{
                 size: 100,
               )
           ),
-          Text("Ops você está sem conexão",
+          Text("Você está sem conexão",
             style: TextStyle(
               fontSize: 25
             ),

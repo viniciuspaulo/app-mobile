@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:Clinicarx/app/modules/auth/login/login_page.dart';
+import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +47,7 @@ class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateM
         if (success == 1) {
           Navigator.pushReplacementNamed(context, '/home');
         } else {
-          Navigator.pushReplacementNamed(context, LoginPage.tag);
+          Navigator.pushReplacementNamed(context, LoginScreen.tag);
         }
       });
     });

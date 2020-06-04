@@ -6,6 +6,13 @@ class UserModel {
   String email;
   String birthday;
   String sex;
+  String photo;
+  String googleToken;
+  String facebookToken;
+  String appleToken;
+
+  String provider;
+  String providerToken;
 
   UserModel(
       {this.id,
@@ -14,7 +21,13 @@ class UserModel {
       this.name,
       this.email,
       this.birthday,
-      this.sex});
+      this.sex,
+      this.photo,
+      this.googleToken,
+      this.facebookToken,
+      this.appleToken,
+      this.provider,
+      this.providerToken});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -24,6 +37,13 @@ class UserModel {
     email = json['email'];
     birthday = json['birthday'];
     sex = json['sex'];
+    photo = json['phone'];
+    googleToken = json['google_token'];
+    facebookToken = json['facebook_token'];
+    appleToken = json['apple_token'];
+
+    provider = json['provider'];
+    providerToken = json['provider_token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +55,13 @@ class UserModel {
     data['email'] = this.email;
     data['birthday'] = this.birthday;
     data['sex'] = this.sex;
+    data['photo'] = this.photo;
+    data['google_token'] = this.googleToken;
+    data['facebook_token'] = this.facebookToken;
+    data['apple_token'] = this.appleToken;
+
+    data['provider'] = this.provider;
+    data['provider_token'] = this.providerToken;
     return data;
   }
 }

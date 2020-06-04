@@ -3,7 +3,6 @@
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PerfilScreen extends StatefulWidget {
   static String tagRota = '/home/perfil';
