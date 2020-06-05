@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/services/social_auth.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,6 +21,17 @@ class PerfilSocialScreen extends StatefulWidget {
 class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
   final repositorio = Modular.get<ClientRepository>();
   bool loading = false;
+
+  Future<bool> validarApple() async {
+    if (Platform.isIOS) {
+      var iosInfo = await DeviceInfoPlugin().iosInfo;
+      var version = iosInfo.systemVersion;
+      if (version.contains('13') == true) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,35 +106,43 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                 activeColor: Colors.teal,
               ),
             ),
-            ListTile(
-              leading: Icon(FontAwesomeIcons.apple, color: Colors.black),
-              title: Text("Apple"),
-              trailing: Switch(
-                value: widget.profile.appleToken != null ? true : false,
-                onChanged: (value) async {
-                  if (value) {
-                    try {
-                      UserModel user = await signInApple();
-                      widget.profile.appleToken = user.providerToken;
-                      await repositorio.putProfile(widget.profile);
-                      setState(() {});
-                    } catch (mensagem) {
-                      setState(() {
-                        widget.profile.googleToken = null;
-                      });
-                      Toast.show(mensagem.toString(), context);
-                      return;
-                    }
-                  } else {
-                    setState(() {
-                      widget.profile.googleToken = null;
-                    });
-                  }
-                },
-                activeTrackColor: Colors.tealAccent,
-                activeColor: Colors.teal,
-              ),
-            )
+            FutureBuilder(
+              future: validarApple(),
+              builder: (_, snapshot) {
+                return Visibility(
+                  visible: snapshot.hasData && snapshot.data,
+                  child: ListTile(
+                    leading: Icon(FontAwesomeIcons.apple, color: Colors.black),
+                    title: Text("Apple"),
+                    trailing: Switch(
+                      value: widget.profile.appleToken != null ? true : false,
+                      onChanged: (value) async {
+                        if (value) {
+                          try {
+                            UserModel user = await signInApple();
+                            widget.profile.appleToken = user.providerToken;
+                            await repositorio.putProfile(widget.profile);
+                            setState(() {});
+                          } catch (mensagem) {
+                            setState(() {
+                              widget.profile.googleToken = null;
+                            });
+                            Toast.show(mensagem.toString(), context);
+                            return;
+                          }
+                        } else {
+                          setState(() {
+                            widget.profile.googleToken = null;
+                          });
+                        }
+                      },
+                      activeTrackColor: Colors.tealAccent,
+                      activeColor: Colors.teal,
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

@@ -86,7 +86,7 @@ Future<UserModel> signInFacebook() async {
 
     return _user;
   } catch (e) {
-    throw Exception("Não foi possivel logar");
+    throw "Não foi possivel logar";
   }
 }
 
@@ -116,6 +116,6 @@ Future<UserModel> signInApple() async {
         break;
     }
   } catch (e) {
-    throw Exception("Não foi possivel logar");
+    throw "Não foi possivel logar";
   }
 }

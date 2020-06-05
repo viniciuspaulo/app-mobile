@@ -123,13 +123,19 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                 Text(
                                   profile.amountMedicines.toString(),
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                      color: Colors.teal),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                    color: Colors.teal,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text("Medicamentos em uso"),
+                                  child: Text(
+                                    "Medicamentos em uso",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -142,13 +148,19 @@ class _PerfilScreenState extends State<PerfilScreen> {
                                 Text(
                                   profile.amountAttendances.toString(),
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                      color: Colors.teal),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25,
+                                    color: Colors.teal,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Text("Número de atendimentos"),
+                                  child: Text(
+                                    "Número de atendimentos",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
