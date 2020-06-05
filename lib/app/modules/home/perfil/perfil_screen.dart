@@ -55,131 +55,138 @@ class _PerfilScreenState extends State<PerfilScreen> {
           iconTheme: IconThemeData(color: Colors.black54),
         ),
         backgroundColor: Colors.white,
-        drawer: Menu(),
-        body: this.load
-            ? Center(
-                child: CircularProgressIndicator(
-                backgroundColor: Colors.white,
-                strokeWidth: 1,
-              ))
-            : SingleChildScrollView(
-                child: Container(
-                  width: screenSize.width,
-                  height: screenSize.height,
+        iconTheme: IconThemeData(
+          color: Colors.black54
+        ),
+      ),
+      backgroundColor: Colors.white,
+      drawer: Menu(),
+      body: this.load ? 
+        Center(child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+          strokeWidth: 1,
+        )) : SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image(
+              width: 120,
+              image: AssetImage("assets/images/avatar.png",),
+            ),
+            Text(profile.name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.black54
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(maskCpf.text),
+            ),
+            Text(profile.email,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                color: Colors.black54
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text((profile.sex == "male" ? "Masculino" : "Feminino")+" | "+(getAge(profile.birthday))+" anos"),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, PerfilEditScreen.tagRota, arguments: profile);
+              },
+              child: Text("Editar Perfil",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  color: Colors.teal
+                ),
+              ),
+            ),
+            Divider(),
+
+            Row(children: [
+              Expanded(
+                child: Card(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image(
-                        width: 120,
-                        image: AssetImage(
-                          "assets/images/avatar.png",
+                      Text(profile.amountMedicines.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.teal
                         ),
                       ),
-                      Text(
-                        profile.name,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Colors.black54),
-                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(maskCpf.text),
-                      ),
-                      Text(
-                        profile.email,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
-                            color: Colors.black54),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            (profile.sex == "male" ? "Masculino" : "Feminino") +
-                                " | " +
-                                (getAge(profile.birthday)) +
-                                " anos"),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, PerfilEditScreen.tagRota,
-                              arguments: profile);
-                        },
-                        child: Text(
-                          "Editar Perfil",
+                        child: Text("Medicamentos em uso",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                              color: Colors.teal),
-                        ),
-                      ),
-                      Divider(),
-                      Row(children: [
-                        Expanded(
-                          child: Card(
-                            child: Column(
-                              children: [
-                                Text(
-                                  profile.amountMedicines.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                      color: Colors.teal),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text("Medicamentos em uso"),
-                                ),
-                              ],
-                            ),
+                            fontSize: 12
                           ),
                         ),
-                        Expanded(
-                          child: Card(
-                            child: Column(
-                              children: [
-                                Text(
-                                  profile.amountAttendances.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                      color: Colors.teal),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text("Número de atendimentos"),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ]),
-                      Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Text("Últimas farmacias visitadas"),
                       ),
-                      Column(
-                        children: profile.lastClinicAttendances.map((clinics) {
-                          return Column(
-                            children: [
-                              Container(
-                                  child: ListTile(
-                                leading: imageFromBase64String(
-                                    base64String: clinics.logo,
-                                    width: 80,
-                                    height: 40),
-                                title: Text(clinics.name),
-                                subtitle: Text(clinics.phone),
-                              )),
-                              Divider()
-                            ],
-                          );
-                        }).toList(),
-                      )
                     ],
                   ),
                 ),
-              ));
+              ),
+              Expanded(
+                child: Card(
+                  child: Column(
+                    children: [
+                      Text(profile.amountAttendances.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                          color: Colors.teal
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("Número de atendimentos",
+                          style: TextStyle(
+                            fontSize: 12
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ]),
+
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text("Últimas farmacias visitadas"),
+            ),
+
+            Column(
+              children: profile.lastClinicAttendances.map((clinics) {
+                return Column(
+                  children: [
+                    Container(
+                      child: ListTile(
+                        leading:  imageFromBase64String(
+                          base64String: clinics.logo,
+                          width: 80,
+                          height: 40
+                        ),
+                        title: Text(clinics.name),
+                        subtitle: Text(clinics.phone),
+                      )
+                    ),
+                    Divider()
+                  ],
+                );
+              }).toList(),
+            )
+            
+          ],
+        ),
+      )
+    );
   }
 }

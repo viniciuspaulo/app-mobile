@@ -13,25 +13,36 @@ modalAlertResponsibles({@required context, @required Function onPress}) {
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30), topRight: Radius.circular(30)),
     ),
-    builder: (BuildContext context) {
+    builder:  (BuildContext context) {
+        
       final Size screenSize = MediaQuery.of(context).size;
 
       return Container(
         width: screenSize.width,
-        height: screenSize.height / 1.5,
+        height: screenSize.height,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-            color: Colors.white),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Inclua contatos de emergência",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+          color: Colors.white,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Inclua contatos de emergência",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Dê preferência ao contato via telefone"),
                 ),
               ),
               Padding(

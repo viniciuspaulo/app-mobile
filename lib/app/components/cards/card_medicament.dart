@@ -17,8 +17,8 @@ class CardMedicament extends StatelessWidget {
         Navigator.pushNamed(context, MedicamentScreen.tagRota, arguments: this.medicine);
       },
       child: Card(
-        margin: const EdgeInsets.all(15.0),
-        elevation: 5,
+        margin: const EdgeInsets.all(5.0),
+        elevation: 2,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

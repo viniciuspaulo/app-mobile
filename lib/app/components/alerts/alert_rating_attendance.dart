@@ -25,7 +25,7 @@ modalAlertRatingAttendance({
 
         return Container(
           width: screenSize.width,
-          height: screenSize.height / 2.5,
+          height: screenSize.height - 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),

@@ -67,6 +67,6 @@ flutter:
           weight: 400
 scripts:
   mobx: flutter pub run build_runner watch --delete-conflicting-outputs
-  google: keytool -genkey -v -keystore naboa-chave.keystore -alias naboa -keyalg RSA -keysize 2048 -validity 100000000010000
-  chave: keytool -genkey -v -keystore naboa-chave.keystore -alias naboa -keyalg RSA -keysize 2048 -validity 10000
+  google: keytool -genkey -v -keystore clinicarx-chave.keystore -alias clinicarx -keyalg RSA -keysize 2048 -validity 100000000010000
+  chave: keytool -genkey -v -keystore clinicarx-chave.keystore -alias clinicarx -keyalg RSA -keysize 2048 -validity 10000
   sha1: keytool -J-Duser.language=en -exportcert -alias androiddebugkey -keystore $HOME/.android/debug.keystore -list -v -storepass android

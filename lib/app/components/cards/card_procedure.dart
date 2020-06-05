@@ -13,8 +13,6 @@ class CardProcedure extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Size screenSize = MediaQuery.of(context).size;
-
     return Card(
       margin: const EdgeInsets.all(8.0),
       child: Column(
@@ -30,7 +28,7 @@ class CardProcedure extends StatelessWidget {
                   fontWeight: FontWeight.bold
                 )
               ),
-              subtitle: Text(procedure.pAD <= 0 && procedure.pAS <= 0 ?  "NÃO INFORMADO" : "${procedure.pAD} x ${procedure.pAS} mmhg")
+              subtitle: Text(procedure.pAD != null && procedure.pAS !=null && (procedure.pAD <= 0 && procedure.pAS <= 0) ?  "NÃO INFORMADO" : "${procedure.pAD} x ${procedure.pAS} mmhg")
             ),
           ),
           Visibility(

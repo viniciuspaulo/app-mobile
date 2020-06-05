@@ -61,30 +61,31 @@ class _PerfilResponsibleScreenState extends State<PerfilResponsibleScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Adione um contato"),
-              )
+              ),
             ]),
             Column(
               children: widget.profile.responsibles != null
                   ? widget.profile.responsibles.map((responsible) {
                       return Container(
-                          width: screenSize.width,
-                          child: Container(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Column(children: [
-                              Text(responsible.name),
-                              Text(responsible.email),
-                              Text(
-                                responsible.phone1,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black54),
-                              ),
-                              Divider()
-                            ]),
-                          ));
+                        width: screenSize.width,
+                        child: Container(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(children: [
+                            Text(responsible.name),
+                            Text(responsible.email),
+                            Text(
+                              responsible.phone1,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54),
+                            ),
+                            Divider(),
+                          ]),
+                        ),
+                      );
                     }).toList()
                   : [],
-            )
+            ),
           ],
         ),
       ),
