@@ -1,9 +1,7 @@
-
-
 import 'package:Clinicarx/app/components/cards/card_medicament.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/models/MedicineModel.dart';
-import 'package:Clinicarx/app/repositorys/MedicineRepository.dart';
+import 'package:Clinicarx/app/repositories/MedicineRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,15 +11,13 @@ class MedicamentsScreen extends StatefulWidget {
   static String tag = '/medicaments';
   final Key menuKey;
 
-  const MedicamentsScreen({Key key,this.menuKey}) : super(key: key);
+  const MedicamentsScreen({Key key, this.menuKey}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MedicamentPageState();
 }
 
 class _MedicamentPageState extends State<MedicamentsScreen> {
-  
-
   MedicinePaginate medicinePaginate = new MedicinePaginate();
   final repositorio = Modular.get<MedicineRepository>();
   List<MedicineModel> searchList = [];
@@ -37,9 +33,9 @@ class _MedicamentPageState extends State<MedicamentsScreen> {
     super.initState();
     onInit();
 
-     _scrollController.addListener(() {
+    _scrollController.addListener(() {
       var triggerFetchMoreSize =
-        0.9 * _scrollController.position.maxScrollExtent;
+          0.9 * _scrollController.position.maxScrollExtent;
       if (_scrollController.position.pixels > triggerFetchMoreSize) {
         scrollLoad();
       }
@@ -55,14 +51,15 @@ class _MedicamentPageState extends State<MedicamentsScreen> {
   }
 
   scrollLoad() async {
-    if(this.page >= medicinePaginate.total) {
+    if (this.page >= medicinePaginate.total) {
       setState(() => loadScroll = false);
       return;
     }
     if (!loadScroll) {
       setState(() => loadScroll = true);
       searchList = [];
-      MedicinePaginate result = await repositorio.getMedicine(page: this.page++);
+      MedicinePaginate result =
+          await repositorio.getMedicine(page: this.page++);
       medicinePaginate.data = [...medicinePaginate.data, ...result.data];
       searchList = medicinePaginate.data;
       setState(() => loadScroll = false);
@@ -70,83 +67,79 @@ class _MedicamentPageState extends State<MedicamentsScreen> {
   }
 
   search(String text) {
-    medicinePaginate.data = searchList.where((item) => item.medicines.toUpperCase().contains(text.toUpperCase())).toList();
+    medicinePaginate.data = searchList
+        .where(
+            (item) => item.medicines.toUpperCase().contains(text.toUpperCase()))
+        .toList();
     setState(() {});
   }
-    
+
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Image(
-          width: 120,
-          image: AssetImage("assets/images/logo.png",),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black54
-        ),
-      ),
-      drawer: Menu(),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(5.0),
-                    labelText: 'Buscar medicamentos',
-                    fillColor: Colors.black54,
-                    focusColor: Colors.black54
-                  ),     
-                  style: TextStyle(
-                    color: Colors.black54
-                  ),
-                  onChanged: search,   
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(FontAwesomeIcons.search,
-                  color: Colors.black54
-                ),
-              )
-            ],
-          ),
-
-          Expanded(
-            child: Container(
-              child: this.load ? 
-              Center(child: CircularProgressIndicator(
-                backgroundColor: Colors.white,
-                strokeWidth: 1,
-              )) : 
-                medicinePaginate.data.length > 0 ? 
-                  ListView.builder(
-                    controller: _scrollController,
-                    itemCount: medicinePaginate.data.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {  
-
-                      // if (loadScroll && index == attendancesPaginate.data.length) {
-                      //   return Center(child: CircularProgressIndicator(
-                      //     backgroundColor: Colors.white,
-                      //     strokeWidth: 1,
-                      //   ));
-                      // }
-                      return CardMedicament(medicinePaginate.data[index]);
-                    },
-                  ) : 
-                  Center(
-                    child: Text("Não existe atendimentos"),
-                  ),
+        appBar: AppBar(
+          title: Image(
+            width: 120,
+            image: AssetImage(
+              "assets/images/logo.png",
             ),
-          )
-        ],
-      )
-    );
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black54),
+        ),
+        drawer: Menu(),
+        body: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(5.0),
+                        labelText: 'Buscar medicamentos',
+                        fillColor: Colors.black54,
+                        focusColor: Colors.black54),
+                    style: TextStyle(color: Colors.black54),
+                    onChanged: search,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(FontAwesomeIcons.search, color: Colors.black54),
+                )
+              ],
+            ),
+            Expanded(
+              child: Container(
+                child: this.load
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                        strokeWidth: 1,
+                      ))
+                    : medicinePaginate.data.length > 0
+                        ? ListView.builder(
+                            controller: _scrollController,
+                            itemCount: medicinePaginate.data.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              // if (loadScroll && index == attendancesPaginate.data.length) {
+                              //   return Center(child: CircularProgressIndicator(
+                              //     backgroundColor: Colors.white,
+                              //     strokeWidth: 1,
+                              //   ));
+                              // }
+                              return CardMedicament(
+                                  medicinePaginate.data[index]);
+                            },
+                          )
+                        : Center(
+                            child: Text("Não existe atendimentos"),
+                          ),
+              ),
+            )
+          ],
+        ));
   }
-
 }
