@@ -1,6 +1,8 @@
 import 'package:Clinicarx/app/constants/strings.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
+import 'package:Clinicarx/app/models/UserModel.dart';
+import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:flutter/material.dart';
 // import 'package:toast/toast.dart';
 
@@ -15,6 +17,8 @@ class TermsScreen extends StatefulWidget {
 class _TermsScreenState extends State<TermsScreen> {
   bool load = false;
   bool isTermsAccepted = false;
+  UserModel _user = new UserModel();
+  String nextScreen = HomeScreen.tag;
 
   void handleTerms() {
     /**
@@ -23,6 +27,26 @@ class _TermsScreenState extends State<TermsScreen> {
      * - Senão segue direto para a home ou, caso tenha faltado algum dado, segue
      * para a tela de complementar dados
      */
+    if (nextScreen == HomeScreen.tag) {
+      Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
+    } else {
+      Navigator.pushNamed(context, nextScreen, arguments: _user);
+    }
+  }
+
+  @override
+  initState() {
+    Future.delayed(Duration.zero, () {
+      dynamic arguments = ModalRoute.of(context).settings.arguments;
+      if (arguments['user'] != null) {
+        _user = arguments['user'];
+        print(_user.provider);
+      }
+      if (arguments['nextScreen'] != null) {
+        nextScreen = arguments['nextScreen'];
+      }
+    });
+    super.initState();
   }
 
   @override

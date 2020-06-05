@@ -44,7 +44,7 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
     });
   }
 
-  Future<Null> _selectDate(BuildContext context) async {
+  Future _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -126,10 +126,10 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
                     },
                   )),
               onChanged: (String value) {
-                // widget.profile.birthday = value;
+                widget.profile.birthday = value;
               },
               onSaved: (String value) {
-                // widget.profile.birthday = value;
+                widget.profile.birthday = value;
               },
             ),
             Divider(color: Colors.transparent),

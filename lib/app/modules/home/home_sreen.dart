@@ -49,6 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
         new FirebaseNotifications(context).setUpFirebase();
       }
     });
+
+    (Connectivity().checkConnectivity()).then((connectivityResult) {
+      setState(() => statusConnect = connectivityResult);
+    });
   }
 
   @override

@@ -54,26 +54,21 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
               trailing: Switch(
                 value: widget.profile.googleToken != null ? true : false,
                 onChanged: (value) async {
-                  if (value) {
-                    try {
+                  try {
+                    if (value) {
                       UserModel user = await signInGoogle();
                       widget.profile.googleToken = user.providerToken;
-                      await repositorio.putProfile(widget.profile);
-                      setState(() {});
-                    } catch (mensagem) {
-                      setState(() {
-                        widget.profile.googleToken = null;
-                      });
-                      Toast.show(mensagem.toString(), context);
-                      return;
-                    }
-                  } else {
-                    setState(() {
+                    } else {
                       widget.profile.googleToken = null;
-                    });
+                    }
+                    await repositorio.putProfileSocialMidia(
+                        'google', widget.profile.googleToken);
+                    setState(() {});
+                  } catch (mensagem) {
+                    Toast.show(mensagem.toString(), context);
+                    return;
                   }
                 },
-                activeTrackColor: Colors.tealAccent,
                 activeColor: Colors.teal,
               ),
             ),
@@ -83,26 +78,24 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
               trailing: Switch(
                 value: widget.profile.facebookToken != null ? true : false,
                 onChanged: (value) async {
-                  if (value) {
-                    try {
+                  try {
+                    if (value) {
                       UserModel user = await signInFacebook();
                       widget.profile.facebookToken = user.providerToken;
-                      await repositorio.putProfile(widget.profile);
-                      setState(() {});
-                    } catch (mensagem) {
-                      setState(() {
-                        widget.profile.googleToken = null;
-                      });
-                      Toast.show(mensagem.toString(), context);
-                      return;
+                    } else {
+                      widget.profile.facebookToken = null;
                     }
-                  } else {
+                    await repositorio.putProfileSocialMidia(
+                        'facebook', widget.profile.facebookToken);
+                    setState(() {});
+                  } catch (mensagem) {
                     setState(() {
-                      widget.profile.googleToken = null;
+                      widget.profile.facebookToken = null;
                     });
+                    Toast.show(mensagem.toString(), context);
+                    return;
                   }
                 },
-                activeTrackColor: Colors.tealAccent,
                 activeColor: Colors.teal,
               ),
             ),
@@ -117,26 +110,21 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                     trailing: Switch(
                       value: widget.profile.appleToken != null ? true : false,
                       onChanged: (value) async {
-                        if (value) {
-                          try {
+                        try {
+                          if (value) {
                             UserModel user = await signInApple();
                             widget.profile.appleToken = user.providerToken;
-                            await repositorio.putProfile(widget.profile);
-                            setState(() {});
-                          } catch (mensagem) {
-                            setState(() {
-                              widget.profile.googleToken = null;
-                            });
-                            Toast.show(mensagem.toString(), context);
-                            return;
+                          } else {
+                            widget.profile.appleToken = null;
                           }
-                        } else {
-                          setState(() {
-                            widget.profile.googleToken = null;
-                          });
+                          await repositorio.putProfileSocialMidia(
+                              'apple', widget.profile.appleToken);
+                          setState(() {});
+                        } catch (mensagem) {
+                          Toast.show(mensagem.toString(), context);
+                          return;
                         }
                       },
-                      activeTrackColor: Colors.tealAccent,
                       activeColor: Colors.teal,
                     ),
                   ),

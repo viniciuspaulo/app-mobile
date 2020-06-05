@@ -1,4 +1,3 @@
-import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -9,7 +8,7 @@ import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
 import 'package:Clinicarx/app/components/connect.dart';
 import 'package:Clinicarx/app/components/buttons/container_social_buttons.dart';
 
-import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
+import 'package:Clinicarx/app/modules/auth/register/register_validate_screen.dart';
 import 'package:Clinicarx/app/modules/auth/remember/remember_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 
@@ -19,8 +18,6 @@ import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
-
-import '../terms/terms.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = '/login';
@@ -73,17 +70,6 @@ class _LoginScreenState extends State<LoginScreen> {
     (Connectivity().checkConnectivity()).then((connectivityResult) {
       setState(() => statusConnect = connectivityResult);
     });
-  }
-
-  Future<bool> validarApple() async {
-    if (Platform.isIOS) {
-      var iosInfo = await DeviceInfoPlugin().iosInfo;
-      var version = iosInfo.systemVersion;
-      if (version.contains('13') == true) {
-        return true;
-      }
-    }
-    return false;
   }
 
   @override
@@ -225,7 +211,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: SecundaryButton(
                             text: "NOVO POR AQUI? CADASTRE-SE",
                             onPressed: () {
-                              Navigator.pushNamed(context, RegisterScreen.tag);
+                              Navigator.pushNamed(
+                                  context, RegisterValidateScreen.tag);
                             },
                           ),
                         ),

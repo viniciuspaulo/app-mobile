@@ -2,6 +2,7 @@ class UserModel {
   int id;
   String document;
   String password;
+  String passwordConfirm;
   String name;
   String email;
   String birthday;
@@ -10,7 +11,7 @@ class UserModel {
   String googleToken;
   String facebookToken;
   String appleToken;
-
+  bool tos;
   String provider;
   String providerToken;
 
@@ -18,6 +19,7 @@ class UserModel {
       {this.id,
       this.document,
       this.password,
+      this.passwordConfirm,
       this.name,
       this.email,
       this.birthday,
@@ -26,6 +28,7 @@ class UserModel {
       this.googleToken,
       this.facebookToken,
       this.appleToken,
+      this.tos,
       this.provider,
       this.providerToken});
 
@@ -41,7 +44,7 @@ class UserModel {
     googleToken = json['google_token'];
     facebookToken = json['facebook_token'];
     appleToken = json['apple_token'];
-
+    tos = json['tos'];
     provider = json['provider'];
     providerToken = json['provider_token'];
   }
@@ -59,7 +62,7 @@ class UserModel {
     data['google_token'] = this.googleToken;
     data['facebook_token'] = this.facebookToken;
     data['apple_token'] = this.appleToken;
-
+    data['tos'] = this.tos;
     data['provider'] = this.provider;
     data['provider_token'] = this.providerToken;
     return data;

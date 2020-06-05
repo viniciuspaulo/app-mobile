@@ -40,10 +40,10 @@ Future<UserModel> signInGoogle() async {
     _user.email = user.email;
     _user.name = user.displayName;
     _user.photo = user.photoUrl;
-    _user.googleToken = user.providerId;
+    _user.googleToken = user.uid;
 
     _user.provider = "google";
-    _user.providerToken = user.providerId;
+    _user.providerToken = user.uid;
 
     return _user;
   } catch (e) {
@@ -79,10 +79,10 @@ Future<UserModel> signInFacebook() async {
     _user.email = user.email;
     _user.name = user.displayName;
     _user.photo = user.photoUrl;
-    _user.facebookToken = user.providerId;
+    _user.facebookToken = user.uid;
 
     _user.provider = "facebook";
-    _user.providerToken = user.providerId;
+    _user.providerToken = user.uid;
 
     return _user;
   } catch (e) {

@@ -9,17 +9,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ClientRepository {
   final _private = new ApiService();
 
-  Future postLogin(UserModel usuario) async {
+  Future postLogin(UserModel user) async {
     var paramets = {};
-    if (usuario.provider != null) {
+    if (user.provider != null) {
       paramets = {
-        'provider': usuario.provider,
-        'provider_token': usuario.providerToken
+        'provider': user.provider,
+        'provider_token': user.providerToken
       };
     } else {
       paramets = {
-        'document': somenteNumeros(usuario.document),
-        'password': usuario.password
+        'document': somenteNumeros(user.document),
+        'password': user.password
       };
     }
     Response response = await _private.postRequest('auth/login', paramets);
@@ -33,9 +33,34 @@ class ClientRepository {
     return response.data['data'];
   }
 
-  Future postForgotPassword(UserModel usuario) async {
+  Future postRegister(UserModel user) async {
+    user.tos = true;
+    user.document = somenteNumeros(user.document);
+
+    List<String> dataList = user.birthday.split("/");
+    if (dataList.length == 3) {
+      user.birthday = (dataList[2] + "-" + dataList[1] + "-" + dataList[0]);
+    }
+
+    Response response =
+        await _private.postRequest('auth/register', user.toJson());
+
+    final storage = await SharedPreferences.getInstance();
+    await storage.setString("token", response.data['data']['access_token']);
+
+    postSyncronize();
+
+    return response.data['data'];
+  }
+
+  Future postSyncronize() async {
+    Response response = await _private.putRequest('synchronize', {});
+    return response.data['data'];
+  }
+
+  Future postForgotPassword(UserModel user) async {
     Response response = await _private
-        .postRequest('auth/forgot-password', {'email': usuario.email});
+        .postRequest('auth/forgot-password', {'email': user.email});
     return response.data['data'];
   }
 
@@ -52,13 +77,25 @@ class ClientRepository {
   }
 
   Future putProfile(ProfileModel profile) async {
-    Response response = await _private.putRequest('profile', {});
+    Response response = await _private.putRequest('profile', profile.toJson());
+    return ProfileModel.fromJson(response.data['data']['user']);
+  }
+
+  Future putProfileSocialMidia(String provider, String providerId) async {
+    Response response = await _private.putRequest(
+        'profile', {'${provider}_token': providerId, 'social_midia': true});
     return ProfileModel.fromJson(response.data['data']['user']);
   }
 
   Future getProfile() async {
     Response response = await _private.getRequest('profile');
     return ProfileModel.fromJson(response.data['data']);
+  }
+
+  Future getSearchDocument(String document) async {
+    Response response = await _private
+        .getRequest('auth/search-document/' + somenteNumeros(document));
+    return response.data['data'];
   }
 
   Future putProfilePassword(String password) async {

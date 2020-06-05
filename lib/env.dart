@@ -3,11 +3,10 @@
 import 'package:flutter/material.dart';
 
 const config = {
-  'baseUrl': 'https://api.clinicarx.com.br/mobile',
+  'baseUrl': 'http://192.168.1.103:8000',
   'cor1': Colors.teal,
   'cor2': Colors.teal
 };
-
 
 //Usuario de teste prod
 // cpf: 782.226.620-90
@@ -16,6 +15,5 @@ const config = {
 //Usuario de teste stage
 // CPF: 06647865969
 // Senha: beraldo
-
 
 final environment = config;
