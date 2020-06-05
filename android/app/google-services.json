@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "722487420586",
+    "firebase_url": "https://clinicarx-mobile.firebaseio.com",
+    "project_id": "clinicarx-mobile",
+    "storage_bucket": "clinicarx-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722487420586:android:d842bdf853a7261ad152d3",
+        "android_client_info": {
+          "package_name": "com.clinicarx.clinicarxapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722487420586-frlranpu528ea8qn8ctjji2ndia4p9o1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clinicarx.clinicarxapp",
+            "certificate_hash": "45f500e867f397641de15d8033a83bf2410afe24"
+          }
+        },
+        {
+          "client_id": "722487420586-vecssm79sq2od88cqft0fuutm6fbnja1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clinicarx.clinicarxapp",
+            "certificate_hash": "4aec059ab1bf12fef2521a9bfa7bede4c4459a00"
+          }
+        },
+        {
+          "client_id": "722487420586-f9d933iu390nsrges1m1ened81lmt1qr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clinicarx.clinicarxapp",
+            "certificate_hash": "6ac30b5d075d4dd42d45a65a01eb386ca834d025"
+          }
+        },
+        {
+          "client_id": "722487420586-3ua1b7874ocu7gap4oar2qb6cdhv11nh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clinicarx.clinicarxapp",
+            "certificate_hash": "739f2f210b00d74ad66816515baf76ba4c1bfbc2"
+          }
+        },
+        {
+          "client_id": "722487420586-bk85u3q1qevlsmpnfd3ivu2bfjd0tib5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.clinicarx.clinicarxapp",
+            "certificate_hash": "155f6036cc367746fa89028069633d3ec745be41"
+          }
+        },
+        {
+          "client_id": "722487420586-20nvd0t3ov1li5g3g0hn27la73dg6jn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlJ_gsjG0Fis5CFUp_dLIPXMU0F6CD9-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "722487420586-20nvd0t3ov1li5g3g0hn27la73dg6jn6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "722487420586-7kjof2iki673kvs29lsgcofapeukh04j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.clinicarx.clinicarxapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
