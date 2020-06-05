@@ -1,6 +1,6 @@
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
-import 'package:Clinicarx/app/repositorys/ClientRepository.dart';
+import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -18,17 +18,16 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
- final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   ClientRepository _repositorio = new ClientRepository();
-  bool loading = false;
+  bool load = false;
   String token = "";
   String password = "";
   String confirmPassword = "";
-  
+
   bool showPassword = false;
 
   submit() async {
-
     if (password != confirmPassword) {
       Toast.show("A senhas não sao iguais.", context);
       return;
@@ -36,30 +35,29 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      setState(() => loading = true);
-      
+      setState(() => load = true);
+
       try {
         final prefs = await SharedPreferences.getInstance();
         prefs.setString("token", token);
 
         await _repositorio.postUpdatePassword(password);
 
-        setState(() => loading = false);
+        setState(() => load = false);
         prefs.remove("token");
 
         Toast.show("A senhas alterada com sucesso.", context);
         Navigator.pushReplacementNamed(context, LoginScreen.tag);
-      } catch(mensagem) {
+      } catch (mensagem) {
         Toast.show(mensagem, context);
-        setState(() => loading = false);
+        setState(() => load = false);
       }
     }
   }
 
-
   @override
   initState() {
-    Future.delayed(Duration.zero,(){
+    Future.delayed(Duration.zero, () {
       token = ModalRoute.of(context).settings.arguments;
     });
     super.initState();
@@ -71,9 +69,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black54
-        ),
+        iconTheme: IconThemeData(color: Colors.black54),
       ),
       backgroundColor: Colors.white,
       body: Form(
@@ -85,19 +81,17 @@ class _PasswordScreenState extends State<PasswordScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
               Image(
                 image: AssetImage("assets/images/logo.png"),
               ),
-              
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 margin: EdgeInsets.only(top: 8),
-                child: Text("Se houver uma conta vinculada a esse e-mail você receberá um código para alterar sua senha.",
+                child: Text(
+                  "Se houver uma conta vinculada a esse e-mail você receberá um código para alterar sua senha.",
                   textAlign: TextAlign.center,
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: TextFormField(
@@ -115,12 +109,15 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       borderSide: BorderSide(color: Colors.black54, width: 1.0),
                     ),
                     suffixIcon: IconButton(
-                      icon: showPassword ? 
-                        Icon(FontAwesomeIcons.eyeSlash, color: Colors.black54) : 
-                        Icon(FontAwesomeIcons.eye, color: Colors.black54,
-                      ),
+                      icon: showPassword
+                          ? Icon(FontAwesomeIcons.eyeSlash,
+                              color: Colors.black54)
+                          : Icon(
+                              FontAwesomeIcons.eye,
+                              color: Colors.black54,
+                            ),
                       onPressed: () {
-                        setState(() => showPassword =! showPassword);
+                        setState(() => showPassword = !showPassword);
                       },
                     ),
                   ),
@@ -132,7 +129,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   },
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: TextFormField(
@@ -150,12 +146,15 @@ class _PasswordScreenState extends State<PasswordScreen> {
                       borderSide: BorderSide(color: Colors.black54, width: 1.0),
                     ),
                     suffixIcon: IconButton(
-                      icon: showPassword ? 
-                        Icon(FontAwesomeIcons.eyeSlash, color: Colors.black54) : 
-                        Icon(FontAwesomeIcons.eye, color: Colors.black54,
-                      ),
+                      icon: showPassword
+                          ? Icon(FontAwesomeIcons.eyeSlash,
+                              color: Colors.black54)
+                          : Icon(
+                              FontAwesomeIcons.eye,
+                              color: Colors.black54,
+                            ),
                       onPressed: () {
-                        setState(() => showPassword =! showPassword);
+                        setState(() => showPassword = !showPassword);
                       },
                     ),
                   ),
@@ -167,20 +166,16 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   },
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 margin: EdgeInsets.symmetric(vertical: 16),
                 child: PrimaryButton(
-                  text: "ENVIAR",
-                  onPressed: submit,
-                  loading: loading
-                )
+                    text: "ENVIAR", onPressed: submit, load: load),
               ),
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
