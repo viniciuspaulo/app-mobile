@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:Clinicarx/app/repositorys/FirebaseRepository.dart';
+import 'package:Clinicarx/app/repositories/FirebaseRepository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 
 class FirebaseNotifications {
   FirebaseMessaging _firebaseMessaging;
@@ -29,5 +28,4 @@ class FirebaseNotifications {
       print("Settings registered: $settings");
     });
   }
-  
 }

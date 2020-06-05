@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:Clinicarx/app/models/UserModel.dart';
@@ -7,7 +6,6 @@ import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -18,7 +16,8 @@ final repositorio = new ApiService();
 Future<UserModel> signInGoogle() async {
   try {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleSignInAuthentication.accessToken,
@@ -30,7 +29,7 @@ Future<UserModel> signInGoogle() async {
       throw Exception("Não foi possivel logar");
     }
     final FirebaseUser user = authResult.user;
-    
+
     assert(!user.isAnonymous);
     assert(await user.getIdToken() != null);
 
@@ -47,7 +46,7 @@ Future<UserModel> signInGoogle() async {
     _user.providerToken = user.providerId;
 
     return _user;
-  } catch(e) {
+  } catch (e) {
     throw Exception("Não foi possivel logar");
   }
 }
@@ -59,7 +58,6 @@ Future<UserModel> signInFacebook() async {
         : FacebookLoginBehavior.nativeWithFallback;
 
     final result = await facebookLogin.logIn(['email']);
-
 
     final AuthCredential credential = FacebookAuthProvider.getCredential(
       accessToken: result.accessToken.token,
@@ -87,7 +85,7 @@ Future<UserModel> signInFacebook() async {
     _user.providerToken = user.providerId;
 
     return _user;
-  } catch(e) {
+  } catch (e) {
     throw Exception("Não foi possivel logar");
   }
 }
@@ -101,14 +99,15 @@ Future<UserModel> signInApple() async {
       case AuthorizationStatus.authorized:
         UserModel _user = new UserModel();
         _user.email = result.credential.email;
-        _user.name = "${result.credential.fullName.givenName} ${result.credential.fullName.familyName}";
-        _user.appleToken = "apple_"+result.credential.email;
+        _user.name =
+            "${result.credential.fullName.givenName} ${result.credential.fullName.familyName}";
+        _user.appleToken = "apple_" + result.credential.email;
 
         _user.provider = "apple";
         _user.providerToken = _user.appleToken;
 
         return _user;
-      break;
+        break;
       case AuthorizationStatus.error:
         throw Exception("Não foi possivel logar");
         break;
@@ -116,7 +115,7 @@ Future<UserModel> signInApple() async {
         throw Exception("Não foi possivel logar");
         break;
     }
-  } catch(e) {
+  } catch (e) {
     throw Exception("Não foi possivel logar");
   }
 }
