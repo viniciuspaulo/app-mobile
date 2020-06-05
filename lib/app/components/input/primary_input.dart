@@ -31,19 +31,10 @@ class _PrimaryInput extends State<PrimaryInput> {
       initialValue: widget.initialValue,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        focusedBorder: OutlineInputBorder(
+        border: OutlineInputBorder(
           borderSide:
               BorderSide(color: Colors.black54, width: 1.0),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Colors.black54, width: 1.0),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: Colors.black54, width: 1.0),
-        ),
-        
       ),
       onChanged: widget.onChanged,
       onSaved: widget.onChanged,

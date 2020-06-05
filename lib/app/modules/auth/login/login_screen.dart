@@ -154,11 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       decoration: InputDecoration(
                         hintText: "CPF",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black54, width: 1.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
+                        border: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.black54, width: 1.0),
                         ),
@@ -181,11 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       decoration: InputDecoration(
                         hintText: "Senha",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black54, width: 1.0),
-                        ),
-                        enabledBorder: OutlineInputBorder(
+                        border: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.black54, width: 1.0),
                         ),
