@@ -14,7 +14,7 @@ class TermsScreen extends StatefulWidget {
 
 class _TermsScreenState extends State<TermsScreen> {
   bool load = false;
-  bool termsAccepted = false;
+  bool isTermsAccepted = false;
 
   void handleTerms() {
     /**
@@ -70,17 +70,17 @@ class _TermsScreenState extends State<TermsScreen> {
                 child: Row(
                   children: <Widget>[
                     Checkbox(
-                      value: termsAccepted,
+                      value: isTermsAccepted,
                       onChanged: (bool value) {
                         setState(() {
-                          termsAccepted = !termsAccepted;
+                          isTermsAccepted = !isTermsAccepted;
                         });
                       },
                     ),
                     InkWell(
                       onTap: () {
                         setState(() {
-                          termsAccepted = !termsAccepted;
+                          isTermsAccepted = !isTermsAccepted;
                         });
                       },
                       child: Text(
@@ -96,10 +96,10 @@ class _TermsScreenState extends State<TermsScreen> {
               padding: EdgeInsets.symmetric(horizontal: 24),
               margin: EdgeInsets.only(top: 16),
               child: PrimaryButton(
-                text: 'aceitar e continuar',
-                onPressed: handleTerms,
-                load: load,
-              ),
+                  text: 'aceitar e continuar',
+                  onPressed: handleTerms,
+                  load: load,
+                  disabled: !isTermsAccepted),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24),

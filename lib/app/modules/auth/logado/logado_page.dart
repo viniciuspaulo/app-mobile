@@ -13,34 +13,35 @@ class LogadoPage extends StatefulWidget {
   _LogadoPageState createState() => _LogadoPageState();
 }
 
-class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateMixin{
-
+class _LogadoPageState extends State<LogadoPage>
+    with SingleTickerProviderStateMixin {
   Animation<double> animation;
   Animation<double> animation2;
 
   AnimationController animationController;
   AnimationController animationController2;
   ConnectivityResult statusConnect;
-  
- @override
+
+  @override
   void initState() {
     super.initState();
 
-    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    
+    animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+
     animation = Tween<double>(begin: -300, end: 0).animate(animationController)
-    ..addListener(() {
-      setState(() {});
-    });
+      ..addListener(() {
+        setState(() {});
+      });
 
     animation2 = Tween<double>(begin: -300, end: 0).animate(animationController)
-    ..addListener(() {
-      setState(() {});
-    });
+      ..addListener(() {
+        setState(() {});
+      });
 
     animationController.forward();
 
-    Future.delayed(Duration(milliseconds: 1000),(){
+    Future.delayed(Duration(milliseconds: 1000), () {
       checkIfAuthenticated().then((success) async {
         if (success == 1) {
           Navigator.pushReplacementNamed(context, '/home');
@@ -72,24 +73,22 @@ class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
+        body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/fundo.png"),
-            fit: BoxFit.fill,
-          )
-        ),
-        child: Stack(children: [
-          Positioned(
-            child: Transform.translate(
-              offset: Offset(animation.value, 0),
-              child: Container(
+        image: AssetImage("assets/images/fundo.png"),
+        fit: BoxFit.fill,
+      )),
+      child: Stack(children: [
+        Positioned(
+          child: Transform.translate(
+            offset: Offset(animation.value, 0),
+            child: Container(
                 width: screenSize.width,
                 height: double.infinity,
                 child: ClipRRect(
@@ -100,25 +99,22 @@ class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateM
                   child: Container(
                     color: Colors.white,
                   ),
-                )
+                )),
+          ),
+        ),
+        Positioned(
+          child: Transform.translate(
+            offset: Offset(animation2.value, 0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Image(
+                image: AssetImage("assets/images/logo.png"),
               ),
             ),
           ),
-          Positioned(
-            child: Transform.translate(
-              offset: Offset(animation2.value, 0),
-              child: Container(
-                width: double.infinity,
-                height: double.infinity,
-                child: Image(
-                  image: AssetImage("assets/images/logo.png"),
-                ),
-              ),
-            ),
-          ),
-
-        ]),
-      )
-    );
+        ),
+      ]),
+    ));
   }
 }

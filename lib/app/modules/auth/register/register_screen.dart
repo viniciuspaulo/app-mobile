@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/buttons/container_social_buttons.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/social_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
@@ -198,51 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 28),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        SocialButton(
-                          icon: Icon(
-                            FontAwesomeIcons.google,
-                            size: 18,
-                            color: Colors.red,
-                          ),
-                          load: loadSocial == "google" ? true : false,
-                          onPressed: () {
-//                            submitSocial("google");
-                          },
-                        ),
-                        SocialButton(
-                          icon: Icon(
-                            FontAwesomeIcons.facebook,
-                            size: 18,
-                            color: Colors.blue,
-                          ),
-                          load: loadSocial == "facebook" ? true : false,
-                          onPressed: () {
-//                            submitSocial("facebook");
-                          },
-                        ),
-                        FutureBuilder(
-                          future: DeviceUtils.isTheIosVersionCompatible(13),
-                          builder: (_, snapshot) {
-                            return Visibility(
-                              child: SocialButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.apple,
-                                  size: 18,
-                                ),
-                                load: loadSocial == "apple" ? true : false,
-                                onPressed: () {
-//                                  submitSocial("apple");
-                                },
-                              ),
-                              visible: snapshot.hasData && snapshot.data,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                    child: ContainerSocialButtons(),
                   ),
                 ],
               ),

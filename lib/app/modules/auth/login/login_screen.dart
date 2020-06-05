@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
-import 'package:Clinicarx/app/components/buttons/social_button.dart';
 import 'package:Clinicarx/app/components/connect.dart';
+import 'package:Clinicarx/app/components/buttons/container_social_buttons.dart';
 
 import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
 import 'package:Clinicarx/app/modules/auth/remember/remember_screen.dart';
@@ -15,7 +14,6 @@ import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
-import 'package:Clinicarx/app/services/social_auth.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -55,35 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
         Toast.show(mensagem, context);
         setState(() => load = false);
       }
-    }
-  }
-
-  submitSocial(String provider) async {
-    setState(() => loadSocial = provider);
-    try {
-      if (provider == "google") {
-        _user = await signInGoogle();
-      }
-
-      if (provider == "facebook") {
-        _user = await signInFacebook();
-      }
-
-      if (provider == "apple") {
-        _user = await signInApple();
-      }
-
-      var result = await _repositorio.postLogin(_user);
-      setState(() => loadSocial = "");
-
-      if (result['first_access'] != null) {
-        Navigator.pushNamed(context, RegisterScreen.tag);
-        return;
-      }
-      Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
-    } catch (mensagem) {
-      Toast.show("Não possivel logar.", context);
-      setState(() => loadSocial = "");
     }
   }
 
@@ -235,43 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 28),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SocialButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.google,
-                                  size: 18,
-                                  color: Colors.red,
-                                ),
-                                load: loadSocial == "google" ? true : false,
-                                onPressed: () {
-                                  submitSocial("google");
-                                },
-                              ),
-                              SocialButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.facebook,
-                                  size: 18,
-                                  color: Colors.blue,
-                                ),
-                                load: loadSocial == "facebook" ? true : false,
-                                onPressed: () {
-                                  submitSocial("facebook");
-                                },
-                              ),
-                              SocialButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.apple,
-                                  size: 18,
-                                ),
-                                load: loadSocial == "apple" ? true : false,
-                                onPressed: () {
-                                  submitSocial("apple");
-                                },
-                              ),
-                            ],
-                          ),
+                          child: ContainerSocialButtons(),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 28),

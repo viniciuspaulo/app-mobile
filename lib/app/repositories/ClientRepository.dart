@@ -1,6 +1,3 @@
-
-
-
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/models/ResponsiblesModel.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
@@ -13,21 +10,21 @@ class ClientRepository {
   final _private = new ApiService();
 
   Future postLogin(UserModel usuario) async {
-    var paramets =  {};
+    var paramets = {};
     if (usuario.provider != null) {
       paramets = {
         'provider': usuario.provider,
-        'provider_token': usuario.providerToken 
+        'provider_token': usuario.providerToken
       };
     } else {
       paramets = {
         'document': somenteNumeros(usuario.document),
-        'password': usuario.password 
+        'password': usuario.password
       };
     }
-    Response response = await _private.postRequest('auth/login',paramets);
+    Response response = await _private.postRequest('auth/login', paramets);
 
-    if (response.data['data']['first_access'] != null ) {
+    if (response.data['data']['first_access'] != null) {
       return response.data['data'];
     }
 
@@ -37,28 +34,25 @@ class ClientRepository {
   }
 
   Future postForgotPassword(UserModel usuario) async {
-    Response response = await _private.postRequest('auth/forgot-password',{
-      'email': usuario.email
-    });
+    Response response = await _private
+        .postRequest('auth/forgot-password', {'email': usuario.email});
     return response.data['data'];
   }
 
   Future postValidateResetPassword(String code) async {
-    Response response = await _private.postRequest('auth/validate-reset-password',{
-      'code': code
-    });
+    Response response = await _private
+        .postRequest('auth/validate-reset-password', {'code': code});
     return response.data['data'];
   }
 
   Future postUpdatePassword(String password) async {
-    Response response = await _private.postRequest('auth/update-password',{
-      'password': password
-    });
+    Response response = await _private
+        .postRequest('auth/update-password', {'password': password});
     return response.data['data'];
   }
 
   Future putProfile(ProfileModel profile) async {
-    Response response = await _private.putRequest('profile',{});
+    Response response = await _private.putRequest('profile', {});
     return ProfileModel.fromJson(response.data['data']['user']);
   }
 
@@ -68,14 +62,13 @@ class ClientRepository {
   }
 
   Future putProfilePassword(String password) async {
-    Response response = await _private.putRequest('profile/password',{
-      "password": password
-    });
+    Response response =
+        await _private.putRequest('profile/password', {"password": password});
     return response.data['data'];
   }
 
   Future putResponsibles(ResponsiblesModel responsible) async {
-    Response response = await _private.putRequest('profile/responsibles',{});
+    Response response = await _private.putRequest('profile/responsibles', {});
     return response.data['data'];
   }
 }
