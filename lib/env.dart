@@ -9,9 +9,13 @@ const config = {
 };
 
 
-//Usuario de teste
+//Usuario de teste prod
 // cpf: 782.226.620-90
 // senha: crx12345
+
+//Usuario de teste stage
+// CPF: 06647865969
+// Senha: beraldo
 
 
 final environment = config;

@@ -75,4 +75,19 @@ class ApiService {
       throw(e.response.data['data']['message']);
     }
   }
+
+  Future putRequest(String url, dynamic data) async {
+    await _meutoken();
+    try {
+      String urlRequest = '$_baseUrl/$url';
+      if (latitude != null && longitude !=null) {
+        urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+      }
+      print(urlRequest);
+      return await this._dio.put(urlRequest,data: data);
+    } on DioError catch(e) {
+      print(e.response.data);
+      throw(e.response.data['data']['message']);
+    }
+  }
 }

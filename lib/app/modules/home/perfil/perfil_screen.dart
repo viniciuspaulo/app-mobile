@@ -1,8 +1,13 @@
 
 
 import 'package:Clinicarx/app/components/menu.dart';
+import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
+import 'package:Clinicarx/app/repositorys/ClientRepository.dart';
+import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PerfilScreen extends StatefulWidget {
   static String tagRota = '/home/perfil';
@@ -17,6 +22,24 @@ class PerfilScreen extends StatefulWidget {
 
 class _PerfilScreenState extends State<PerfilScreen> {
   
+  ProfileModel profile = new ProfileModel();
+  final repositorio = Modular.get<ClientRepository>();
+  bool load = false;
+
+  var maskCpf = new MaskedTextController(text: '', mask: '000.000.000-00');
+
+  @override
+  initState() {
+    super.initState();
+    onInit();
+  }
+
+  onInit() async {
+    setState(() => load = true);
+    profile = await repositorio.getProfile();
+    maskCpf.updateText(profile.document);
+    setState(() => load = false);
+  }
     
   @override
   Widget build(BuildContext context) {
@@ -37,7 +60,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
       ),
       backgroundColor: Colors.white,
       drawer: Menu(),
-      body: SingleChildScrollView(
+      body: this.load ? 
+        Center(child: CircularProgressIndicator(
+          backgroundColor: Colors.white,
+          strokeWidth: 1,
+        )) : SingleChildScrollView(
         child: Container(
           width: screenSize.width,
           height: screenSize.height,
@@ -48,7 +75,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                 width: 120,
                 image: AssetImage("assets/images/avatar.png",),
               ),
-              Text("TESTE APP MOBILE",
+              Text(profile.name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
@@ -57,9 +84,9 @@ class _PerfilScreenState extends State<PerfilScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("782.226.620-90"),
+                child: Text(maskCpf.text),
               ),
-              Text("vbbritodepaulo@gmail.com",
+              Text(profile.email,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 12,
@@ -68,11 +95,11 @@ class _PerfilScreenState extends State<PerfilScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Marculino | 30 anos"),
+                child: Text((profile.sex == "male" ? "Masculino" : "Feminino")+" | "+(getAge(profile.birthday))+" anos"),
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, PerfilEditScreen.tagRota);
+                  Navigator.pushNamed(context, PerfilEditScreen.tagRota, arguments: profile);
                 },
                 child: Text("Editar Perfil",
                   style: TextStyle(
@@ -89,7 +116,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   child: Card(
                     child: Column(
                       children: [
-                        Text("2",
+                        Text(profile.amountMedicines.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -108,7 +135,7 @@ class _PerfilScreenState extends State<PerfilScreen> {
                   child: Card(
                     child: Column(
                       children: [
-                        Text("3072",
+                        Text(profile.amountAttendances.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -131,16 +158,22 @@ class _PerfilScreenState extends State<PerfilScreen> {
               ),
 
               Column(
-                children: [1,2,3].map((e) {
-                  return Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      leading:  Image(
-                        width: 50,
-                        image: AssetImage('assets/images/paguemenos.png'),
+                children: profile.lastClinicAttendances.map((clinics) {
+                  return Column(
+                    children: [
+                      Container(
+                        child: ListTile(
+                          leading:  imageFromBase64String(
+                            base64String: clinics.logo,
+                            width: 80,
+                            height: 40
+                          ),
+                          title: Text(clinics.name),
+                          subtitle: Text(clinics.phone),
+                        )
                       ),
-                      title: Text("Loja 33"),
-                    )
+                      Divider()
+                    ],
                   );
                 }).toList(),
               )

@@ -1,5 +1,6 @@
 
 
+import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:flutter/material.dart';
 
 class MedicamentScreen extends StatefulWidget {
@@ -15,7 +16,17 @@ class MedicamentScreen extends StatefulWidget {
 
 class _MedicamentScreenState extends State<MedicamentScreen> {
   
-    
+  MedicineModel medicine = new MedicineModel();
+
+  @override
+  initState() {
+    super.initState();
+    Future.delayed(Duration.zero,(){
+      medicine = ModalRoute.of(context).settings.arguments;
+      setState(() {});
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
 
@@ -54,12 +65,15 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            color: Colors.teal,
-                            child: Text("USO CONTINUO",
-                              style: TextStyle(
-                                color: Colors.white
+                          Visibility(
+                            visible: medicine.continuous != null && medicine.continuous,
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              color: Colors.teal,
+                              child: Text("USO CONTINUO",
+                                style: TextStyle(
+                                  color: Colors.white
+                                ),
                               ),
                             ),
                           )
@@ -72,7 +86,8 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                           image: AssetImage('assets/images/ICON_MEDICINE.png'),
                         ),
                       ),
-                      Text("Puran T4 (Levotiroxina)",
+                      Text((medicine.medicines != null ? medicine.medicines : "Sem medicamentos")+
+                        (medicine.activePrinciple != null ? "("+medicine.activePrinciple+")" : "Sem princípios ativos"),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black54
@@ -80,7 +95,7 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Puran T4 (Levotiroxina)",
+                        child: Text(medicine.laboratory != null &&  medicine.laboratory != "" ? medicine.laboratory : "Sem laboratório",
                           style: TextStyle(
                             color: Colors.black54
                           ),
@@ -96,7 +111,7 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
                             color: Colors.black54
                           ),
                         ),
-                        Text("Sem prescritor",
+                        Text(medicine.prescriptive != null && medicine.prescriptive != "" ? medicine.prescriptive : "Sem prescritor",
                           style: TextStyle(
                             color: Colors.black54
                           ),
@@ -105,15 +120,16 @@ class _MedicamentScreenState extends State<MedicamentScreen> {
 
                       Divider(),
 
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("INICIO: NÃO INFORMADO FIM: NÃO INFORMADO",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54
-                          ),
-                        ),
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: medicine != null ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("INÍCIO: "+(medicine.treatmentStartDate  != null ? medicine.treatmentStartDate : "NÃO INFORMADO")),
+                          Text("FIM: "+(medicine.treatmentEndDate  != null ? medicine.treatmentEndDate : "NÃO INFORMADO")),
+                        ],
+                      ) : null,
+                    ),
 
                       Divider(),
 

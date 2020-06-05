@@ -1,6 +1,8 @@
 
 
 
+import 'package:Clinicarx/app/models/ProfileModel.dart';
+import 'package:Clinicarx/app/models/ResponsiblesModel.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/services/api.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
@@ -52,6 +54,28 @@ class ClientRepository {
     Response response = await _private.postRequest('auth/update-password',{
       'password': password
     });
+    return response.data['data'];
+  }
+
+  Future putProfile(ProfileModel profile) async {
+    Response response = await _private.putRequest('profile',{});
+    return ProfileModel.fromJson(response.data['data']['user']);
+  }
+
+  Future getProfile() async {
+    Response response = await _private.getRequest('profile');
+    return ProfileModel.fromJson(response.data['data']);
+  }
+
+  Future putProfilePassword(String password) async {
+    Response response = await _private.putRequest('profile/password',{
+      "password": password
+    });
+    return response.data['data'];
+  }
+
+  Future putResponsibles(ResponsiblesModel responsible) async {
+    Response response = await _private.putRequest('profile/responsibles',{});
     return response.data['data'];
   }
 }

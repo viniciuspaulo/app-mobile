@@ -1,18 +1,20 @@
 
 
+import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:Clinicarx/app/modules/home/medicament/medicament_screen.dart';
 import 'package:flutter/material.dart';
 
 class CardMedicament extends StatelessWidget {
 
-  CardMedicament();
+  final MedicineModel medicine;
+  CardMedicament(this.medicine);
   
   @override
   Widget build(BuildContext context) {
 
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, MedicamentScreen.tagRota);
+        Navigator.pushNamed(context, MedicamentScreen.tagRota, arguments: this.medicine);
       },
       child: Card(
         margin: const EdgeInsets.all(15.0),
@@ -25,8 +27,8 @@ class CardMedicament extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("INÍCIO: NÃO INFORMADO"),
-                  Text("FIM: NÃO INFORMADO"),
+                  Text("INÍCIO: "+(medicine.treatmentStartDate  != null ? medicine.treatmentStartDate : "NÃO INFORMADO")),
+                  Text("FIM: "+(medicine.treatmentEndDate  != null ? medicine.treatmentEndDate : "NÃO INFORMADO")),
                 ],
               ),
             ),
@@ -40,7 +42,8 @@ class CardMedicament extends StatelessWidget {
                     width: 30,
                     image: AssetImage('assets/images/ICON_MEDICINE.png'),
                   ),
-                  Text("Puran T4 (Levotiroxina)"),
+                  Text(medicine.medicines != null ? medicine.medicines : "Sem medicamentos"),
+                  Text(medicine.activePrinciple != null ? "("+medicine.activePrinciple+")" : "Sem princípios ativos"),
                 ],
               ),
             ),

@@ -5,48 +5,82 @@ import 'package:flutter/material.dart';
 
 class CardProcedure extends StatelessWidget {
 
-  CardProcedure(Procedures procedure);
+  final Procedures procedure;
+  CardProcedure(this.procedure);
+
+  
   
   @override
   Widget build(BuildContext context) {
+
+    final Size screenSize = MediaQuery.of(context).size;
 
     return Card(
       margin: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("INÍCIO: NÃO INFORMADO"),
-                Text("FIM: NÃO INFORMADO"),
-              ],
-            ),
-          ),
-          Divider(),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text("INÍCIO: NÃO INFORMADO"),
-                    Text("FIM: NÃO INFORMADO"),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text("INÍCIO: NÃO INFORMADO"),
-                    Text("FIM: NÃO INFORMADO"),
-                  ],
+          
+          Visibility(
+            visible: procedure.pAD != null && procedure.pAS != null,
+            child: ListTile(
+              title: Text("Pressão arterial (média)",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
                 )
-              ],
+              ),
+              subtitle: Text(procedure.pAD <= 0 && procedure.pAS <= 0 ?  "NÃO INFORMADO" : "${procedure.pAD} x ${procedure.pAS} mmhg")
             ),
           ),
+          Visibility(
+            visible: procedure.freqCardiaca != null,
+            child: ListTile(
+              title: Text("Frequência cardíaca",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+              subtitle: Text(procedure.freqCardiaca != null && procedure.freqCardiaca > 0 ? "${procedure.freqCardiaca} BPM" : "NÃO INFORMADO")
+            ),
+          ),
+          Visibility(
+            visible: procedure.average != null,
+            child: ListTile(
+              title: Text("Glicemia (média)",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+              subtitle: Text(procedure.average != null && procedure.average > 0 ? "${procedure.average} mg/dL" : "NÃO INFORMADO")
+            ),
+          ),
+          Visibility(
+            visible: procedure.foodStatus != null,
+            child: ListTile(
+              title: Text("Estado alimentar",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+              subtitle: Text(procedure.foodStatus != null ? procedure.foodStatus  : "NÃO INFORMADO")
+            ),
+          ),
+          Visibility(
+            visible: procedure.hasDiabetes != null,
+            child: ListTile(
+              title: Text("Diagnóstico prévio de diabetes",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                )
+              ),
+              subtitle: Text(procedure.hasDiabetes != null && procedure.hasDiabetes ? "SIM"  : "NÃO INFORMADO")
+            ),
+          )
         ],
       ),
     );

@@ -119,7 +119,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 color: Colors.white,
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
-                  child: Text("(14) 3458-7890"),
+                  child: Text(this.attendance.farmaciaPhone != null ? this.attendance.farmaciaPhone : "",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
                 ),
               ),
               Container(
@@ -132,28 +137,48 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               Container(
                 width: screenSize.width,
                 color: Colors.white,
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Text("Pague Menos"),
-                        Text("Pague Menos"),
-                      ],
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  title: Text("Farmacêutico(a): ",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold
                     ),
-                    Column(
-                      children: [
-                        Text("Pague Menos"),
-                        Text("Pague Menos"),
-                      ],
-                    )
-                  ],
+                  ),
+                  subtitle: Text(attendance.farmaceutico != null ? attendance.farmaceutico : ""),
+                  trailing: Column(
+                    children: [
+                      Text(attendance.closedTime != null ? attendance.closedTime : ""),
+                      Text(attendance.duration != null ? attendance.duration : ""),
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                width: screenSize.width,
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  title: Text("Cargo: ",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  subtitle: Text(attendance.farmaceuticoCargo !=null ? attendance.farmaceuticoCargo : ""),
                 ),
               ),
 
               Divider(color: Colors.transparent),
-              Text("PROCEDIMENTOS REALIZADOS"),
+              Text("PROCEDIMENTOS REALIZADOS",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
 
               Column(
                 children: attendance.procedures != null ? attendance.procedures.map((procedure) {
@@ -163,12 +188,23 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
 
               Divider(color: Colors.transparent),
-              Text("ANEXOS DO ATENDIMENTO"),
+              Text("ANEXOS DO ATENDIMENTO",
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold
+                )
+              ),
 
-              Column(
-                children: attendance.files != null ? attendance.files.map((file) {
-                  return CardFile(file);
-                }).toList() : [],
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                child: Card(
+                  color: Colors.white,
+                  child: Column(
+                    children: attendance.files != null ? attendance.files.map((file) {
+                      return CardFile(file);
+                    }).toList() : [],
+                  ),
+                ),
               )
             ],
           ),

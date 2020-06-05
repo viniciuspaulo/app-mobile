@@ -20,8 +20,6 @@ class _LogadoPageState extends State<LogadoPage> with SingleTickerProviderStateM
 
   AnimationController animationController;
   AnimationController animationController2;
-
-  StreamSubscription<ConnectivityResult> subscription;
   ConnectivityResult statusConnect;
   
  @override

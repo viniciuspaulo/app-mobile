@@ -27,7 +27,7 @@ Future<UserModel> signInGoogle() async {
 
     final AuthResult authResult = await _auth.signInWithCredential(credential);
     if (authResult == null) {
-      throw Exception("Não foi possivel logar");
+      throw "Não foi possivel logar";
     }
     final FirebaseUser user = authResult.user;
     
@@ -48,7 +48,7 @@ Future<UserModel> signInGoogle() async {
 
     return _user;
   } catch(e) {
-    throw Exception("Não foi possivel logar");
+    throw "Não foi possivel logar";
   }
 }
 
@@ -67,7 +67,7 @@ Future<UserModel> signInFacebook() async {
 
     final AuthResult authResult = await _auth.signInWithCredential(credential);
     if (authResult == null) {
-      throw Exception("Não foi possivel logar");
+      throw "Não foi possivel logar";
     }
     final FirebaseUser user = authResult.user;
 
@@ -88,7 +88,7 @@ Future<UserModel> signInFacebook() async {
 
     return _user;
   } catch(e) {
-    throw Exception("Não foi possivel logar");
+    throw "Não foi possivel logar";
   }
 }
 
@@ -110,13 +110,13 @@ Future<UserModel> signInApple() async {
         return _user;
       break;
       case AuthorizationStatus.error:
-        throw Exception("Não foi possivel logar");
+        throw "Não foi possivel logar";
         break;
       case AuthorizationStatus.cancelled:
-        throw Exception("Não foi possivel logar");
+        throw "Não foi possivel logar";
         break;
     }
   } catch(e) {
-    throw Exception("Não foi possivel logar");
+    throw "Não foi possivel logar";
   }
 }

@@ -84,7 +84,6 @@ class _LoginScreenState extends State<LoginScreen> {
       }
       Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
     } catch (mensagem) {
-      print(mensagem);
       Toast.show("Não possivel logar.", context);
       setState(() => loadingSocial = "");
     }

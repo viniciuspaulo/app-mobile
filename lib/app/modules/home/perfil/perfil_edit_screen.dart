@@ -1,5 +1,10 @@
 
 
+import 'package:Clinicarx/app/models/ProfileModel.dart';
+import 'package:Clinicarx/app/modules/home/perfil/perfil_acess_screen.dart';
+import 'package:Clinicarx/app/modules/home/perfil/perfil_info_screen.dart';
+import 'package:Clinicarx/app/modules/home/perfil/perfil_responsible_screen.dart';
+import 'package:Clinicarx/app/modules/home/perfil/perfil_social_screen.dart';
 import 'package:flutter/material.dart';
 
 class PerfilEditScreen extends StatefulWidget {
@@ -15,7 +20,17 @@ class PerfilEditScreen extends StatefulWidget {
 
 class _PerfilEditScreenState extends State<PerfilEditScreen> {
   
-    
+  ProfileModel profile;
+
+  @override
+  initState() {
+    super.initState();
+    Future.delayed(Duration.zero,(){
+      profile = ModalRoute.of(context).settings.arguments;
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -33,92 +48,30 @@ class _PerfilEditScreenState extends State<PerfilEditScreen> {
           color: Colors.black54
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
+      body: profile != null ? Container(
           padding: const EdgeInsets.all(8.0),
           width: screenSize.width,
           height: screenSize.height,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              
-              Card(
-                elevation: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("DADOS CADASTRAIS",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54
-                        ),
-                      ),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'CPF'
-                        ),
-                        onChanged: (String value) { },
-                        onSaved: (String value) {},
-                      ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                
+                PerfilInfoScreen(profile),
+                Divider(color: Colors.transparent),
+                PerfilAcessScreen(profile),
+                Divider(color: Colors.transparent),
+                PerfilSocialScreen(profile),
+                Divider(color: Colors.transparent),
+                PerfilResponsibleScreen(profile),
 
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Nome completo'
-                        ),
-                        onChanged: (String value) { },
-                        onSaved: (String value) {},
-                      ),
-
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Telefone'
-                        ),
-                        onChanged: (String value) { },
-                        onSaved: (String value) {},
-                      ),
-
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: 'Data de nascimento'
-                        ),
-                        onChanged: (String value) { },
-                        onSaved: (String value) {},
-                      ),
-
-                      
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Divider(color: Colors.transparent),
-                          Text("Sexo" ),
-                          Row(children: [
-                              Checkbox(
-                              value: true,
-                              onChanged: (bool value) {},
-                            ),
-                            Text("Masculino"),
-
-                            Checkbox(
-                              value: false,
-                              onChanged: (bool value) {},
-                            ),
-                            Text("Feminino"),
-                          ])
-                      ])
-
-                    ],
-                  ),
-                ),
-              )
-
-            ],
+              ],
+            ),
           ),
-        ),
-      )
+        ) : Center(child: CircularProgressIndicator(
+        backgroundColor: Colors.white,
+        strokeWidth: 1,
+      ))
     );
   }
 

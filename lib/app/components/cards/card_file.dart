@@ -5,7 +5,6 @@ import 'dart:typed_data';
 
 import 'package:Clinicarx/app/models/AttendancesModel.dart';
 import 'package:Clinicarx/app/repositorys/AttendanceRepository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -45,11 +44,12 @@ class CardFile extends StatelessWidget {
           Toast.show("Não foi possível exibir este pdf.", context,duration: Toast.LENGTH_LONG);
         }
       },
-      child: Card(
-        margin: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(FontAwesomeIcons.file),
-          title: Text("Arquivo anexado"),
+      child: ListTile(
+        leading: Icon(FontAwesomeIcons.fileAlt, color: Colors.teal),
+        title: Text(attendenceFile.name,
+          style: TextStyle(
+            color: Colors.teal
+          ),
         ),
       ),
     );

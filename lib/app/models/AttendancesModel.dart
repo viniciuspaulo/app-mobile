@@ -121,12 +121,17 @@ class AttendancesFilesModel {
 class Procedures {
   String id;
   bool hasDiabetes;
-  String foodStatus;
-  String orientation;
+  String foodStatus = "";
+  String orientation = "";
   int average;
-  String type;
-  String consideration;
+  String type = "";
+  String consideration = "";
   dynamic regua;
+
+  int pAS;
+  int pAD;
+  int freqCardiaca;
+  bool hasHypertension;
 
   Procedures(
       {this.id,
@@ -135,6 +140,10 @@ class Procedures {
       this.orientation,
       this.average,
       this.type,
+      this.pAS,
+      this.pAD,
+      this.freqCardiaca,
+      this.hasHypertension,
       this.consideration,
       this.regua});
 
@@ -147,6 +156,11 @@ class Procedures {
     type = json['type'];
     consideration = json['consideration'];
     regua = json['regua'];
+
+    pAS = json['PAS'];
+    pAD = json['PAD'];
+    freqCardiaca = json['freq_cardiaca'];
+    hasHypertension = json['has_hypertension'];
   }
 
   Map<String, dynamic> toJson() {

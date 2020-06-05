@@ -2,6 +2,7 @@
 
 import 'package:Clinicarx/app/components/cards/card_attendance.dart';
 import 'package:Clinicarx/app/components/menu.dart';
+import 'package:Clinicarx/app/models/AttendancesModel.dart';
 import 'package:Clinicarx/app/repositorys/AttendanceRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -22,6 +23,7 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
   
   AttendcePaginate attendancesPaginate = new AttendcePaginate();
   final repositorio = Modular.get<AttendanceRepository>();
+  List<AttendancesModel> searchList = [];
 
   //Infity Scroll
   ScrollController _scrollController = new ScrollController();
@@ -45,7 +47,9 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
 
   onInit() async {
     setState(() => load = true);
+    searchList = [];
     attendancesPaginate = await repositorio.getAttendences(page: page);
+    searchList = attendancesPaginate.data;
     setState(() => load = false);
   }
 
@@ -56,10 +60,17 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
     }
     if (!loadScroll) {
       setState(() => loadScroll = true);
+      searchList = [];
       AttendcePaginate result = await repositorio.getAttendences(page: this.page++);
       attendancesPaginate.data = [...attendancesPaginate.data, ...result.data];
+      searchList = attendancesPaginate.data;
       setState(() => loadScroll = false);
     }
+  }
+
+  search(String text) {
+    attendancesPaginate.data = searchList.where((item) => item.farmaciaName.toUpperCase().contains(text.toUpperCase())).toList();
+    setState(() {});
   }
 
   @override
@@ -137,7 +148,7 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
                   style: TextStyle(
                     color: Colors.black54
                   ),
-                  onChanged: (String _value) {},   
+                  onChanged: search,   
                 ),
               ),
               Padding(
