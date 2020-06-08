@@ -89,9 +89,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: <Widget>[
                         Image(
                           image: AssetImage("assets/images/logo.png"),
+                          width: 200,
+                          height: 60,
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 26),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
                           margin: EdgeInsets.symmetric(vertical: 15),
                           child: Text(
                             "Organizamos tudo para que você gerencie melhor sua saúde",
@@ -111,8 +113,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               mensagem: "Cpf é obrigatório",
                             ),
                             decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 16),
                               hintText: "CPF",
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -121,6 +121,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.black54, width: 1.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.red[700], width: 1.0),
                               ),
                             ),
                             onSaved: (String value) {
@@ -140,8 +144,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               mensagem: "Senha é obrigatória",
                             ),
                             decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 16),
                               hintText: "Senha",
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
@@ -150,6 +152,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.black54, width: 1.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.red[700], width: 1.0),
                               ),
                               suffixIcon: IconButton(
                                 icon: showPassword

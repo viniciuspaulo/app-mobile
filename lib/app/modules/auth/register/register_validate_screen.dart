@@ -91,6 +91,8 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                 children: <Widget>[
                   Image(
                     image: AssetImage('assets/images/logo.png'),
+                    width: 200,
+                    height: 60,
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -115,16 +117,18 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                               mensagem: "Cpf é obrigatório",
                             ),
                             decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 16),
                               hintText: "CPF",
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.black38, width: 1.0),
+                                    color: Colors.black54, width: 1.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.black38, width: 1.0),
+                                    color: Colors.black54, width: 1.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.red[700], width: 1.0),
                               ),
                             ),
                             onSaved: (String value) {
@@ -159,7 +163,6 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                           mensagem: "Senha é obrigatória",
                         ),
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 16),
                           hintText: "Senha",
                           focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -168,6 +171,10 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black54, width: 1.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red[700], width: 1.0),
                           ),
                           suffixIcon: IconButton(
                             icon: showPassword
@@ -203,7 +210,6 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                           mensagem: "Senha é obrigatória",
                         ),
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 16),
                           hintText: "Confirmar senha",
                           focusedBorder: OutlineInputBorder(
                             borderSide:
@@ -212,6 +218,10 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                           enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black54, width: 1.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red[700], width: 1.0),
                           ),
                           suffixIcon: IconButton(
                             icon: showPasswordConfirm
