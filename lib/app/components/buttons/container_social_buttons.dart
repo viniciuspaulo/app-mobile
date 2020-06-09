@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:Clinicarx/app/components/buttons/social_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
-import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_validate_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
@@ -33,12 +32,14 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
   }
 
   void checkCompatibilityIosDevice() async {
-    final verificationIosVersionCompatibility =
-        await DeviceUtils.isIosVersionCompatible(
-            minimumIosVersionCompatibleWithAppleSignin);
+    try {
+      final verificationIosVersionCompatibility =
+          await DeviceUtils.isIosVersionCompatible(
+              minimumIosVersionCompatibleWithAppleSignin);
 
-    setState(() => isIosDeviceVersionCompatibleWithAppleSignin =
-        verificationIosVersionCompatibility);
+      setState(() => isIosDeviceVersionCompatibleWithAppleSignin =
+          verificationIosVersionCompatibility);
+    } catch (e) {}
   }
 
   // TODO: mover para um service
