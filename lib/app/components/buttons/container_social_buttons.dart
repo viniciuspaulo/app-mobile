@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:Clinicarx/app/components/buttons/social_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
-import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_validate_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/utils/device.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,7 +20,6 @@ class ContainerSocialButtons extends StatefulWidget {
 
 class _ContainerSocialButtons extends State<ContainerSocialButtons> {
   String loadSocial = "";
-  int minimumIosVersionCompatibleWithAppleSignin = 13;
   bool isIosDeviceVersionCompatibleWithAppleSignin = false;
 
   UserModel _user = new UserModel();
@@ -33,12 +32,18 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
   }
 
   void checkCompatibilityIosDevice() async {
-    final verificationIosVersionCompatibility =
-        await DeviceUtils.isIosVersionCompatible(
-            minimumIosVersionCompatibleWithAppleSignin);
-
-    setState(() => isIosDeviceVersionCompatibleWithAppleSignin =
-        verificationIosVersionCompatibility);
+    if (Platform.isIOS) {
+      var iosInfo = await DeviceInfoPlugin().iosInfo;
+      if (double.parse(iosInfo.systemVersion) >= 13) {
+        setState(() {
+          isIosDeviceVersionCompatibleWithAppleSignin = true;
+        });
+        return;
+      }
+    }
+    setState(() {
+      isIosDeviceVersionCompatibleWithAppleSignin = true;
+    });
   }
 
   // TODO: mover para um service

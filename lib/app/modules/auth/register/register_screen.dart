@@ -122,16 +122,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         valor: _value,
                       ),
                       decoration: InputDecoration(
-                        hintText: "Nome completo",
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black45, width: 1.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black54, width: 1.0),
-                        ),
-                      ),
+                          hintText: "Nome completo",
+                          border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black45, width: 1.0),
+                          )),
                       onChanged: (String value) {
                         _user.name = value;
                       },
@@ -140,26 +135,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                   ),
-                  // Container(
-                  //   margin: EdgeInsets.symmetric(vertical: 8),
-                  //   child: TextFormField(
-                  //     controller: _email,
-                  //     validator: validacaoEmail,
-                  //     decoration: InputDecoration(
-                  //       labelText: "Email",
-                  //       border: OutlineInputBorder(
-                  //         borderSide:
-                  //             BorderSide(color: Colors.black45, width: 1.0),
-                  //       ),
-                  //     ),
-                  //     onChanged: (String value) {
-                  //       _user.email = value;
-                  //     },
-                  //     onSaved: (String value) {
-                  //       _user.email = value;
-                  //     },
-                  //   ),
-                  // ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: TextFormField(
+                      controller: _email,
+                      validator: validacaoEmail,
+                      decoration: InputDecoration(
+                        labelText: "Email",
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black45, width: 1.0),
+                        ),
+                      ),
+                      onChanged: (String value) {
+                        _user.email = value;
+                      },
+                      onSaved: (String value) {
+                        _user.email = value;
+                      },
+                    ),
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

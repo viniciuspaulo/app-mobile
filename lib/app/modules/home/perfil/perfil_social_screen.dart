@@ -25,8 +25,7 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
   Future<bool> validarApple() async {
     if (Platform.isIOS) {
       var iosInfo = await DeviceInfoPlugin().iosInfo;
-      var version = iosInfo.systemVersion;
-      if (version.contains('13') == true) {
+      if (double.parse(iosInfo.systemVersion) >= 13) {
         return true;
       }
     }
@@ -49,21 +48,24 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
             ),
             Divider(color: Colors.transparent),
             ListTile(
-              leading: Icon(FontAwesomeIcons.google, color: Colors.red),
+              leading: Image(
+                  image: AssetImage('assets/images/google.png'), width: 25),
               title: Text("Google"),
               trailing: Switch(
                 value: widget.profile.googleToken != null ? true : false,
                 onChanged: (value) async {
                   try {
+                    String provider;
                     if (value) {
                       UserModel user = await signInGoogle();
-                      widget.profile.googleToken = user.providerToken;
+                      provider = user.providerToken;
                     } else {
-                      widget.profile.googleToken = null;
+                      provider = null;
                     }
-                    await repositorio.putProfileSocialMidia(
-                        'google', widget.profile.googleToken);
-                    setState(() {});
+                    await repositorio.putProfileSocialMidia('google', provider);
+                    setState(() {
+                      widget.profile.googleToken = provider;
+                    });
                   } catch (mensagem) {
                     Toast.show(mensagem.toString(), context);
                     return;
@@ -79,19 +81,19 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                 value: widget.profile.facebookToken != null ? true : false,
                 onChanged: (value) async {
                   try {
+                    String provider;
                     if (value) {
                       UserModel user = await signInFacebook();
-                      widget.profile.facebookToken = user.providerToken;
+                      provider = user.providerToken;
                     } else {
-                      widget.profile.facebookToken = null;
+                      provider = null;
                     }
                     await repositorio.putProfileSocialMidia(
-                        'facebook', widget.profile.facebookToken);
-                    setState(() {});
-                  } catch (mensagem) {
+                        'facebook', provider);
                     setState(() {
-                      widget.profile.facebookToken = null;
+                      widget.profile.facebookToken = provider;
                     });
+                  } catch (mensagem) {
                     Toast.show(mensagem.toString(), context);
                     return;
                   }
@@ -111,15 +113,18 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                       value: widget.profile.appleToken != null ? true : false,
                       onChanged: (value) async {
                         try {
+                          String provider;
                           if (value) {
                             UserModel user = await signInApple();
-                            widget.profile.appleToken = user.providerToken;
+                            provider = user.providerToken;
                           } else {
-                            widget.profile.appleToken = null;
+                            provider = null;
                           }
                           await repositorio.putProfileSocialMidia(
-                              'apple', widget.profile.appleToken);
-                          setState(() {});
+                              'apple', provider);
+                          setState(() {
+                            widget.profile.appleToken = provider;
+                          });
                         } catch (mensagem) {
                           Toast.show(mensagem.toString(), context);
                           return;

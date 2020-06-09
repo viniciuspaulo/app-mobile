@@ -60,7 +60,7 @@ class _PerfilResponsibleScreenState extends State<PerfilResponsibleScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Adione um contato"),
+                child: Text("Adicione um contato"),
               ),
             ]),
             Column(
