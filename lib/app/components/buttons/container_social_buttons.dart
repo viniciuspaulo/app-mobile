@@ -60,7 +60,6 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
       var result = await _clientRepository.postLogin(_user);
       setState(() => loadSocial = "");
 
-      print(result);
       if (result['first_access'] != null) {
         Navigator.pushNamed(context, RegisterValidateScreen.tag,
             arguments: _user);
@@ -68,7 +67,7 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
       }
       Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
     } catch (mensagem) {
-      Toast.show("Não possivel logar.", context);
+      Toast.show("Não foi possivel logar.", context);
       setState(() => loadSocial = "");
     }
   }

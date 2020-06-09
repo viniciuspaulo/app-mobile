@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 
 const config = {
-  'baseUrl': 'http://192.168.1.103:8000',
+  //'baseUrl': 'http://192.168.1.103:8000',
+  'baseUrl': 'https://api.clinicarx.com.br/mobile',
   'cor1': Colors.teal,
   'cor2': Colors.teal
 };

@@ -1,10 +1,10 @@
 class MedicineModel {
   String id;
   String posology;
-  Null treatmentStartDate;
-  Null treatmentEndDate;
+  dynamic treatmentStartDate;
+  dynamic treatmentEndDate;
   String addedDate;
-  Null treatmentDuration;
+  dynamic treatmentDuration;
   bool continuous;
   String prescriptive;
   String laboratory;
@@ -26,7 +26,6 @@ class MedicineModel {
 
   MedicineModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    print(json);
     posology = json['posology'];
     treatmentStartDate = json['treatment_start_date'];
     treatmentEndDate = json['treatment_end_date'];
@@ -55,11 +54,11 @@ class MedicineModel {
     return data;
   }
 
-  static List<MedicineModel> encondeToJson(List<dynamic> itens){
-      List<MedicineModel> list = [];
-      for (int i = 0; i < itens.length; i++) {
-        list.add(MedicineModel.fromJson(itens[i]));
-      }
-      return list;
+  static List<MedicineModel> encondeToJson(List<dynamic> itens) {
+    List<MedicineModel> list = [];
+    for (int i = 0; i < itens.length; i++) {
+      list.add(MedicineModel.fromJson(itens[i]));
+    }
+    return list;
   }
 }

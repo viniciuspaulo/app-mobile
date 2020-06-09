@@ -1,6 +1,9 @@
 import 'package:Clinicarx/app/components/cards/card_attendance.dart';
+import 'package:Clinicarx/app/components/cards/card_attendance_tratament.dart';
 import 'package:Clinicarx/app/components/menu.dart';
+import 'package:Clinicarx/app/models/AppointmentsModel.dart';
 import 'package:Clinicarx/app/models/AttendancesModel.dart';
+import 'package:Clinicarx/app/repositories/AppointmentsRepository.dart';
 import 'package:Clinicarx/app/repositories/AttendanceRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -20,13 +23,18 @@ class AttendancesScreen extends StatefulWidget {
 class _AttendancesScreenState extends State<AttendancesScreen> {
   AttendcePaginate attendancesPaginate = new AttendcePaginate();
   final repositorio = Modular.get<AttendanceRepository>();
+  final repositorioAppontments = Modular.get<AppointmentsRepository>();
+
   List<AttendancesModel> searchList = [];
+  List<AppointmentsModel> appointments = [];
 
   //Infity Scroll
   ScrollController _scrollController = new ScrollController();
   int page = 0;
   bool load = false;
   bool loadScroll = false;
+
+  bool loadAppointments = false;
 
   @override
   initState() {
@@ -44,10 +52,17 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
 
   onInit() async {
     setState(() => load = true);
+    loadAppointment();
     searchList = [];
     attendancesPaginate = await repositorio.getAttendences(page: page);
     searchList = attendancesPaginate.data;
     setState(() => load = false);
+  }
+
+  loadAppointment() async {
+    setState(() => loadAppointments = true);
+    appointments = await repositorioAppontments.getAppointments();
+    setState(() => loadAppointments = false);
   }
 
   scrollLoad() async {
@@ -93,48 +108,9 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
         drawer: Menu(),
         body: Column(
           children: [
-            Container(
-              padding: EdgeInsets.all(8.0),
-              color: Colors.teal.withAlpha(30),
-              width: screenSize.width,
-              height: 110,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "PRÓXIMO ATENDIMENTO",
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 100,
-                        child: Icon(
-                          Icons.info_outline,
-                          color: Colors.black54,
-                          size: 60,
-                        ),
-                      ),
-                      SizedBox(
-                        width: screenSize.width - 150,
-                        child: ListTile(
-                          title: Text(
-                            "NENHUM NOVO ATENDIMENTO AGENDADO",
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          subtitle: Text("Consulte seu farmacêutico"),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            CardAttendanceTratament(
+                appointments.length > 0 ? appointments[0] : null,
+                loadAppointments),
             Row(
               children: [
                 Expanded(

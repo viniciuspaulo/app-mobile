@@ -1,12 +1,15 @@
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/input/primary_input.dart';
+import 'package:Clinicarx/app/models/PhoneModel.dart';
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
+import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:toast/toast.dart';
 
 class PerfilInfoScreen extends StatefulWidget {
@@ -19,20 +22,28 @@ class PerfilInfoScreen extends StatefulWidget {
 
 class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
   var maskCpf = new MaskedTextController(text: '', mask: '000.000.000-00');
+  var maskPhone = new MaskedTextController(text: '', mask: '(00) 00000-0000');
+
   final repositorio = Modular.get<ClientRepository>();
   bool load = false;
-
   DateTime selectedDate = DateTime.now();
   TextEditingController _date = new TextEditingController();
 
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
   submit() async {
-    setState(() => load = true);
-    try {
-      await repositorio.putProfile(widget.profile);
-      setState(() => load = false);
-    } catch (mensagem) {
-      Toast.show(mensagem, context);
-      setState(() => load = false);
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      setState(() => load = true);
+      try {
+        await repositorio.putProfile(widget.profile);
+        setState(() => load = false);
+        Toast.show('Atualizado com sucesso.', context);
+      } catch (mensagem) {
+        Toast.show(mensagem, context);
+        setState(() => load = false);
+      }
     }
   }
 
@@ -41,6 +52,14 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
     super.initState();
     Future.delayed(Duration.zero, () {
       maskCpf.updateText(widget.profile.document);
+      setState(() {
+        if (widget.profile.birthday != null) {
+          _date.text = widget.profile.birthday.format('dd/MM/yyyy');
+        }
+        if (widget.profile.phones.length > 0) {
+          maskPhone.updateText(widget.profile.phones[0].phone);
+        }
+      });
     });
   }
 
@@ -61,193 +80,212 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Text(
-              "DADOS CADASTRAIS",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54),
-            ),
-            Divider(color: Colors.transparent),
-            TextFormField(
+    return Form(
+      key: _formKey,
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.all(18.0),
+          child: Column(
+            children: [
+              Text(
+                "DADOS CADASTRAIS",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
+              ),
+              Divider(color: Colors.transparent),
+              TextFormField(
                 enabled: false,
                 controller: maskCpf,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'CPF',
-                  focusedBorder: OutlineInputBorder(
+                  border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black54, width: 1.0),
                   ),
-                  enabledBorder: OutlineInputBorder(
+                ),
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                  initialValue: widget.profile.name,
+                  labelText: 'Nome completo',
+                  onChanged: (String value) {
+                    widget.profile.name = value;
+                  },
+                  onSaved: (String value) {
+                    widget.profile.name = value;
+                  }),
+              Divider(color: Colors.transparent),
+              TextFormField(
+                controller: maskPhone,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'Telefone',
+                  border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black54, width: 1.0),
                   ),
-                  disabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
-                )),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-                initialValue: widget.profile.name,
-                labelText: 'Nome completo',
+                ),
                 onChanged: (String value) {
-                  widget.profile.name = value;
+                  if (widget.profile.phones.length > 0) {
+                    widget.profile.phones[0].phone = value;
+                  } else {
+                    PhoneModel phone = new PhoneModel();
+                    phone.phone = value;
+                    widget.profile.phones.add(phone);
+                  }
                 },
                 onSaved: (String value) {
-                  widget.profile.name = value;
-                }),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              labelText: 'Telefone',
-              onChanged: (String value) {},
-              onSaved: (String value) {},
-            ),
-            Divider(color: Colors.transparent),
-            TextFormField(
-              controller: _date,
-              keyboardType: TextInputType.datetime,
-              decoration: InputDecoration(
-                  hintText: "Data de nascimento",
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
-                  suffixIcon: IconButton(
-                    icon:
-                        Icon(FontAwesomeIcons.calendar, color: Colors.black54),
-                    onPressed: () {
-                      _selectDate(context);
-                    },
-                  )),
-              onChanged: (String value) {
-                widget.profile.birthday = value;
-              },
-              onSaved: (String value) {
-                widget.profile.birthday = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Divider(color: Colors.transparent),
-              Text("Sexo"),
-              Row(children: [
-                Radio(
-                    value: 'male',
-                    groupValue: widget.profile.sex,
-                    onChanged: (String _value) {
-                      setState(() {
-                        widget.profile.sex = _value;
-                      });
-                    }),
-                Text("Masculino"),
-                Radio(
-                    value: 'female',
-                    groupValue: widget.profile.sex,
-                    onChanged: (String _value) {
-                      setState(() {
-                        widget.profile.sex = _value;
-                      });
-                    }),
-                Text("Feminino"),
-              ])
-            ]),
-            Divider(color: Colors.transparent),
-            Text(
-              "DADOS COMPLEMENTARES",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black54),
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.motherName,
-              labelText: 'Nome da mãe',
-              onChanged: (String value) {
-                widget.profile.motherName = value;
-              },
-              onSaved: (String value) {
-                widget.profile.motherName = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.skinColor,
-              labelText: 'Raça / Cor da pele',
-              onChanged: (String value) {
-                widget.profile.skinColor = value;
-              },
-              onSaved: (String value) {
-                widget.profile.skinColor = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.occupation,
-              labelText: 'Ocupação',
-              onChanged: (String value) {
-                widget.profile.occupation = value;
-              },
-              onSaved: (String value) {
-                widget.profile.occupation = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.birthCity,
-              labelText: 'Cidade de nascimento',
-              onChanged: (String value) {
-                widget.profile.birthCity = value;
-              },
-              onSaved: (String value) {
-                widget.profile.birthCity = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.birthState,
-              labelText: 'Estado de nascimento',
-              onChanged: (String value) {
-                widget.profile.birthState = value;
-              },
-              onSaved: (String value) {
-                widget.profile.birthState = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryInput(
-              initialValue: widget.profile.birthCountry,
-              labelText: 'Nacionalidade',
-              onChanged: (String value) {
-                widget.profile.birthCountry = value;
-              },
-              onSaved: (String value) {
-                widget.profile.birthCountry = value;
-              },
-            ),
-            Divider(color: Colors.transparent),
-            ListTile(
-              subtitle:
-                  Text("Aceito receber email com novidades sobre o Clinicarx"),
-              leading: Checkbox(
-                value: widget.profile.newsletter,
-                onChanged: (bool _value) {
-                  setState(() {
-                    widget.profile.newsletter = _value;
-                  });
+                  if (widget.profile.phones.length > 0) {
+                    widget.profile.phones[0].phone = value;
+                  } else {
+                    PhoneModel phone = new PhoneModel();
+                    phone.phone = value;
+                    widget.profile.phones.add(phone);
+                  }
                 },
               ),
-            ),
-            Divider(color: Colors.transparent),
-            PrimaryButton(text: "Salvar", onPressed: submit, load: load),
-            Divider(color: Colors.transparent)
-          ],
+              Divider(color: Colors.transparent),
+              TextFormField(
+                enabled: widget.profile != null ? false : true,
+                controller: _date,
+                keyboardType: TextInputType.datetime,
+                decoration: InputDecoration(
+                    hintText: "Data de nascimento",
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(FontAwesomeIcons.calendar,
+                          color: Colors.black54),
+                      onPressed: () {
+                        _selectDate(context);
+                      },
+                    )),
+                onChanged: (String value) {
+                  widget.profile.birthday = new Jiffy(dateParserUs(value));
+                },
+                onSaved: (String value) {
+                  widget.profile.birthday = new Jiffy(dateParserUs(value));
+                },
+              ),
+              Divider(color: Colors.transparent),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Divider(color: Colors.transparent),
+                Text("Sexo"),
+                Row(children: [
+                  Radio(
+                      value: 'male',
+                      groupValue: widget.profile.sex,
+                      onChanged: (String _value) {
+                        setState(() {
+                          widget.profile.sex = _value;
+                        });
+                      }),
+                  Text("Masculino"),
+                  Radio(
+                      value: 'female',
+                      groupValue: widget.profile.sex,
+                      onChanged: (String _value) {
+                        setState(() {
+                          widget.profile.sex = _value;
+                        });
+                      }),
+                  Text("Feminino"),
+                ])
+              ]),
+              Divider(color: Colors.transparent),
+              Text(
+                "DADOS COMPLEMENTARES",
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.motherName,
+                labelText: 'Nome da mãe',
+                onChanged: (String value) {
+                  widget.profile.motherName = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.motherName = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.skinColor,
+                labelText: 'Raça / Cor da pele',
+                onChanged: (String value) {
+                  widget.profile.skinColor = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.skinColor = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.occupation,
+                labelText: 'Ocupação',
+                onChanged: (String value) {
+                  widget.profile.occupation = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.occupation = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.birthCity,
+                labelText: 'Cidade de nascimento',
+                onChanged: (String value) {
+                  widget.profile.birthCity = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.birthCity = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.birthState,
+                labelText: 'Estado de nascimento',
+                onChanged: (String value) {
+                  widget.profile.birthState = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.birthState = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                initialValue: widget.profile.birthCountry,
+                labelText: 'Nacionalidade',
+                onChanged: (String value) {
+                  widget.profile.birthCountry = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.birthCountry = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              ListTile(
+                subtitle: Text(
+                    "Aceito receber email com novidades sobre o Clinicarx"),
+                leading: Checkbox(
+                  value: widget.profile.newsletter,
+                  onChanged: (bool _value) {
+                    setState(() {
+                      widget.profile.newsletter = _value;
+                    });
+                  },
+                ),
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryButton(text: "Salvar", onPressed: submit, load: load),
+              Divider(color: Colors.transparent)
+            ],
+          ),
         ),
       ),
     );

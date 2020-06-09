@@ -1,23 +1,25 @@
+import 'package:Clinicarx/app/models/PhoneModel.dart';
 import 'package:Clinicarx/app/models/ResponsiblesModel.dart';
+import 'package:jiffy/jiffy.dart';
 
 class ProfileModel {
   String id;
   String name;
-  String birthday;
+  Jiffy birthday;
   String email;
   String sex;
   String document;
-  Null occupation;
-  Null birthCity;
-  Null birthState;
-  Null birthCountry;
-  Null motherName;
-  Null skinColor;
+  String occupation;
+  String birthCity;
+  String birthState;
+  String birthCountry;
+  String motherName;
+  String skinColor;
   bool newsletter;
   int amountAttendances;
   int amountMedicines;
   List<LastClinicAttendances> lastClinicAttendances;
-  List<dynamic> phones;
+  List<PhoneModel> phones;
   List<ResponsiblesModel> responsibles;
 
   String googleToken;
@@ -49,7 +51,12 @@ class ProfileModel {
   ProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    birthday = json['birthday'];
+
+    if (json['birthday'] != null) {
+      List<String> data = json['birthday'].split('/');
+      birthday = Jiffy(data[2] + '-' + data[1] + '-' + data[0]);
+    }
+
     email = json['email'];
     sex = json['sex'];
     document = json['document'];
@@ -60,7 +67,6 @@ class ProfileModel {
     motherName = json['mother_name'];
     skinColor = json['skin_color'];
     newsletter = json['newsletter'];
-
 
     googleToken = json['google_token'];
     facebookToken = json['facebook_token'];
@@ -75,10 +81,10 @@ class ProfileModel {
       });
     }
     if (json['phones'] != null) {
-      // phones = new List<Null>();
-      // json['phones'].forEach((v) {
-      //   phones.add(new Null.fromJson(v));
-      // });
+      phones = new List<PhoneModel>();
+      json['phones'].forEach((v) {
+        phones.add(new PhoneModel.fromJson(v));
+      });
     }
     if (json['responsibles'] != null) {
       responsibles = new List<ResponsiblesModel>();
@@ -103,7 +109,6 @@ class ProfileModel {
     data['mother_name'] = this.motherName;
     data['skin_color'] = this.skinColor;
     data['newsletter'] = this.newsletter;
-
 
     data['google_token'] = this.googleToken;
     data['facebook_token'] = this.facebookToken;

@@ -1,4 +1,3 @@
-
 class AttendancesModel {
   String id;
   String patientId;
@@ -87,12 +86,12 @@ class AttendancesModel {
     return data;
   }
 
-  static List<AttendancesModel> encondeToJson(List<dynamic> itens){
-      List<AttendancesModel> list = [];
-      for (int i = 0; i < itens.length; i++) {
-        list.add(AttendancesModel.fromJson(itens[i]));
-      }
-      return list;
+  static List<AttendancesModel> encondeToJson(List<dynamic> itens) {
+    List<AttendancesModel> list = [];
+    for (int i = 0; i < itens.length; i++) {
+      list.add(AttendancesModel.fromJson(itens[i]));
+    }
+    return list;
   }
 }
 
@@ -178,4 +177,3 @@ class Procedures {
     return data;
   }
 }
-

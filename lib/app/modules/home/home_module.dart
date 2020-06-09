@@ -5,6 +5,7 @@ import 'package:Clinicarx/app/modules/home/medicament/medicament_screen.dart';
 import 'package:Clinicarx/app/modules/home/medicament/medicaments_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
+import 'package:Clinicarx/app/repositories/AppointmentsRepository.dart';
 import 'package:Clinicarx/app/repositories/AttendanceRepository.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/repositories/MedicineRepository.dart';
@@ -14,6 +15,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind<AttendanceRepository>((i) => AttendanceRepository()),
+        Bind<AppointmentsRepository>((i) => AppointmentsRepository()),
         Bind<MedicineRepository>((i) => MedicineRepository()),
         Bind<ClientRepository>((i) => ClientRepository())
       ];

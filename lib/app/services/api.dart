@@ -11,20 +11,19 @@ class ApiService {
   double longitude;
 
   _meutoken() async {
-
     // _dio.options.connectTimeout = 13000;
     // _dio.options.receiveTimeout = 13000;
 
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getString('token') != null) {
-
       this._dio.options.headers = {
         'Authorization': 'Bearer ' + prefs.getString('token'),
       };
 
       try {
         if (await Geolocator().isLocationServiceEnabled()) {
-          Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+          Position position = await Geolocator()
+              .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
           this._dio.options.headers = {
             'Authorization': 'Bearer ' + prefs.getString('token'),
             'position_lat': position.latitude,
@@ -33,8 +32,7 @@ class ApiService {
           latitude = position.latitude;
           longitude = position.longitude;
         }
-      }catch(e) { }
-
+      } catch (e) {}
     }
   }
 
@@ -44,20 +42,22 @@ class ApiService {
       String urlRequest = '$_baseUrl/$url';
 
       if (url.split('?').length > 1) {
-        if (latitude != null && longitude !=null) {
-          urlRequest = urlRequest+"\&position_lat=$latitude&position_lng=$longitude";
+        if (latitude != null && longitude != null) {
+          urlRequest =
+              urlRequest + "\&position_lat=$latitude&position_lng=$longitude";
         }
       } else {
-        if (latitude != null && longitude !=null) {
-          urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+        if (latitude != null && longitude != null) {
+          urlRequest =
+              urlRequest + "\?position_lat=$latitude&position_lng=$longitude";
         }
       }
 
       print(urlRequest);
       return await this._dio.get(urlRequest);
-    } on DioError catch(e) {
+    } on DioError catch (e) {
       print(e.response.data);
-      throw(e.response.data['data']['message']);
+      throw (e.response.data['data']['message']);
     }
   }
 
@@ -65,14 +65,15 @@ class ApiService {
     await _meutoken();
     try {
       String urlRequest = '$_baseUrl/$url';
-      if (latitude != null && longitude !=null) {
-        urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+      if (latitude != null && longitude != null) {
+        urlRequest =
+            urlRequest + "\?position_lat=$latitude&position_lng=$longitude";
       }
       print(urlRequest);
-      return await this._dio.post(urlRequest,data: data);
-    } on DioError catch(e) {
+      return await this._dio.post(urlRequest, data: data);
+    } on DioError catch (e) {
       print(e.response.data);
-      throw(e.response.data['data']['message']);
+      throw (e.response.data['data']['message']);
     }
   }
 
@@ -80,14 +81,17 @@ class ApiService {
     await _meutoken();
     try {
       String urlRequest = '$_baseUrl/$url';
-      if (latitude != null && longitude !=null) {
-        urlRequest = urlRequest+"\?position_lat=$latitude&position_lng=$longitude";
+      if (latitude != null && longitude != null) {
+        urlRequest =
+            urlRequest + "\?position_lat=$latitude&position_lng=$longitude";
       }
       print(urlRequest);
-      return await this._dio.put(urlRequest,data: data);
-    } on DioError catch(e) {
-      print(e.response.data);
-      throw(e.response.data['data']['message']);
+      return await this._dio.put(urlRequest, data: data);
+    } on DioError catch (e) {
+      if (e.response.data['data']['errors'] != null) {
+        throw (e.response.data['data']['errors']);
+      }
+      throw (e.response.data['data']['message']);
     }
   }
 }

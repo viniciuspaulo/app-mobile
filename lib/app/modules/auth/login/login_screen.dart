@@ -50,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() => load = false);
         Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
       } catch (mensagem) {
+        print(mensagem);
         Toast.show(mensagem, context);
         setState(() => load = false);
       }
