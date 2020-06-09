@@ -5,6 +5,8 @@ import 'package:Clinicarx/app/modules/home/medicines/medicine_screen.dart';
 import 'package:Clinicarx/app/modules/home/medicines/medicines_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
+import 'package:Clinicarx/app/modules/home/sidemenu/about.dart';
+import 'package:Clinicarx/app/modules/home/sidemenu/about_terms.dart';
 import 'package:Clinicarx/app/repositories/AppointmentsRepository.dart';
 import 'package:Clinicarx/app/repositories/AttendanceRepository.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
@@ -29,6 +31,8 @@ class HomeModule extends ChildModule {
         Router(MedicinesScreen.tag, child: (_, args) => MedicinesScreen()),
         Router(PerfilScreen.tag, child: (_, args) => PerfilScreen()),
         Router(PerfilEditScreen.tag, child: (_, args) => PerfilEditScreen()),
+        Router(AboutScreen.tag, child: (_, args) => AboutScreen()),
+        Router(AboutTermsScreen.tag, child: (_, args) => AboutTermsScreen()),
       ];
 
   static Inject get to => Inject<HomeModule>.of();
