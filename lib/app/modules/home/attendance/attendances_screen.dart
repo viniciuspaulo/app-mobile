@@ -1,5 +1,5 @@
 import 'package:Clinicarx/app/components/cards/card_attendance.dart';
-import 'package:Clinicarx/app/components/cards/card_attendance_tratament.dart';
+import 'package:Clinicarx/app/components/cards/card_attendance_treatment.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/models/AppointmentsModel.dart';
 import 'package:Clinicarx/app/models/AttendancesModel.dart';
@@ -91,8 +91,6 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-
     return Scaffold(
         appBar: AppBar(
           title: Image(
@@ -108,7 +106,7 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
         drawer: Menu(),
         body: Column(
           children: [
-            CardAttendanceTratament(
+            CardAttendanceTreatment(
                 appointments.length > 0 ? appointments[0] : null,
                 loadAppointments),
             Row(

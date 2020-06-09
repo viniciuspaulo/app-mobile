@@ -3,10 +3,10 @@ import 'package:Clinicarx/app/models/AppointmentsModel.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:flutter/material.dart';
 
-class CardAttendanceTratament extends StatelessWidget {
+class CardAttendanceTreatment extends StatelessWidget {
   final AppointmentsModel appointment;
   final bool load;
-  CardAttendanceTratament(this.appointment, this.load);
+  CardAttendanceTreatment(this.appointment, this.load);
 
   @override
   Widget build(BuildContext context) {

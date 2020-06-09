@@ -1,8 +1,8 @@
 import 'package:Clinicarx/app/modules/home/attendance/attendance_screen.dart';
 import 'package:Clinicarx/app/modules/home/attendance/attendances_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
-import 'package:Clinicarx/app/modules/home/medicament/medicament_screen.dart';
-import 'package:Clinicarx/app/modules/home/medicament/medicaments_screen.dart';
+import 'package:Clinicarx/app/modules/home/medicines/medicine_screen.dart';
+import 'package:Clinicarx/app/modules/home/medicines/medicines_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_edit_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
 import 'package:Clinicarx/app/repositories/AppointmentsRepository.dart';
@@ -25,8 +25,8 @@ class HomeModule extends ChildModule {
         Router(HomeScreen.tag, child: (_, args) => HomeScreen()),
         Router(AttendancesScreen.tag, child: (_, args) => AttendancesScreen()),
         Router(AttendanceScreen.tag, child: (_, args) => AttendanceScreen()),
-        Router(MedicamentsScreen.tag, child: (_, args) => MedicamentsScreen()),
-        Router(MedicamentScreen.tag, child: (_, args) => MedicamentScreen()),
+        Router(MedicineScreen.tag, child: (_, args) => MedicineScreen()),
+        Router(MedicinesScreen.tag, child: (_, args) => MedicinesScreen()),
         Router(PerfilScreen.tag, child: (_, args) => PerfilScreen()),
         Router(PerfilEditScreen.tag, child: (_, args) => PerfilEditScreen()),
       ];

@@ -3,18 +3,18 @@
 import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:flutter/material.dart';
 
-class MedicamentScreen extends StatefulWidget {
-  static String tagRota = '/home/medicament';
-  static String tag = '/medicament';
+class MedicineScreen extends StatefulWidget {
+  static String tagRota = '/home/medicine';
+  static String tag = '/medicine';
   final Key menuKey;
 
-  const MedicamentScreen({Key key,this.menuKey}) : super(key: key);
+  const MedicineScreen({Key key,this.menuKey}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _MedicamentScreenState();
+  State<StatefulWidget> createState() => _MedicineScreenState();
 }
 
-class _MedicamentScreenState extends State<MedicamentScreen> {
+class _MedicineScreenState extends State<MedicineScreen> {
   
   MedicineModel medicine = new MedicineModel();
 
