@@ -1,4 +1,4 @@
-import 'package:Clinicarx/app/components/cards/card_medicament.dart';
+import 'package:Clinicarx/app/components/cards/card_medicine.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:Clinicarx/app/repositories/MedicineRepository.dart';
@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MedicamentsScreen extends StatefulWidget {
-  static String tagRota = '/home/medicaments';
-  static String tag = '/medicaments';
+class MedicinesScreen extends StatefulWidget {
+  static String tagRota = '/home/medicines';
+  static String tag = '/medicines';
   final Key menuKey;
 
-  const MedicamentsScreen({Key key, this.menuKey}) : super(key: key);
+  const MedicinesScreen({Key key, this.menuKey}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MedicamentPageState();
 }
 
-class _MedicamentPageState extends State<MedicamentsScreen> {
+class _MedicamentPageState extends State<MedicinesScreen> {
   MedicinePaginate medicinePaginate = new MedicinePaginate();
   final repositorio = Modular.get<MedicineRepository>();
   List<MedicineModel> searchList = [];
@@ -130,8 +130,7 @@ class _MedicamentPageState extends State<MedicamentsScreen> {
                               //     strokeWidth: 1,
                               //   ));
                               // }
-                              return CardMedicament(
-                                  medicinePaginate.data[index]);
+                              return CardMedicine(medicinePaginate.data[index]);
                             },
                           )
                         : Center(

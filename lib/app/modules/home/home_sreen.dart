@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:Clinicarx/app/components/connect.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/modules/home/attendance/attendances_screen.dart';
-import 'package:Clinicarx/app/modules/home/medicament/medicaments_screen.dart';
+import 'package:Clinicarx/app/modules/home/medicines/medicines_screen.dart';
 import 'package:Clinicarx/app/modules/home/perfil/perfil_screen.dart';
 import 'package:Clinicarx/env.dart';
 import 'package:connectivity/connectivity.dart';
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     AttendancesScreen(),
-    MedicamentsScreen(),
+    MedicinesScreen(),
     PerfilScreen()
   ];
 
