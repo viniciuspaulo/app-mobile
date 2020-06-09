@@ -8,10 +8,8 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:Clinicarx/app/modules/home/attendance/attendance_doc_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:share/share.dart';
 import 'package:share_extend/share_extend.dart';
 import 'package:toast/toast.dart';
 
