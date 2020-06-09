@@ -76,6 +76,8 @@ class _ResetScreenState extends State<ResetScreen> {
               children: [
                 Image(
                   image: AssetImage("assets/images/logo.png"),
+                  width: 200,
+                  height: 60,
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 24),

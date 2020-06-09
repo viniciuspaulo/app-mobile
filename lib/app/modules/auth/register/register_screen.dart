@@ -101,6 +101,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: <Widget>[
                   Image(
                     image: AssetImage('assets/images/logo.png'),
+                    width: 200,
+                    height: 60,
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -120,8 +122,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         valor: _value,
                       ),
                       decoration: InputDecoration(
-                        labelText: "Nome completo",
+                        hintText: "Nome completo",
                         border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black45, width: 1.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Colors.black54, width: 1.0),
                         ),
@@ -134,32 +140,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: TextFormField(
-                      controller: _email,
-                      validator: validacaoEmail,
-                      decoration: InputDecoration(
-                        labelText: "Email",
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.black54, width: 1.0),
-                        ),
-                      ),
-                      onChanged: (String value) {
-                        _user.email = value;
-                      },
-                      onSaved: (String value) {
-                        _user.email = value;
-                      },
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.symmetric(vertical: 8),
+                  //   child: TextFormField(
+                  //     controller: _email,
+                  //     validator: validacaoEmail,
+                  //     decoration: InputDecoration(
+                  //       labelText: "Email",
+                  //       border: OutlineInputBorder(
+                  //         borderSide:
+                  //             BorderSide(color: Colors.black45, width: 1.0),
+                  //       ),
+                  //     ),
+                  //     onChanged: (String value) {
+                  //       _user.email = value;
+                  //     },
+                  //     onSaved: (String value) {
+                  //       _user.email = value;
+                  //     },
+                  //   ),
+                  // ),
                   Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Divider(color: Colors.transparent),
-                        Text("Sexo"),
-                        Row(children: [
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
                           Radio(
                               value: 'male',
                               groupValue: _user.sex,
@@ -168,7 +173,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _user.sex = _value;
                                 });
                               }),
-                          Text("Masculino"),
+                          Text(
+                            "Masculino",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 16,
+                            ),
+                          ),
                           Radio(
                               value: 'female',
                               groupValue: _user.sex,
@@ -177,10 +188,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _user.sex = _value;
                                 });
                               }),
-                          Text("Feminino"),
-                        ])
-                      ]),
-                  Divider(color: Colors.transparent),
+                          Text(
+                            "Feminino",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                   TextFormField(
                     controller: maskNascimento,
                     validator: (String _value) => validacaoStringNotNull(
@@ -192,11 +210,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintText: "Data de nascimento",
                         border: OutlineInputBorder(
                           borderSide:
+                              BorderSide(color: Colors.black45, width: 1.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
                               BorderSide(color: Colors.black54, width: 1.0),
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(FontAwesomeIcons.calendar,
-                              color: Colors.black54),
+                              color: Colors.black45),
                           onPressed: () {
                             _selectDate(context);
                           },

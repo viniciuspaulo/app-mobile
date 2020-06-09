@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 
 validacaoStringNotNull({String valor, String mensagem}) {
   if (valor == null || valor.length == 0) {
@@ -77,13 +78,18 @@ String base64String(Uint8List data) {
   return base64Encode(data);
 }
 
-getAge(String birthday) {
-  if (birthday == null && birthday == "") {
+getAge(Jiffy birthday) {
+  if (birthday == null) {
     return "";
   }
-  List<String> dataList = birthday.split("/");
-  DateTime dob =
-      DateTime.parse(dataList[2] + "-" + dataList[1] + "-" + dataList[0]);
-  Duration dur = DateTime.now().difference(dob);
+  Duration dur = DateTime.now().difference(birthday.dateTime);
   return (dur.inDays / 365).floor().toString();
+}
+
+String dateParserUs(String valor) {
+  List<String> dataList = valor.split("/");
+  if (dataList.length > 0) {
+    return dataList[2] + "-" + dataList[1] + "-" + dataList[0];
+  }
+  return valor;
 }

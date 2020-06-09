@@ -21,12 +21,6 @@ class _TermsScreenState extends State<TermsScreen> {
   String nextScreen = HomeScreen.tag;
 
   void handleTerms() {
-    /**
-     * Se estiver fazendo o cadastro com login social:
-     * - Segue para tela de CPF
-     * - Senão segue direto para a home ou, caso tenha faltado algum dado, segue
-     * para a tela de complementar dados
-     */
     if (nextScreen == HomeScreen.tag) {
       Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
     } else {
@@ -40,7 +34,6 @@ class _TermsScreenState extends State<TermsScreen> {
       dynamic arguments = ModalRoute.of(context).settings.arguments;
       if (arguments['user'] != null) {
         _user = arguments['user'];
-        print(_user.provider);
       }
       if (arguments['nextScreen'] != null) {
         nextScreen = arguments['nextScreen'];
@@ -61,6 +54,8 @@ class _TermsScreenState extends State<TermsScreen> {
           children: [
             Image(
               image: AssetImage('assets/images/logo.png'),
+              width: 200,
+              height: 60,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 54),

@@ -77,7 +77,11 @@ class ClientRepository {
   }
 
   Future putProfile(ProfileModel profile) async {
-    Response response = await _private.putRequest('profile', profile.toJson());
+    dynamic data = profile.toJson();
+    if (profile.birthday != null) {
+      data['birthday'] = profile.birthday.format('yyyy-MM-dd');
+    }
+    Response response = await _private.putRequest('profile', data);
     return ProfileModel.fromJson(response.data['data']['user']);
   }
 

@@ -110,6 +110,8 @@ class _LogadoPageState extends State<LogadoPage>
               height: double.infinity,
               child: Image(
                 image: AssetImage("assets/images/logo.png"),
+                width: 200,
+                height: 60,
               ),
             ),
           ),
