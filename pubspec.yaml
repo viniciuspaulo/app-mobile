@@ -33,10 +33,12 @@ dependencies:
   firebase_auth: ^0.15.3
   firebase_messaging: ^6.0.16
   flutter_full_pdf_viewer: ^1.0.6
-  share: ^0.6.4+3
+  downloads_path_provider: ^0.1.0
+  share_extend: "^1.1.6"
   google_sign_in: ^4.0.14
   flutter_facebook_login: ^3.0.0
   apple_sign_in: ^0.1.0
+  permission_handler: ^5.0.1
 
 dev_dependencies:
   flutter_test:
