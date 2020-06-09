@@ -150,11 +150,13 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                             : ""),
                         trailing: Column(
                           children: [
-                            Text(attendance.closedTime != null
-                                ? attendance.closedTime
-                                : ""),
+                            Text(
+                              attendance.closedTime != null
+                                  ? attendance.closedTime
+                                  : "",
+                            ),
                             Text(attendance.duration != null
-                                ? attendance.duration
+                                ? "Duracão: " + attendance.duration
                                 : ""),
                           ],
                         ),
@@ -174,7 +176,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         ),
                         subtitle: Text(attendance.farmaceuticoCargo != null
                             ? attendance.farmaceuticoCargo
-                            : ""),
+                            : "Indefinido"),
                       ),
                     ),
                     Divider(color: Colors.transparent),

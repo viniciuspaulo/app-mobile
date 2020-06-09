@@ -12,6 +12,7 @@ import 'package:Clinicarx/app/modules/home/attendance/attendance_doc_screen.dart
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_extend/share_extend.dart';
 import 'package:toast/toast.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CardFile extends StatefulWidget {
   final AttendancesFilesModel attendenceFile;
@@ -45,6 +46,10 @@ class _CardFile extends State<CardFile> {
       Directory downloadsDirectory =
           (await DownloadsPathProvider.downloadsDirectory);
 
+      if (Platform.isIOS) {
+        downloadsDirectory = await getApplicationDocumentsDirectory();
+      }
+
       File file = new File(
           downloadsDirectory.path + '/' + widget.attendenceFile.id + ".pdf");
 
@@ -59,6 +64,7 @@ class _CardFile extends State<CardFile> {
           "Não foi possível salvar este pdf, verifique se você deu permissão.",
           context,
           duration: Toast.LENGTH_LONG);
+      throw ("Erro");
     }
   }
 

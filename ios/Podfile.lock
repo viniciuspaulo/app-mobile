@@ -13,6 +13,8 @@ PODS:
     - Flutter
   - device_info (0.0.1):
     - Flutter
+  - downloads_path_provider (0.0.1):
+    - Flutter
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
     - FBSDKCoreKit/Core (= 5.15.1)
@@ -172,10 +174,12 @@ PODS:
     - Flutter
   - path_provider_macos (0.0.1):
     - Flutter
+  - permission_handler (5.0.1):
+    - Flutter
   - PromisesObjC (1.2.8)
   - Protobuf (3.12.0)
   - Reachability (3.2)
-  - share (0.0.1):
+  - share_extend (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
@@ -198,6 +202,7 @@ DEPENDENCIES:
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - connectivity_macos (from `.symlinks/plugins/connectivity_macos/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
+  - downloads_path_provider (from `.symlinks/plugins/downloads_path_provider/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_auth_web (from `.symlinks/plugins/firebase_auth_web/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -215,7 +220,8 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - path_provider_linux (from `.symlinks/plugins/path_provider_linux/ios`)
   - path_provider_macos (from `.symlinks/plugins/path_provider_macos/ios`)
-  - share (from `.symlinks/plugins/share/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - share_extend (from `.symlinks/plugins/share_extend/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - shared_preferences_macos (from `.symlinks/plugins/shared_preferences_macos/ios`)
   - shared_preferences_web (from `.symlinks/plugins/shared_preferences_web/ios`)
@@ -262,6 +268,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/connectivity_macos/ios"
   device_info:
     :path: ".symlinks/plugins/device_info/ios"
+  downloads_path_provider:
+    :path: ".symlinks/plugins/downloads_path_provider/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_auth_web:
@@ -296,8 +304,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_linux/ios"
   path_provider_macos:
     :path: ".symlinks/plugins/path_provider_macos/ios"
-  share:
-    :path: ".symlinks/plugins/share/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
+  share_extend:
+    :path: ".symlinks/plugins/share_extend/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   shared_preferences_macos:
@@ -319,6 +329,7 @@ SPEC CHECKSUMS:
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   connectivity_macos: e2e9731b6b22dda39eb1b128f6969d574460e191
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
+  downloads_path_provider: fe0d06888d4b8c055a59edbc2f51f03e63cb0e28
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: 5719b4f965f76643241a1bb8244483ff6117db39
@@ -358,10 +369,11 @@ SPEC CHECKSUMS:
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   path_provider_linux: 4d630dc393e1f20364f3e3b4a2ff41d9674a84e4
   path_provider_macos: f760a3c5b04357c380e2fddb6f9db6f3015897e0
+  permission_handler: 7022f8972d2d85ce95c1040db945f28bdbfa45d1
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  share: 0b2c3e82132f5888bccca3351c504d0003b3b410
+  share_extend: b6748dc53695587891126a89533b862b92548c7b
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   shared_preferences_macos: f3f29b71ccbb56bf40c9dd6396c9acf15e214087
   shared_preferences_web: 141cce0c3ed1a1c5bf2a0e44f52d31eeb66e5ea9

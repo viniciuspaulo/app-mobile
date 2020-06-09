@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:jiffy/jiffy.dart';
 
 validacaoStringNotNull({String valor, String mensagem}) {
@@ -63,11 +64,24 @@ gteKetRandom() {
 
 Image imageFromBase64String(
     {String base64String, double width, double height}) {
-  return Image.memory(
-    base64Decode(base64String),
-    width: width,
-    height: height,
-  );
+  try {
+    return Image.memory(
+      base64Decode(base64String),
+      width: width,
+      height: height,
+      errorBuilder:
+          (BuildContext context, Object exception, StackTrace stackTrace) {
+        return Image(
+          width: width,
+          height: height,
+          image: AssetImage('assets/images/logo.png'),
+        );
+      },
+    );
+  } catch (e) {
+    print('Nao foi possivel converter imagem');
+    return null;
+  }
 }
 
 Uint8List dataFromBase64String(String base64String) {

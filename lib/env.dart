@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 const config = {
-  'baseUrl': 'https://api.clinicarx.com.br/mobile',
+  'baseUrl': 'https://apiteste.clinicarx.com.br/mobile',
   'cor1': Colors.teal,
   'cor2': Colors.teal
 };
