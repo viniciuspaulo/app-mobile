@@ -43,7 +43,7 @@ class _MenuState extends State<Menu> {
             margin: const EdgeInsets.symmetric(vertical: 8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AboutScreen.tag);
+                Navigator.pushNamed(context, AboutScreen.tagRota);
               },
               child: Text(
                 "Sobre Clinicarx",
@@ -58,7 +58,7 @@ class _MenuState extends State<Menu> {
             margin: const EdgeInsets.symmetric(vertical: 8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AboutTermsScreen.tag);
+                Navigator.pushNamed(context, AboutTermsScreen.tagRota);
               },
               child: Text(
                 "Termos de uso",
@@ -73,7 +73,7 @@ class _MenuState extends State<Menu> {
             margin: const EdgeInsets.symmetric(vertical: 8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AboutTermsScreen.tag);
+                Navigator.pushNamed(context, AboutTermsScreen.tagRota);
               },
               child: Text(
                 "Reportar um problema",
