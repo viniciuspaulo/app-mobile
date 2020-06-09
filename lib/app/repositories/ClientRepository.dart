@@ -22,6 +22,7 @@ class ClientRepository {
         'password': user.password
       };
     }
+    print(paramets);
     Response response = await _private.postRequest('auth/login', paramets);
 
     if (response.data['data']['first_access'] != null) {
