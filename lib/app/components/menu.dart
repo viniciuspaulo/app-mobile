@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'modals/issue_report_modal.dart';
+
 class Menu extends StatefulWidget {
   final Key menuKey;
+
   const Menu({Key key, this.menuKey}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _MenuState();
 }
@@ -40,7 +44,7 @@ class _MenuState extends State<Menu> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 14),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, AboutScreen.tagRota);
@@ -49,13 +53,13 @@ class _MenuState extends State<Menu> {
                 "Sobre Clinicarx",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 20,
                 ),
               ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 14),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, AboutTermsScreen.tagRota);
@@ -64,25 +68,25 @@ class _MenuState extends State<Menu> {
                 "Termos de uso",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 20,
                 ),
               ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 14),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, AboutTermsScreen.tagRota);
+                issueReportModal(context: context);
               },
               child: Text(
                 "Reportar um problema",
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
+            margin: const EdgeInsets.symmetric(vertical: 14),
             child: InkWell(
               onTap: () async {
                 final storage = await SharedPreferences.getInstance();
@@ -92,7 +96,7 @@ class _MenuState extends State<Menu> {
               },
               child: Text(
                 "Sair",
-                style: TextStyle(color: Colors.white, fontSize: 25),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),

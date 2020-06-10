@@ -1,4 +1,5 @@
 import 'package:Clinicarx/app/components/cards/card_medicine.dart';
+import 'package:Clinicarx/app/components/input/search_input.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:Clinicarx/app/repositories/MedicineRepository.dart';
@@ -69,9 +70,11 @@ class _MedicamentPageState extends State<MedicinesScreen> {
   search(String text) {
     medicinePaginate.data = searchList
         .where(
-            (item) => item.medicines.toUpperCase().contains(text.toUpperCase()))
+          (item) => item.medicines.toUpperCase().contains(
+                text.toUpperCase(),
+              ),
+        )
         .toList();
-    setState(() {});
   }
 
   @override
@@ -94,20 +97,12 @@ class _MedicamentPageState extends State<MedicinesScreen> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5.0),
-                        labelText: 'Buscar medicamentos',
-                        fillColor: Colors.black54,
-                        focusColor: Colors.black54),
-                    style: TextStyle(color: Colors.black54),
+                  child: SearchInput(
+                    hintText: 'Buscar medicamentos',
                     onChanged: search,
+                    onSaved: search,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(FontAwesomeIcons.search, color: Colors.black54),
-                )
               ],
             ),
             Expanded(
@@ -134,7 +129,7 @@ class _MedicamentPageState extends State<MedicinesScreen> {
                             },
                           )
                         : Center(
-                            child: Text("Não existe atendimentos"),
+                            child: Text("Não existem atendimentos"),
                           ),
               ),
             )

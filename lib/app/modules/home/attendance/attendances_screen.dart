@@ -1,5 +1,6 @@
 import 'package:Clinicarx/app/components/cards/card_attendance.dart';
 import 'package:Clinicarx/app/components/cards/card_attendance_treatment.dart';
+import 'package:Clinicarx/app/components/input/search_input.dart';
 import 'package:Clinicarx/app/components/menu.dart';
 import 'package:Clinicarx/app/models/AppointmentsModel.dart';
 import 'package:Clinicarx/app/models/AttendancesModel.dart';
@@ -7,7 +8,6 @@ import 'package:Clinicarx/app/repositories/AppointmentsRepository.dart';
 import 'package:Clinicarx/app/repositories/AttendanceRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AttendancesScreen extends StatefulWidget {
   static String tagRota = '/home/attendances';
@@ -112,20 +112,12 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(5.0),
-                        labelText: 'Buscar atendimentos',
-                        fillColor: Colors.black54,
-                        focusColor: Colors.black54),
-                    style: TextStyle(color: Colors.black54),
+                  child: SearchInput(
+                    hintText: 'Buscar atendimentos',
                     onChanged: search,
+                    onSaved: search,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(FontAwesomeIcons.search, color: Colors.black54),
-                )
               ],
             ),
             Expanded(
@@ -153,7 +145,7 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
                             },
                           )
                         : Center(
-                            child: Text("Não existe atendimentos"),
+                            child: Text("Não existem atendimentos"),
                           ),
               ),
             )

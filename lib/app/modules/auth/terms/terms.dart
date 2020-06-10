@@ -1,10 +1,9 @@
-import 'package:Clinicarx/app/constants/strings.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
+import 'package:Clinicarx/app/components/containers/text_terms.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:flutter/material.dart';
-// import 'package:toast/toast.dart';
 
 class TermsScreen extends StatefulWidget {
   const TermsScreen({Key key}) : super(key: key);
@@ -68,19 +67,8 @@ class _TermsScreenState extends State<TermsScreen> {
             ),
             Container(
               padding: EdgeInsets.only(top: 33),
-              height: 251,
-              width: 312,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text(
-                      Strings.terms,
-                      style: TextStyle(color: Colors.black54),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+              height: 250,
+              child: TextTerms(),
             ),
             Container(
               padding: EdgeInsets.only(top: 8),

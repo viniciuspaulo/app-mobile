@@ -127,6 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 borderSide: BorderSide(
                                     color: Colors.red[700], width: 1.0),
                               ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.red[700], width: 1.0),
+                              ),
                             ),
                             onSaved: (String value) {
                               _user.document = value;
@@ -155,6 +159,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.black54, width: 1.0),
                               ),
                               errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.red[700], width: 1.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.red[700], width: 1.0),
                               ),

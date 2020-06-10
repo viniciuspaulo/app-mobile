@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext contex) {
     return statusConnect != ConnectivityResult.wifi &&
             statusConnect != ConnectivityResult.mobile
         ? Connect()
@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             drawer: Menu(),
             body: _children[_currentIndex],
             bottomNavigationBar: BottomNavigationBar(
+              selectedFontSize: 14,
               elevation: 0,
               backgroundColor: environment['cor1'],
               onTap: onTabTapped,
@@ -71,37 +72,45 @@ class _HomeScreenState extends State<HomeScreen> {
               items: [
                 BottomNavigationBarItem(
                   icon: Image(
-                    width: 35,
-                    height: 35,
+                    width: 30,
+                    height: 30,
                     image: AssetImage(
                       "assets/images/icon_atend.png",
                     ),
                   ),
-                  title: Text('Atendimentos',
-                      style: TextStyle(color: Colors.white)),
+                  title: Text(
+                    'Atendimentos',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                 ),
                 BottomNavigationBarItem(
                   icon: Image(
-                    width: 35,
-                    height: 35,
+                    width: 30,
+                    height: 30,
                     image: AssetImage(
                       "assets/images/ICON_CAPSULE.png",
                     ),
                   ),
-                  title: Text('Medicamentos',
-                      style: TextStyle(color: Colors.white)),
+                  title: Text(
+                    'Medicamentos',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                 ),
                 BottomNavigationBarItem(
                   icon: Image(
-                    width: 35,
-                    height: 35,
+                    width: 30,
+                    height: 30,
                     image: AssetImage(
                       "assets/images/ICON_USER.png",
                     ),
                   ),
-                  title: Text('Perfil', style: TextStyle(color: Colors.white)),
+                  title: Text(
+                    'Perfil',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
                 ),
               ],
-            ));
+            ),
+          );
   }
 }

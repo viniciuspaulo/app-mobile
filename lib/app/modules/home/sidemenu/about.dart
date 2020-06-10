@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/containers/text_about.dart';
 import 'package:flutter/material.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -11,6 +12,18 @@ class AboutScreen extends StatefulWidget {
 class _AboutScreen extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Image(
+          width: 120,
+          image: AssetImage(
+            "assets/images/logo.png",
+          ),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black54),
+      ),
+      body: TextAbout(),
+    );
   }
 }

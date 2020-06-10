@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/containers/text_terms.dart';
 import 'package:flutter/material.dart';
 
 class AboutTermsScreen extends StatefulWidget {
@@ -14,18 +15,17 @@ class _AboutTermsScreen extends State<AboutTermsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(
-                    text:
-                        'TERMOS DE USO DO CLINICARX - APLICATIVO DIGITAL DE SAÚDE'),
-              ],
-            ),
-          )),
+      appBar: AppBar(
+        title: Image(
+          width: 120,
+          image: AssetImage(
+            "assets/images/logo.png",
+          ),
+        ),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black54),
+      ),
+      body: TextTerms(),
     );
   }
 }

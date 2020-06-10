@@ -11,6 +11,7 @@ class ClientRepository {
 
   Future postLogin(UserModel user) async {
     var paramets = {};
+
     if (user.provider != null) {
       paramets = {
         'provider': user.provider,
@@ -22,7 +23,7 @@ class ClientRepository {
         'password': user.password
       };
     }
-    print(paramets);
+
     Response response = await _private.postRequest('auth/login', paramets);
 
     if (response.data['data']['first_access'] != null) {
