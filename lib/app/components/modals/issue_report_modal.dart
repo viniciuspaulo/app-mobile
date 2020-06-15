@@ -82,8 +82,9 @@ issueReportModal({
                               Navigator.pop(context);
                               Toast.show(successMessage, context);
                             } catch (error) {
-                              print('ERROUUU $error');
-                              // Toast.show(context);
+                              Toast.show(
+                                  'Ocorreu um erro ao reportar o problema',
+                                  context);
                               setState(() => loading = false);
                             }
                           } else {

@@ -63,7 +63,7 @@ modalAlertAppointmentAttendance(
               ),
               Container(
                 padding: const EdgeInsets.all(8.0),
-                child: SecundaryButton(
+                child: SecondaryButton(
                   text: "OK, ENTENDI",
                   onPressed: () {
                     Navigator.pop(context);

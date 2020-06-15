@@ -111,7 +111,7 @@ class _TermsScreenState extends State<TermsScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 24),
               margin: EdgeInsets.only(top: 16),
-              child: SecundaryButton(
+              child: SecondaryButton(
                 text: 'declinar',
                 onPressed: () {
                   Navigator.pop(context);

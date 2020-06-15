@@ -11,18 +11,19 @@ class MedicineModel {
   String medicines;
   String activePrinciple;
 
-  MedicineModel(
-      {this.id,
-      this.posology,
-      this.treatmentStartDate,
-      this.treatmentEndDate,
-      this.addedDate,
-      this.treatmentDuration,
-      this.continuous,
-      this.prescriptive,
-      this.laboratory,
-      this.medicines,
-      this.activePrinciple});
+  MedicineModel({
+    this.id,
+    this.posology,
+    this.treatmentStartDate,
+    this.treatmentEndDate,
+    this.addedDate,
+    this.treatmentDuration,
+    this.continuous,
+    this.prescriptive,
+    this.laboratory,
+    this.medicines,
+    this.activePrinciple,
+  });
 
   MedicineModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

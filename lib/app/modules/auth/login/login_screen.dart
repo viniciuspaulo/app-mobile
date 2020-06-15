@@ -206,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 28),
-                          child: SecundaryButton(
+                          child: SecondaryButton(
                             text: "NOVO POR AQUI? CADASTRE-SE",
                             onPressed: () {
                               Navigator.pushNamed(

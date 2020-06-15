@@ -124,7 +124,11 @@ class _MedicamentPageState extends State<MedicinesScreen> {
                               //     strokeWidth: 1,
                               //   ));
                               // }
-                              return CardMedicine(medicinePaginate.data[index]);
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child:
+                                    CardMedicine(medicinePaginate.data[index]),
+                              );
                             },
                           )
                         : Center(
