@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 const config = {
   'baseUrl': 'https://apiteste.clinicarx.com.br/mobile',
   'cor1': Colors.teal,
-  'cor2': Colors.teal
+  'cor2': Colors.teal,
+  'cacheTimeMinutes': 15
 };
 
 //Usuario de teste prod

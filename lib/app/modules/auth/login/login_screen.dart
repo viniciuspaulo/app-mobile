@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -17,7 +18,6 @@ import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:toast/toast.dart';
 
 class LoginScreen extends StatefulWidget {
   static String tag = '/login';
@@ -28,7 +28,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
   bool load = false;
   String loadSocial = "";
   bool showPassword = false;
@@ -50,8 +52,12 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() => load = false);
         Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
       } catch (mensagem) {
-        print(mensagem);
-        Toast.show(mensagem, context);
+        snackBarCustom(
+          scaffoldKey: _scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         setState(() => load = false);
       }
     }
@@ -79,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
             statusConnect != ConnectivityResult.mobile
         ? Connect()
         : Scaffold(
+            key: _scaffoldKey,
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Center(
@@ -115,24 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               mensagem: "Cpf é obrigatório",
                             ),
                             decoration: InputDecoration(
-                              hintText: "CPF",
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
-                              ),
-                            ),
+                                hintText: "CPF",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black54, width: 1.0),
+                                )),
                             onSaved: (String value) {
                               _user.document = value;
                             },
@@ -151,21 +145,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             decoration: InputDecoration(
                               hintText: "Senha",
-                              focusedBorder: OutlineInputBorder(
+                              border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.black54, width: 1.0),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
                               ),
                               suffixIcon: IconButton(
                                 icon: showPassword

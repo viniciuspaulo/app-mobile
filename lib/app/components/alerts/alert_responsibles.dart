@@ -83,7 +83,8 @@ modalAlertResponsibles({@required context, @required Function onPress}) {
                               responsible.email == "") ||
                           (responsible.phone1 == null ||
                               responsible.phone1 == "")) {
-                        Toast.show("Complete os dados corretamente.", context);
+                        Toast.show("Complete os dados corretamente.", context,
+                            gravity: 1);
                         return;
                       }
                       Navigator.pop(context);

@@ -38,8 +38,11 @@ class CardMedicine extends StatelessWidget {
               Divider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Wrap(
+                  spacing: 5.0,
+                  runSpacing: 5.0,
+                  direction: Axis.horizontal,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     Image(
                       width: 30,

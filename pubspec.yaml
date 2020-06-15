@@ -1,6 +1,6 @@
 name: Clinicarx
 description: clinicar app.
-version: 2.0.1+
+version: 2.0.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.3
   dio: ^3.0.9
+  dio_http_cache: ^0.2.7
   flutter_mobx: ^1.0.1
   mobx: ^1.0.2
   flutter_modular: ^0.5.2

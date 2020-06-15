@@ -42,7 +42,7 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
           _user.password != null &&
           _user.passwordConfirm != null) {
         if (_user.password != _user.passwordConfirm) {
-          Toast.show("Senhas são diferentes.", context);
+          Toast.show("Senhas são diferentes.", context, gravity: 1);
           return;
         }
       }
@@ -58,7 +58,7 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
         );
       } catch (msg) {
         setState(() => load = false);
-        Toast.show(msg, context);
+        Toast.show(msg, context, gravity: 1);
         return;
       }
     }
@@ -118,20 +118,11 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                               mensagem: "Cpf é obrigatório",
                             ),
                             decoration: InputDecoration(
-                              hintText: "CPF",
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
-                              ),
-                            ),
+                                hintText: "CPF",
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Colors.black54, width: 1.0),
+                                )),
                             onSaved: (String value) {
                               _user.document = value;
                             },
@@ -165,17 +156,9 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                         ),
                         decoration: InputDecoration(
                           hintText: "Senha",
-                          focusedBorder: OutlineInputBorder(
+                          border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black54, width: 1.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black54, width: 1.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.red[700], width: 1.0),
                           ),
                           suffixIcon: IconButton(
                             icon: showPassword
@@ -212,17 +195,9 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                         ),
                         decoration: InputDecoration(
                           hintText: "Confirmar senha",
-                          focusedBorder: OutlineInputBorder(
+                          border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.black54, width: 1.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black54, width: 1.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.red[700], width: 1.0),
                           ),
                           suffixIcon: IconButton(
                             icon: showPasswordConfirm

@@ -39,9 +39,9 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
       try {
         await repositorio.putProfile(widget.profile);
         setState(() => load = false);
-        Toast.show('Atualizado com sucesso.', context);
+        Toast.show('Atualizado com sucesso.', context, gravity: 1);
       } catch (mensagem) {
-        Toast.show(mensagem, context);
+        Toast.show(mensagem, context, gravity: 1);
         setState(() => load = false);
       }
     }

@@ -76,7 +76,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         attendance: this.attendance,
                         onPress: ratingPress);
                   } else {
-                    Toast.show("O atendimento já foi avaliado", context);
+                    Toast.show("O atendimento já foi avaliado", context,
+                        gravity: 1);
                   }
                 },
               ),

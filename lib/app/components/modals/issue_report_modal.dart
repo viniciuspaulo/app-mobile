@@ -50,32 +50,13 @@ issueReportModal({
                           maxLines: 8,
                           maxLength: 1000,
                           decoration: InputDecoration(
-                            hintText: "Descreva o que aconteceu...",
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black54,
-                                width: 1.0,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.black54,
-                                width: 1.0,
-                              ),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.red[700],
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.red[700],
-                                width: 1.0,
-                              ),
-                            ),
-                          ),
+                              hintText: "Descreva o que aconteceu...",
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                  width: 1.0,
+                                ),
+                              )),
                           onChanged: (String value) {
                             issueComment = value;
                           },

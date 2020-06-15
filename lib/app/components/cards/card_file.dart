@@ -63,6 +63,7 @@ class _CardFile extends State<CardFile> {
       Toast.show(
           "Não foi possível salvar este pdf, verifique se você deu permissão.",
           context,
+          gravity: 1,
           duration: Toast.LENGTH_LONG);
       throw ("Erro");
     }
@@ -76,7 +77,7 @@ class _CardFile extends State<CardFile> {
         onTap: () async {
           try {
             File file = await saveFile();
-            Toast.show("Pdf salvo nos downloads.", context);
+            Toast.show("Pdf salvo nos downloads.", context, gravity: 1);
 
             Future.delayed(Duration(seconds: 3), () {
               Navigator.push(

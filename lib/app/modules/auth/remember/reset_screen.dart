@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
 import 'package:Clinicarx/app/modules/auth/remember/password_screen.dart';
@@ -17,6 +18,7 @@ class ResetScreen extends StatefulWidget {
 }
 
 class _ResetScreenState extends State<ResetScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   ClientRepository _repositorio = new ClientRepository();
   bool load = false;
@@ -42,7 +44,12 @@ class _ResetScreenState extends State<ResetScreen> {
         Navigator.pushNamed(context, PasswordScreen.tag,
             arguments: result['token']);
       } catch (mensagem) {
-        Toast.show(mensagem, context);
+        snackBarCustom(
+          scaffoldKey: _scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         setState(() => load = false);
       }
     }
@@ -59,6 +66,7 @@ class _ResetScreenState extends State<ResetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -93,11 +101,7 @@ class _ResetScreenState extends State<ResetScreen> {
                   child: TextFormField(
                     decoration: InputDecoration(
                       hintText: "Código",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
+                      border: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.black54, width: 1.0),
                       ),
