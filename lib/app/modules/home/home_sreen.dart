@@ -62,7 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ? Connect()
         : Scaffold(
             drawer: Menu(),
-            body: _children[_currentIndex],
+            // body: _children[_currentIndex],
+            body: IndexedStack(
+              index: _currentIndex,
+              children: _children,
+            ),
             bottomNavigationBar: BottomNavigationBar(
               selectedFontSize: 14,
               elevation: 0,

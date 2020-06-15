@@ -29,7 +29,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   submit() async {
     if (password != confirmPassword) {
-      Toast.show("A senhas não sao iguais.", context);
+      Toast.show("A senhas não sao iguais.", context, gravity: 1);
       return;
     }
 
@@ -46,10 +46,10 @@ class _PasswordScreenState extends State<PasswordScreen> {
         setState(() => load = false);
         prefs.remove("token");
 
-        Toast.show("A senhas alterada com sucesso.", context);
+        Toast.show("A senhas alterada com sucesso.", context, gravity: 1);
         Navigator.pushReplacementNamed(context, LoginScreen.tag);
       } catch (mensagem) {
-        Toast.show(mensagem, context);
+        Toast.show(mensagem, context, gravity: 1);
         setState(() => load = false);
       }
     }
@@ -104,10 +104,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   ),
                   decoration: InputDecoration(
                     hintText: "Nova senha",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black54, width: 1.0),
                     ),
                     suffixIcon: IconButton(
@@ -141,10 +138,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   ),
                   decoration: InputDecoration(
                     hintText: "Confirmar senha",
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                    ),
-                    enabledBorder: OutlineInputBorder(
+                    border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black54, width: 1.0),
                     ),
                     suffixIcon: IconButton(

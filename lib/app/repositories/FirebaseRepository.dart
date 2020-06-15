@@ -5,7 +5,10 @@ class FirebaseRepository {
 
   Future setTokenUser(String token) async {
     try {
-      await _service.putRequest('profile/fcm-token', {"fcm_token": token});
+      await _service.putRequest(
+        url: 'profile/fcm-token',
+        data: {"fcm_token": token},
+      );
     } catch (e) {}
     return true;
   }

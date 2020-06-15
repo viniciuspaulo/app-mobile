@@ -70,7 +70,7 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
       }
       Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
     } catch (mensagem) {
-      Toast.show("Não foi possivel logar.", context);
+      Toast.show("Não foi possivel logar.", context, gravity: 1);
       setState(() => loadSocial = "");
     }
   }

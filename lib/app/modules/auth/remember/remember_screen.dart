@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/auth/remember/reset_screen.dart';
@@ -17,6 +18,7 @@ class RememberScreen extends StatefulWidget {
 }
 
 class _RememberScreenState extends State<RememberScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   UserModel _user = new UserModel();
   ClientRepository _repositorio = new ClientRepository();
@@ -33,7 +35,12 @@ class _RememberScreenState extends State<RememberScreen> {
         Navigator.pushNamed(context, ResetScreen.tag,
             arguments: result['token']);
       } catch (mensagem) {
-        Toast.show(mensagem, context);
+        snackBarCustom(
+          scaffoldKey: _scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         setState(() => load = false);
       }
     }
@@ -42,6 +49,7 @@ class _RememberScreenState extends State<RememberScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -76,16 +84,11 @@ class _RememberScreenState extends State<RememberScreen> {
                   child: TextFormField(
                     validator: validacaoEmail,
                     decoration: InputDecoration(
-                      hintText: "Email",
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 1.0),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black54, width: 1.0),
-                      ),
-                    ),
+                        hintText: "Email",
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black54, width: 1.0),
+                        )),
                     onSaved: (String value) {
                       _user.email = value;
                     },

@@ -26,10 +26,10 @@ class _PerfilResponsibleScreenState extends State<PerfilResponsibleScreen> {
         loading = false;
         widget.profile.responsibles.add(responsible);
       });
-      Toast.show("Adiciona com sucesso", context);
+      Toast.show("Adiciona com sucesso", context, gravity: 1);
     } catch (mensagem) {
       print(mensagem);
-      Toast.show(mensagem, context);
+      Toast.show(mensagem, context, gravity: 1);
       setState(() => loading = false);
     }
   }

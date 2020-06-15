@@ -67,7 +67,7 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                       widget.profile.googleToken = provider;
                     });
                   } catch (mensagem) {
-                    Toast.show(mensagem.toString(), context);
+                    Toast.show(mensagem.toString(), context, gravity: 1);
                     return;
                   }
                 },
@@ -94,7 +94,7 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                       widget.profile.facebookToken = provider;
                     });
                   } catch (mensagem) {
-                    Toast.show(mensagem.toString(), context);
+                    Toast.show(mensagem.toString(), context, gravity: 1);
                     return;
                   }
                 },
@@ -126,7 +126,7 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                             widget.profile.appleToken = provider;
                           });
                         } catch (mensagem) {
-                          Toast.show(mensagem.toString(), context);
+                          Toast.show(mensagem.toString(), context, gravity: 1);
                           return;
                         }
                       },

@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
@@ -21,7 +22,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final repositorio = Modular.get<ClientRepository>();
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   bool load = false;
   bool showPassword = false;
@@ -45,9 +46,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await repositorio.postRegister(_user);
         setState(() => load = false);
         Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
-      } catch (msg) {
+      } catch (mensagem) {
         setState(() => load = false);
-        Toast.show(msg, context);
+        snackBarCustom(
+          scaffoldKey: _scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         return;
       }
     }
@@ -89,6 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Center(

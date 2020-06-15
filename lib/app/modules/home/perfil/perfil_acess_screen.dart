@@ -32,7 +32,7 @@ class _PerfilAcessScreenState extends State<PerfilAcessScreen> {
       _formKey.currentState.save();
 
       if (password.text != passwordConfirm.text) {
-        Toast.show("Senhas não são iguais", context);
+        Toast.show("Senhas não são iguais", context, gravity: 1);
         return;
       }
       setState(() => load = true);
@@ -43,9 +43,9 @@ class _PerfilAcessScreenState extends State<PerfilAcessScreen> {
           passwordConfirm.clear();
           load = false;
         });
-        Toast.show("Alterado com sucesso", context);
+        Toast.show("Alterado com sucesso", context, gravity: 1);
       } catch (mensagem) {
-        Toast.show(mensagem, context);
+        Toast.show(mensagem, context, gravity: 1);
         setState(() => load = false);
       }
     }
