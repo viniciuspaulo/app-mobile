@@ -18,10 +18,6 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -39,10 +35,14 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>253819219318141</string>
 	<key>FacebookDisplayName</key>
 	<string>Clinicarx</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -52,12 +52,18 @@
 		<string>comgooglemaps</string>
 		<string>waze</string>
 	</array>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Acesso para buscas as farmacias mais próximo de você</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Acesso para buscas as farmacias mais próximo de você</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Acesso para buscas as farmacias mais próximo de você</string>
+	<string>Precisamos acessar os dados de localização para buscas as farmacias mais próximo de você.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Precisamos acessar os dados de localização para buscas as farmacias mais próximo de você.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Precisamos acessar os dados de localização para buscas as farmacias mais próximo de você.</string>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -77,13 +83,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 </dict>
 </plist>

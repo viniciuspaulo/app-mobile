@@ -106,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Container(
                           margin: EdgeInsets.symmetric(vertical: 16),
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: maskCpf,
                             validator: (String _value) =>
                                 validacaoStringNotNullLimit(

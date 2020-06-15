@@ -4,7 +4,6 @@ import 'package:Clinicarx/app/models/ResponsiblesModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toast/toast.dart';
 
 class PerfilResponsibleScreen extends StatefulWidget {

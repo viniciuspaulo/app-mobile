@@ -9,6 +9,7 @@ modalAlertRatingAttendance({
   @required dynamic onPress,
 }) {
   showModalBottomSheet(
+    isScrollControlled: true,
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
