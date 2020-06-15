@@ -118,19 +118,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               hintText: "CPF",
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
+                                  color: Colors.black54,
+                                  width: 1.0,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.black54, width: 1.0),
+                                  color: Colors.black54,
+                                  width: 1.0,
+                                ),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
+                                  color: Colors.red[700],
+                                  width: 1.0,
+                                ),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Colors.red[700], width: 1.0),
+                                  color: Colors.red[700],
+                                  width: 1.0,
+                                ),
                               ),
                             ),
                             onSaved: (String value) {

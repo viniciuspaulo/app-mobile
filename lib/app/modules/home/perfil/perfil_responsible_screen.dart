@@ -51,11 +51,17 @@ class _PerfilResponsibleScreenState extends State<PerfilResponsibleScreen> {
             ),
             Divider(color: Colors.transparent),
             Row(children: [
-              FloatingActionButton(
-                onPressed: () {
-                  modalAlertResponsibles(context: context, onPress: submit);
-                },
-                child: Icon(Icons.add),
+              Container(
+                height: 35,
+                width: 35,
+                child: FittedBox(
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      modalAlertResponsibles(context: context, onPress: submit);
+                    },
+                    child: Icon(Icons.add),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

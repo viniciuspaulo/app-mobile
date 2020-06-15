@@ -10,7 +10,7 @@ class PrimaryButton extends StatefulWidget {
     @required this.text,
     @required this.onPressed,
     this.disabled = false,
-    this.load,
+    this.load = false,
   });
 
   @override

@@ -49,14 +49,26 @@ class _CardMedicineState extends State<CardMedicine> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("INÍCIO: " +
-                        (widget.medicine.treatmentStartDate != null
-                            ? widget.medicine.treatmentStartDate
-                            : "NÃO INFORMADO")),
-                    Text("FIM: " +
-                        (widget.medicine.treatmentEndDate != null
-                            ? widget.medicine.treatmentEndDate
-                            : "NÃO INFORMADO")),
+                    Text(
+                      "INÍCIO: " +
+                          (widget.medicine.treatmentStartDate != null
+                              ? widget.medicine.treatmentStartDate
+                              : "NÃO INFORMADO"),
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "FIM: " +
+                          (widget.medicine.treatmentEndDate != null
+                              ? widget.medicine.treatmentEndDate
+                              : "NÃO INFORMADO"),
+                      style: TextStyle(
+                        color: Colors.black45,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -78,7 +90,10 @@ class _CardMedicineState extends State<CardMedicine> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(medicineDescription),
+                            Text(
+                              medicineDescription,
+                              style: TextStyle(color: Colors.black45),
+                            ),
                           ],
                         ),
                       ),

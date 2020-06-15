@@ -121,11 +121,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         valor: _value,
                       ),
                       decoration: InputDecoration(
-                          hintText: "Nome completo",
-                          border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black45, width: 1.0),
-                          )),
+                        hintText: "Nome completo",
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black54, width: 1.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black54, width: 1.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.red[700], width: 1.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.red[700], width: 1.0),
+                        ),
+                      ),
                       onChanged: (String value) {
                         _user.name = value;
                       },
@@ -140,10 +153,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: _email,
                       validator: validacaoEmail,
                       decoration: InputDecoration(
-                        labelText: "Email",
-                        border: OutlineInputBorder(
+                        hintText: "Email",
+                        focusedBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: Colors.black45, width: 1.0),
+                              BorderSide(color: Colors.black54, width: 1.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.black54, width: 1.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.red[700], width: 1.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.red[700], width: 1.0),
                         ),
                       ),
                       onChanged: (String value) {

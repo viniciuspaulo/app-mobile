@@ -84,48 +84,45 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
       key: _formKey,
       child: Card(
         child: Container(
-          padding: EdgeInsets.all(18.0),
+          padding: EdgeInsets.all(18),
           child: Column(
             children: [
               Text(
                 "DADOS CADASTRAIS",
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
-              ),
-              Divider(color: Colors.transparent),
-              TextFormField(
-                enabled: false,
-                controller: maskCpf,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'CPF',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
                 ),
               ),
               Divider(color: Colors.transparent),
               PrimaryInput(
-                  initialValue: widget.profile.name,
-                  labelText: 'Nome completo',
-                  onChanged: (String value) {
-                    widget.profile.name = value;
-                  },
-                  onSaved: (String value) {
-                    widget.profile.name = value;
-                  }),
+                enable: false,
+                mask: maskCpf,
+                labelText: 'CPF',
+                onChanged: (String value) {
+                  widget.profile.document = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.document = value;
+                },
+              ),
               Divider(color: Colors.transparent),
-              TextFormField(
-                controller: maskPhone,
+              PrimaryInput(
+                initialValue: widget.profile.name,
+                labelText: 'Nome completo',
+                onChanged: (String value) {
+                  widget.profile.name = value;
+                },
+                onSaved: (String value) {
+                  widget.profile.name = value;
+                },
+              ),
+              Divider(color: Colors.transparent),
+              PrimaryInput(
+                labelText: 'Telefone',
+                mask: maskPhone,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  labelText: 'Telefone',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
-                ),
                 onChanged: (String value) {
                   if (widget.profile.phones.length > 0) {
                     widget.profile.phones[0].phone = value;
@@ -146,61 +143,77 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
                 },
               ),
               Divider(color: Colors.transparent),
-              TextFormField(
-                enabled: widget.profile != null ? false : true,
-                controller: _date,
+              PrimaryInput(
+                enable: widget.profile != null ? false : true,
+                labelText: 'Data de nascimento',
+                mask: _date,
                 keyboardType: TextInputType.datetime,
-                decoration: InputDecoration(
-                    hintText: "Data de nascimento",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(FontAwesomeIcons.calendar,
-                          color: Colors.black54),
-                      onPressed: () {
-                        _selectDate(context);
-                      },
-                    )),
                 onChanged: (String value) {
                   widget.profile.birthday = new Jiffy(dateParserUs(value));
                 },
                 onSaved: (String value) {
                   widget.profile.birthday = new Jiffy(dateParserUs(value));
                 },
+                suffixIcon: IconButton(
+                  icon: Icon(FontAwesomeIcons.calendar, color: Colors.black54),
+                  onPressed: () {
+                    _selectDate(context);
+                  },
+                ),
               ),
-              Divider(color: Colors.transparent),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Divider(color: Colors.transparent),
-                Text("Sexo"),
-                Row(children: [
-                  Radio(
-                      value: 'male',
-                      groupValue: widget.profile.sex,
-                      onChanged: (String _value) {
-                        setState(() {
-                          widget.profile.sex = _value;
-                        });
-                      }),
-                  Text("Masculino"),
-                  Radio(
-                      value: 'female',
-                      groupValue: widget.profile.sex,
-                      onChanged: (String _value) {
-                        setState(() {
-                          widget.profile.sex = _value;
-                        });
-                      }),
-                  Text("Feminino"),
-                ])
-              ]),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Divider(color: Colors.transparent),
+                  Text(
+                    "Sexo",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                          value: 'male',
+                          groupValue: widget.profile.sex,
+                          onChanged: (String _value) {
+                            setState(() {
+                              widget.profile.sex = _value;
+                            });
+                          }),
+                      Text(
+                        "Masculino",
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ),
+                      ),
+                      Radio(
+                          value: 'female',
+                          groupValue: widget.profile.sex,
+                          onChanged: (String _value) {
+                            setState(() {
+                              widget.profile.sex = _value;
+                            });
+                          }),
+                      Text(
+                        "Feminino",
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
               Divider(color: Colors.transparent),
               Text(
                 "DADOS COMPLEMENTARES",
                 style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black54),
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black54,
+                ),
               ),
               Divider(color: Colors.transparent),
               PrimaryInput(

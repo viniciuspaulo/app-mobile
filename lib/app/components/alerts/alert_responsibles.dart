@@ -28,15 +28,12 @@ modalAlertResponsibles({@required context, @required Function onPress}) {
         ),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(35),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Inclua contatos de emergência",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                Text(
+                  "Inclua contatos de emergência",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -74,7 +71,7 @@ modalAlertResponsibles({@required context, @required Function onPress}) {
                     }),
                 Divider(color: Colors.transparent),
                 PrimaryButton(
-                    text: "ADICIONAR",
+                    text: "adicionar",
                     load: false,
                     onPressed: () {
                       if ((responsible.name == null ||

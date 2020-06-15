@@ -1,4 +1,5 @@
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
+import 'package:Clinicarx/app/components/buttons/secondary_button.dart';
 import 'package:Clinicarx/app/components/input/primary_input.dart';
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
@@ -68,72 +69,61 @@ class _PerfilAcessScreenState extends State<PerfilAcessScreen> {
               ),
               Divider(color: Colors.transparent),
               PrimaryInput(
-                  enable: false,
-                  initialValue: widget.profile.email,
-                  labelText: 'Email',
-                  onChanged: (String value) {},
-                  onSaved: (String value) {}),
+                enable: false,
+                initialValue: widget.profile.email,
+                labelText: 'Email',
+                onChanged: (String value) {},
+                onSaved: (String value) {},
+              ),
               Divider(color: Colors.transparent),
-              TextFormField(
-                  obscureText: !showPassword,
-                  controller: password,
-                  validator: (String _value) => validacaoStringNotNull(
-                        valor: _value,
-                        mensagem: "Senha é obrigatória",
-                      ),
-                  decoration: InputDecoration(
-                    hintText: "Nova senha",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: showPassword
-                          ? Icon(FontAwesomeIcons.eyeSlash,
-                              color: Colors.black54)
-                          : Icon(
-                              FontAwesomeIcons.eye,
-                              color: Colors.black54,
-                            ),
-                      onPressed: () {
-                        setState(() => showPassword = !showPassword);
-                      },
-                    ),
-                  ),
-                  onSaved: (String value) {
-                    password.text = value;
-                  }),
+              PrimaryInput(
+                labelText: 'Nova senha',
+                validator: (String _value) {
+                  validacaoStringNotNull(
+                      valor: _value, mensagem: "Senha é obrigatória");
+                },
+                mask: password,
+                obscureText: !showPassword,
+                suffixIcon: IconButton(
+                  icon: showPassword
+                      ? Icon(FontAwesomeIcons.eye, color: Colors.black54)
+                      : Icon(
+                          FontAwesomeIcons.eyeSlash,
+                          color: Colors.black54,
+                        ),
+                  onPressed: () => setState(() => showPassword = !showPassword),
+                ),
+                onChanged: (String value) {},
+                onSaved: (String value) {
+                  password.text = value;
+                },
+              ),
               Divider(color: Colors.transparent),
-              TextFormField(
-                obscureText: !showPasswordConfirm,
-                controller: passwordConfirm,
-                validator: (String _value) => validacaoStringNotNull(
-                  valor: _value,
-                  mensagem: "Senha é obrigatória",
+              PrimaryInput(
+                labelText: 'Confirmar nova senha',
+                validator: (String _value) {
+                  validacaoStringNotNull(
+                      valor: _value, mensagem: "Senha é obrigatória");
+                },
+                mask: password,
+                obscureText: !showPassword,
+                suffixIcon: IconButton(
+                  icon: showPassword
+                      ? Icon(FontAwesomeIcons.eye, color: Colors.black54)
+                      : Icon(
+                          FontAwesomeIcons.eyeSlash,
+                          color: Colors.black54,
+                        ),
+                  onPressed: () => setState(
+                      () => showPasswordConfirm = !showPasswordConfirm),
                 ),
-                decoration: InputDecoration(
-                  hintText: "Confirmar nova senha",
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black54, width: 1.0),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: showPasswordConfirm
-                        ? Icon(FontAwesomeIcons.eyeSlash, color: Colors.black54)
-                        : Icon(
-                            FontAwesomeIcons.eye,
-                            color: Colors.black54,
-                          ),
-                    onPressed: () {
-                      setState(
-                          () => showPasswordConfirm = !showPasswordConfirm);
-                    },
-                  ),
-                ),
+                onChanged: (String value) {},
                 onSaved: (String value) {
                   passwordConfirm.text = value;
                 },
               ),
               Divider(color: Colors.transparent),
-              PrimaryButton(text: "Salvar", onPressed: submit, load: load),
+              SecondaryButton(text: "Salvar", onPressed: submit, load: load),
               Divider(color: Colors.transparent)
             ],
           ),

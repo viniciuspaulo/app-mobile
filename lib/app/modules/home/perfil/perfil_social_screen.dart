@@ -40,7 +40,7 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
         child: Column(
           children: [
             Text(
-              "DADOS DE ACESSO",
+              "LOGIN SOCIAL",
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
