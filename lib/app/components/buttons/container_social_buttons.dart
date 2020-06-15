@@ -5,7 +5,6 @@ import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_validate_screen.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
-import 'package:Clinicarx/app/utils/device.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -46,7 +45,6 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
     });
   }
 
-  // TODO: mover para um service
   void submitSocial(String provider) async {
     setState(() => loadSocial = provider);
     try {

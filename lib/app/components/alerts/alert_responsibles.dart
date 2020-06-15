@@ -8,6 +8,7 @@ modalAlertResponsibles({@required context, @required Function onPress}) {
   ResponsiblesModel responsible = new ResponsiblesModel();
 
   showModalBottomSheet(
+    isScrollControlled: true,
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(

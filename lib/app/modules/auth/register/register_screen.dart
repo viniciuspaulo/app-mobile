@@ -1,5 +1,4 @@
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
-import 'package:Clinicarx/app/components/input/primary_input.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';

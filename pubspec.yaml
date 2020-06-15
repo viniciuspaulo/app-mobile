@@ -1,6 +1,6 @@
 name: Clinicarx
 description: clinicar app.
-version: 2.0.0+1
+version: 2.0.1+
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -34,7 +34,7 @@ dependencies:
   firebase_messaging: ^6.0.16
   flutter_full_pdf_viewer: ^1.0.6
   downloads_path_provider: ^0.1.0
-  share_extend: "^1.1.6"
+  share_extend: "^1.1.7"
   google_sign_in: ^4.0.14
   flutter_facebook_login: ^3.0.0
   apple_sign_in: ^0.1.0

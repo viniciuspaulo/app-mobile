@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 modalAlertAppointmentAttendance(
     {@required context, @required AppointmentsModel appointment}) {
   showModalBottomSheet(
+    isScrollControlled: true,
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(

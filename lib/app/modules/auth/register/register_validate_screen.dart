@@ -109,6 +109,7 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                       children: <Widget>[
                         Expanded(
                           child: TextFormField(
+                            keyboardType: TextInputType.number,
                             controller: maskCpf,
                             validator: (String _value) =>
                                 validacaoStringNotNullLimit(
