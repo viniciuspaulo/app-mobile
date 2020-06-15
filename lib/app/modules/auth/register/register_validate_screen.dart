@@ -1,5 +1,6 @@
 import 'package:Clinicarx/app/components/buttons/container_social_buttons.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
+import 'package:Clinicarx/app/components/modals/cpf_info_modal.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/auth/login/login_screen.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_screen.dart';
@@ -143,6 +144,9 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                         Container(
                           padding: EdgeInsets.only(left: 10),
                           child: InkWell(
+                            onTap: () {
+                              cpfInfoModal(context: context);
+                            },
                             child: Icon(
                               Icons.info_outline,
                               color: Colors.black54,

@@ -118,7 +118,7 @@ class _ResetScreenState extends State<ResetScreen> {
                 Container(
                     padding: EdgeInsets.symmetric(horizontal: 24),
                     margin: EdgeInsets.symmetric(vertical: 16),
-                    child: SecundaryButton(
+                    child: SecondaryButton(
                       text: "REENVIAR E-MAIL",
                       onPressed: () {
                         Navigator.pop(context);
