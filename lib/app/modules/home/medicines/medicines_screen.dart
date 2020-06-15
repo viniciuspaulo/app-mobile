@@ -128,7 +128,7 @@ class _MedicamentPageState extends State<MedicinesScreen> {
                             },
                           )
                         : Center(
-                            child: Text("Não existem atendimentos"),
+                            child: Text("Não existem medicamentos"),
                           ),
               ),
             )
