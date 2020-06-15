@@ -5,7 +5,6 @@ import 'package:Clinicarx/app/models/MedicineModel.dart';
 import 'package:Clinicarx/app/repositories/MedicineRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MedicinesScreen extends StatefulWidget {
   static String tagRota = '/home/medicines';
@@ -125,7 +124,11 @@ class _MedicamentPageState extends State<MedicinesScreen> {
                               //     strokeWidth: 1,
                               //   ));
                               // }
-                              return CardMedicine(medicinePaginate.data[index]);
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child:
+                                    CardMedicine(medicinePaginate.data[index]),
+                              );
                             },
                           )
                         : Center(

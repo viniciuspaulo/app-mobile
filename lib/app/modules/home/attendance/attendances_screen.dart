@@ -140,8 +140,11 @@ class _AttendancesScreenState extends State<AttendancesScreen> {
                               //     strokeWidth: 1,
                               //   ));
                               // }
-                              return CardAttendance(
-                                  attendancesPaginate.data[index]);
+                              return Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 4),
+                                child: CardAttendance(
+                                    attendancesPaginate.data[index]),
+                              );
                             },
                           )
                         : Center(
