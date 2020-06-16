@@ -52,7 +52,7 @@ class _TermsScreenState extends State<TermsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image(
-              image: AssetImage('assets/images/logo.png'),
+              image: AssetImage('assets/images/logo@3x.png'),
               width: 200,
               height: 60,
             ),

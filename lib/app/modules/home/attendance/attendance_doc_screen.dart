@@ -18,9 +18,9 @@ class _AttendanceDocScreenState extends State<AttendanceDocScreen> {
         appBar: AppBar(
             title: Center(
               child: Image(
-                width: 120,
+                width: 100,
                 image: AssetImage(
-                  "assets/images/logo.png",
+                  "assets/images/logo@2x.png",
                 ),
               ),
             ),

@@ -17,15 +17,21 @@ class _AboutTermsScreen extends State<AboutTermsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Image(
-          width: 120,
+          width: 100,
           image: AssetImage(
-            "assets/images/logo.png",
+            "assets/images/logo@2x.png",
           ),
         ),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black54),
       ),
-      body: TextTerms(),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Container(
+          margin: const EdgeInsets.only(top: 20),
+          child: TextTerms(),
+        ),
+      ),
     );
   }
 }
