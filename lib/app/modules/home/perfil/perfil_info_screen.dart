@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/input/primary_input.dart';
 import 'package:Clinicarx/app/models/PhoneModel.dart';
@@ -14,7 +15,8 @@ import 'package:toast/toast.dart';
 
 class PerfilInfoScreen extends StatefulWidget {
   final ProfileModel profile;
-  PerfilInfoScreen(this.profile);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  PerfilInfoScreen(this.profile, this.scaffoldKey);
 
   @override
   State<StatefulWidget> createState() => _PerfilInfoScreenState();
@@ -39,9 +41,19 @@ class _PerfilInfoScreenState extends State<PerfilInfoScreen> {
       try {
         await repositorio.putProfile(widget.profile);
         setState(() => load = false);
-        Toast.show('Atualizado com sucesso.', context, gravity: 1);
+        snackBarCustom(
+          scaffoldKey: widget.scaffoldKey,
+          title: 'Atualizado com sucesso.',
+          color: Colors.teal,
+          colorText: Colors.white,
+        );
       } catch (mensagem) {
-        Toast.show(mensagem, context, gravity: 1);
+        snackBarCustom(
+          scaffoldKey: widget.scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         setState(() => load = false);
       }
     }

@@ -18,6 +18,7 @@ class PerfilEditScreen extends StatefulWidget {
 
 class _PerfilEditScreenState extends State<PerfilEditScreen> {
   ProfileModel profile;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   initState() {
@@ -33,41 +34,44 @@ class _PerfilEditScreenState extends State<PerfilEditScreen> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Image(
-            width: 120,
-            image: AssetImage(
-              "assets/images/logo.png",
-            ),
+      key: _scaffoldKey,
+      appBar: AppBar(
+        title: Image(
+          width: 120,
+          image: AssetImage(
+            "assets/images/logo.png",
           ),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black54),
         ),
-        body: profile != null
-            ? Container(
-                padding: const EdgeInsets.all(8.0),
-                width: screenSize.width,
-                height: screenSize.height,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      PerfilInfoScreen(profile),
-                      Divider(color: Colors.transparent),
-                      PerfilAcessScreen(profile),
-                      Divider(color: Colors.transparent),
-                      PerfilSocialScreen(profile),
-                      Divider(color: Colors.transparent),
-                      PerfilResponsibleScreen(profile),
-                    ],
-                  ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black54),
+      ),
+      body: profile != null
+          ? Container(
+              padding: const EdgeInsets.all(8.0),
+              width: screenSize.width,
+              height: screenSize.height,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    PerfilInfoScreen(profile, _scaffoldKey),
+                    Divider(color: Colors.transparent),
+                    PerfilAcessScreen(profile, _scaffoldKey),
+                    Divider(color: Colors.transparent),
+                    PerfilSocialScreen(profile, _scaffoldKey),
+                    Divider(color: Colors.transparent),
+                    PerfilResponsibleScreen(profile, _scaffoldKey),
+                  ],
                 ),
-              )
-            : Center(
-                child: CircularProgressIndicator(
+              ),
+            )
+          : Center(
+              child: CircularProgressIndicator(
                 backgroundColor: Colors.white,
                 strokeWidth: 1,
-              )));
+              ),
+            ),
+    );
   }
 }

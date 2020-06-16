@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
@@ -12,7 +13,8 @@ import 'package:toast/toast.dart';
 
 class PerfilSocialScreen extends StatefulWidget {
   final ProfileModel profile;
-  PerfilSocialScreen(this.profile);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  PerfilSocialScreen(this.profile, this.scaffoldKey);
 
   @override
   State<StatefulWidget> createState() => _PerfilSocialScreenState();
@@ -67,7 +69,12 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                       widget.profile.googleToken = provider;
                     });
                   } catch (mensagem) {
-                    Toast.show(mensagem.toString(), context, gravity: 1);
+                    snackBarCustom(
+                      scaffoldKey: widget.scaffoldKey,
+                      title: mensagem,
+                      color: Colors.red,
+                      colorText: Colors.white,
+                    );
                     return;
                   }
                 },
@@ -94,7 +101,12 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                       widget.profile.facebookToken = provider;
                     });
                   } catch (mensagem) {
-                    Toast.show(mensagem.toString(), context, gravity: 1);
+                    snackBarCustom(
+                      scaffoldKey: widget.scaffoldKey,
+                      title: mensagem,
+                      color: Colors.red,
+                      colorText: Colors.white,
+                    );
                     return;
                   }
                 },
@@ -126,7 +138,12 @@ class _PerfilSocialScreenState extends State<PerfilSocialScreen> {
                             widget.profile.appleToken = provider;
                           });
                         } catch (mensagem) {
-                          Toast.show(mensagem.toString(), context, gravity: 1);
+                          snackBarCustom(
+                            scaffoldKey: widget.scaffoldKey,
+                            title: mensagem,
+                            color: Colors.red,
+                            colorText: Colors.white,
+                          );
                           return;
                         }
                       },

@@ -1,3 +1,4 @@
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/components/buttons/container_social_buttons.dart';
 import 'package:Clinicarx/app/components/buttons/primary_button.dart';
 import 'package:Clinicarx/app/components/modals/cpf_info_modal.dart';
@@ -25,6 +26,7 @@ class RegisterValidateScreen extends StatefulWidget {
 class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
   final repositorio = Modular.get<ClientRepository>();
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   bool load = false;
   bool showPassword = false;
@@ -43,7 +45,12 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
           _user.password != null &&
           _user.passwordConfirm != null) {
         if (_user.password != _user.passwordConfirm) {
-          Toast.show("Senhas são diferentes.", context, gravity: 1);
+          snackBarCustom(
+            scaffoldKey: _scaffoldKey,
+            title: "Senhas são diferentes.",
+            color: Colors.red,
+            colorText: Colors.white,
+          );
           return;
         }
       }
@@ -57,9 +64,14 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
           TermsScreen.tag,
           arguments: {'user': _user, 'nextScreen': RegisterScreen.tag},
         );
-      } catch (msg) {
+      } catch (mensagem) {
         setState(() => load = false);
-        Toast.show(msg, context, gravity: 1);
+        snackBarCustom(
+          scaffoldKey: _scaffoldKey,
+          title: mensagem,
+          color: Colors.red,
+          colorText: Colors.white,
+        );
         return;
       }
     }
@@ -81,6 +93,7 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Center(

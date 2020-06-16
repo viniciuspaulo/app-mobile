@@ -94,6 +94,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
+              Divider(
+                color: Colors.transparent,
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
                 child: TextFormField(
@@ -127,6 +130,9 @@ class _PasswordScreenState extends State<PasswordScreen> {
                     password = value;
                   },
                 ),
+              ),
+              Divider(
+                color: Colors.transparent,
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),

@@ -62,7 +62,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ? Connect()
         : Scaffold(
             drawer: Menu(),
-            // body: _children[_currentIndex],
             body: IndexedStack(
               index: _currentIndex,
               children: _children,

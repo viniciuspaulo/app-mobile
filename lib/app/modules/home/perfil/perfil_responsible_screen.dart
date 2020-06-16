@@ -1,4 +1,5 @@
 import 'package:Clinicarx/app/components/alerts/alert_responsibles.dart';
+import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
 import 'package:Clinicarx/app/models/ProfileModel.dart';
 import 'package:Clinicarx/app/models/ResponsiblesModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
@@ -8,7 +9,8 @@ import 'package:toast/toast.dart';
 
 class PerfilResponsibleScreen extends StatefulWidget {
   final ProfileModel profile;
-  PerfilResponsibleScreen(this.profile);
+  final GlobalKey<ScaffoldState> scaffoldKey;
+  PerfilResponsibleScreen(this.profile, this.scaffoldKey);
 
   @override
   State<StatefulWidget> createState() => _PerfilResponsibleScreenState();
@@ -26,10 +28,20 @@ class _PerfilResponsibleScreenState extends State<PerfilResponsibleScreen> {
         loading = false;
         widget.profile.responsibles.add(responsible);
       });
-      Toast.show("Adiciona com sucesso", context, gravity: 1);
+      snackBarCustom(
+        scaffoldKey: widget.scaffoldKey,
+        title: 'Adiciona com sucesso".',
+        color: Colors.teal,
+        colorText: Colors.white,
+      );
     } catch (mensagem) {
       print(mensagem);
-      Toast.show(mensagem, context, gravity: 1);
+      snackBarCustom(
+        scaffoldKey: widget.scaffoldKey,
+        title: mensagem,
+        color: Colors.red,
+        colorText: Colors.white,
+      );
       setState(() => loading = false);
     }
   }
