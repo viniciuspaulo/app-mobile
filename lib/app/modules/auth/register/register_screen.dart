@@ -106,7 +106,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Image(
-                    image: AssetImage('assets/images/logo.png'),
+                    image: AssetImage('assets/images/logo@3x.png'),
                     width: 200,
                     height: 60,
                   ),

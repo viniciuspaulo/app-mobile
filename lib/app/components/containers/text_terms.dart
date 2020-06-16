@@ -3,32 +3,30 @@ import 'package:flutter/material.dart';
 class TextTerms extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60),
-              child: Text(
-                'TERMOS DE USO DO CLINICARX - APLICATIVO DIGITAL DE SAÚDE',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 60),
+            child: Text(
+              'TERMOS DE USO DO CLINICARX - APLICATIVO DIGITAL DE SAÚDE',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Última Atualização: 03 de outubro de 2019',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 12),
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              'Última Atualização: 03 de outubro de 2019',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 12),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                """Bem vindo(a)! Obrigado por utilizar o Clinicarx - Aplicativo Digital de Saúde! Esta aplicação e seu conteúdo ("Clinicarx - Aplicativo Digital de Saúde") são controlados e operados pelo próprio Clinicarx - Aplicativo Digital de Saúde. Todos os direitos reservados.
-                  
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              """Bem vindo(a)! Obrigado por utilizar o Clinicarx - Aplicativo Digital de Saúde! Esta aplicação e seu conteúdo ("Clinicarx - Aplicativo Digital de Saúde") são controlados e operados pelo próprio Clinicarx - Aplicativo Digital de Saúde. Todos os direitos reservados.
+                
 De acordo com a disposição do artigo 41 da Lei Geral de Proteção de Dados, o Clinicarx - Aplicativo Digital de Saúde indica Alysson Azevedo, Encarregado de Proteção de Dados como pessoa encarregada pelo tratamento de dados, sendo possível o contato através do seguinte e-mail: contato@clinicarx.com.br.
 Estes termos de uso têm por objeto definir as regras a serem seguidaspara a utilização do Clinicarx - Aplicativo Digital de Saúde("Termos de Uso"), sem prejuízo da aplicação da legislaçãovigente.
 
@@ -86,10 +84,9 @@ O QUE MAIS EU PRECISO SABER SOBRE ESTES TERMOS DE USO? Alterações. Paramelhora
 
 
 """,
-              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -105,11 +105,9 @@ class _LogadoPageState extends State<LogadoPage>
         Positioned(
           child: Transform.translate(
             offset: Offset(animation2.value, 0),
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
+            child: Center(
               child: Image(
-                image: AssetImage("assets/images/logo.png"),
+                image: AssetImage("assets/images/logo@3x.png"),
                 width: 200,
                 height: 60,
               ),

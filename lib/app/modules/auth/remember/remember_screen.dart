@@ -66,7 +66,7 @@ class _RememberScreenState extends State<RememberScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage("assets/images/logo.png"),
+                  image: AssetImage("assets/images/logo@3x.png"),
                   width: 200,
                   height: 60,
                 ),

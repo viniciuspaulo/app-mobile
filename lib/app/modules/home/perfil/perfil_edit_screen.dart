@@ -35,9 +35,9 @@ class _PerfilEditScreenState extends State<PerfilEditScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Image(
-            width: 120,
+            width: 100,
             image: AssetImage(
-              "assets/images/logo.png",
+              "assets/images/logo@2x.png",
             ),
           ),
           elevation: 0,

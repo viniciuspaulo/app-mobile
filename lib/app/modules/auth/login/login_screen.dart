@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Image(
-                          image: AssetImage("assets/images/logo.png"),
+                          image: AssetImage("assets/images/logo@3x.png"),
                           width: 200,
                           height: 60,
                         ),
@@ -169,6 +169,30 @@ class _LoginScreenState extends State<LoginScreen> {
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Colors.black54, width: 1.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                  width: 1.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                  width: 1.0,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red[700],
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.red[700],
+                                  width: 1.0,
+                                ),
                               ),
                               suffixIcon: IconButton(
                                 icon: showPassword
