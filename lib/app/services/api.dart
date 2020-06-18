@@ -74,6 +74,11 @@ class ApiService {
         urlRequest =
             urlRequest + "\?position_lat=$latitude&position_lng=$longitude";
       }
+
+      if (url == 'auth/login') {
+        DioCacheManager(CacheConfig(baseUrl: _baseUrl)).clearAll();
+      }
+
       print(urlRequest);
       return await this._dio.post(urlRequest, data: data, options: options);
     } on DioError catch (e) {
