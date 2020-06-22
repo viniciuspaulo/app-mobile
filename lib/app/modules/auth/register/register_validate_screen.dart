@@ -117,6 +117,14 @@ class _RegisterValidateScreenState extends State<RegisterValidateScreen> {
                       style: TextStyle(color: Colors.black54, fontSize: 16),
                     ),
                   ),
+                  Visibility(
+                    visible: _user.provider != null,
+                    child: Text(
+                      'Parece que você já tem um cadastro com esse CPF, por favor faça o login e vincule sua conta social no menu de perfil.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 8),
                     child: Row(

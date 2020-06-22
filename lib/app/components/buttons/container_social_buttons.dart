@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:Clinicarx/app/components/buttons/social_button.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/modules/auth/register/register_validate_screen.dart';
-import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
@@ -63,15 +62,19 @@ class _ContainerSocialButtons extends State<ContainerSocialButtons> {
       var result = await _clientRepository.postLogin(_user);
       setState(() => loadSocial = "");
 
-      if (result['first_access'] != null) {
-        Navigator.pushNamed(context, RegisterValidateScreen.tag,
-            arguments: _user);
-        return;
-      }
-      Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
+      //if (result['first_access'] != null) {
+      Navigator.pushNamed(context, RegisterValidateScreen.tag,
+          arguments: _user);
+      return;
+      //}
+      //Navigator.pushReplacementNamed(context, HomeScreen.tagRota);
     } catch (mensagem) {
       print(mensagem);
-      Toast.show("Não foi possivel logar.", context, gravity: 1);
+      Toast.show(
+        mensagem != null ? mensagem : "Não foi possivel logar.",
+        context,
+        gravity: 1,
+      );
       setState(() => loadSocial = "");
     }
   }

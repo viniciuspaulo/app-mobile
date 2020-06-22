@@ -1,4 +1,5 @@
 import 'package:Clinicarx/app/components/alerts/snack_bar_custom.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -16,7 +17,6 @@ import 'package:Clinicarx/app/modules/home/home_sreen.dart';
 import 'package:Clinicarx/app/models/UserModel.dart';
 import 'package:Clinicarx/app/repositories/ClientRepository.dart';
 import 'package:Clinicarx/app/validations/validacao.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginScreen extends StatefulWidget {

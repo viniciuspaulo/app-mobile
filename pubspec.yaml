@@ -1,6 +1,6 @@
 name: Clinicarx
 description: clinicar app.
-version: 2.0.1+10
+version: 2.0.2+10
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -20,7 +20,7 @@ dependencies:
   font_awesome_flutter: ^8.5.0
   shared_preferences: ^0.5.6+2
   geolocator: ^5.1.5
-  connectivity: ^0.4.2
+  connectivity: ^0.4.8+6
   cached_network_image: ^2.0.0-rc
   flutter_launcher_icons: ^0.7.4
   url_launcher: ^5.1.3

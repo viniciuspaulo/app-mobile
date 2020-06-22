@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:Clinicarx/app/components/global_scaffold.dart';
 import 'package:Clinicarx/app/models/AttendancesModel.dart';
 import 'package:Clinicarx/app/repositories/AttendanceRepository.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
@@ -32,16 +33,16 @@ class _CardFile extends State<CardFile> {
 
   Future<File> saveFile() async {
     setState(() => load = true);
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }
-
-    final repositorio = Modular.get<AttendanceRepository>();
-    var base64 =
-        await repositorio.getAttendenceFileDetail(widget.attendenceFile);
 
     try {
+      var status = await Permission.storage.status;
+      if (!status.isGranted) {
+        await Permission.storage.request();
+      }
+
+      final repositorio = Modular.get<AttendanceRepository>();
+      var base64 =
+          await repositorio.getAttendenceFileDetail(widget.attendenceFile);
       Uint8List bytes = base64Decode(base64);
       Directory downloadsDirectory =
           (await DownloadsPathProvider.downloadsDirectory);
@@ -57,14 +58,9 @@ class _CardFile extends State<CardFile> {
 
       setState(() => load = false);
       return file;
-    } catch (e) {
+    } catch (message) {
       setState(() => load = false);
-      print(e);
-      Toast.show(
-          "Não foi possível salvar este pdf, verifique se você deu permissão.",
-          context,
-          gravity: 1,
-          duration: Toast.LENGTH_LONG);
+      GlobalScaffold.instance.showSnackBarDanger(message);
       throw ("Erro");
     }
   }
